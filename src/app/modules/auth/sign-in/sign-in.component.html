@@ -1,0 +1,64 @@
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid"
+          alt="Sample image">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form [formGroup]="frmLogin" (ngSubmit)="onSubmit(frmLogin)">
+          <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+            <p class="lead fw-normal mb-0">
+              <fa-icon class="me-3" [icon]="faSignIn"></fa-icon>เข้าใช้งานระบบด้วย
+            </p>
+          </div>
+          <div class="d-flex align-items-center my-4">
+            <img class="img-fluid ms-auto" src="assets/images/msu-authentication.JPG">
+          </div>
+          <div class="divider d-flex align-items-center my-4">
+            MSU Authentication Account
+          </div>
+
+          <!-- Username input -->
+          <div class="form-outline mb-4">
+            <label class="form-label">Username</label>
+            <input formControlName="username" type="text" class="form-control"
+              placeholder="Enter Username" />
+            <div *ngIf="frmLogin.get('username')?.invalid && (frmLogin.get('username')?.dirty || frmLogin.get('username')?.touched)" class="form-error">
+              <div *ngIf="frmLogin.get('username')?.errors?.['minlength']" > min length =3</div>
+              <div *ngIf="frmLogin.get('username')?.errors?.['required']" >Please provide a name.</div>
+            </div>  
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <label class="form-label">Password</label>
+            <input formControlName="password" type="password" class="form-control"
+              placeholder="Enter password" />
+              <div *ngIf="frmLogin.get('password')?.invalid && (frmLogin.get('password')?.dirty || frmLogin.get('password')?.touched)" class="form-error">
+                <!-- <div *ngIf="frmLogin.get('password')?.hasError('minlength')" >xxxx</div> -->
+                Please provide a password. 
+              </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <!-- Checkbox -->
+            <div class="form-check mb-0">
+              <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+              <label class="form-check-label" for="form2Example3">
+                Remember me
+              </label>
+            </div>
+            <a href="#" class="text-body">Forgot password?</a>
+          </div>
+
+          <div class="text-center text-lg-start mt-4 pt-2 mb-4">
+            <button type="submit" class="btn btn-primary px-5" [disabled]="!frmLogin.valid">Login</button>
+            <a class="d-block mt-3" routerLink="/home">กลับหน้าหลัก</a>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</section>
