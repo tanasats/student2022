@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+    <button type="button" class="btn close" aria-label="Close" (click)="activeModal.dismiss('Cross click')" tabIndex="-1">
+        <!-- <i class="bi bi-x-lg"></i> -->
+        <i class="bi bi-x-lg"></i>
+    </button>
+</div>
+<div class="modal-body">
+    <p> {{content}}</p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="activeModal.close('Ok')" tabIndex="-1">Ok</button>
+    <button type="button" class="btn btn-secondary" (click)="activeModal.close('Cancle')">Cancle</button>
+</div>

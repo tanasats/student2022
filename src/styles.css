@@ -3,7 +3,95 @@
 html body{
     font-family: 'Sarabun',sans-serif;
 }
+/* My Color Theme */
+:root {
+    --msu-yellow: rgb(250, 223, 74);
+    --msu-yellow1: rgb(251, 182, 0);
+    --msu-gray: rgb(147, 151, 154);
+    --msu-appbar: rgb(52, 74, 97);
+  }
+.bg-msu-yellow1{
+    background-color: var(--msu-yellow1);
+}
+
+.form-control{
+    background-color: white;
+  }
+  .form-control:focus{
+    background-color:#FFFFE0;
+  }
+  .form-error {
+    color: red;
+    font-size: 0.8rem;
+    font-family: "Sarabun";
+  }
+  .form-label {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
 .form-error{
     font-size:0.8rem;
     color:red;
 }
+
+td.fit, th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
+
+.toast-success { background-color: rgba(0, 200, 81,0.7) !important; } 
+.toast-info { background-color: rgba(51, 181, 229,0.7) !important; }
+.toast-warning { background-color: rgba(255, 187, 51,0.7) !important; }
+.toast-error { background-color: rgba(255, 68, 68,0.7) !important; }
+
+.item-table{
+    font-family: "Sarabun",sans-serif;
+    font-size: 1.125em;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 100%;
+    -webkit-box-shadow: 0px 0px 2px rgb(0 0 0 / 5%), 0px 0px 10px rgb(0 0 0 / 10%);
+    box-shadow: 0px 0px 2px rgb(0 0 0 / 5%), 0px 0px 10px rgb(0 0 0 / 10%);
+    margin: 0;
+    min-width: 320px;
+}
+.item-table tr:hover{
+    background-color: rgb(255, 250, 228);
+}
+.item-table th{
+    padding: 6px 14px;
+    background-color: #fbb600;
+    color: #000;
+    white-space: nowrap;
+}
+.item-table td{
+    display: table-cell;
+    padding: 6px 14px;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+  }
+  .btn-circle.btn-lg {
+    width: 50px;
+    height: 50px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 25px;
+  }
+  .btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    font-size: 24px;
+    line-height: 1.33;
+    border-radius: 35px;
+  }

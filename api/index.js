@@ -1,15 +1,47 @@
-var app = require('express')()
+const express = require('express');
+const cors = require('cors');
+const app = express();
 
-var port = process.env.PORT || 7777
+const bodyParser = require('body-parser');
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', function (req, res) {
-  res.send('<h1>Hello Node.js</h1>')
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+require('dotenv').config();
+
+var corsOptions = {
+	//origin: ["http://localhost:4200","http://0.0.0.0:4200"],
+	origin: '*',
+	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions));
+//app.use(cors());
+
+global.__basedir = 'c:/temp';
+
+
+// trimmer MIDDLEWARE
+const {trimmer,debugShowURL} = require('./middleware/utils')
+app.use(debugShowURL);
+app.use(trimmer);
+
+
+app.get('/',(req,res)=>{
+ res.send("test OK!")
 })
 
-app.get('/index', function (req, res) {
-  res.send('<h1>This is index page</h1>')
-})
+// AUTH ROUTH 
+//const authRouteV1 = require('./route/auth.route');
+//app.use('/api/v1', authRouteV1);
+// USER ROUTE
+const userRouteV1 = require('./route/user.route');
+app.use('/api/v1', userRouteV1);
 
-app.listen(port, function () {
-  console.log('Starting node.js on port ' + port)
-})
+
+
+const port = process.env.SERVER_PORT || 3000;
+app.listen(port, () => {
+  console.log(`Listening on port ${port}...`);
+});
+
