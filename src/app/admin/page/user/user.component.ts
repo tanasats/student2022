@@ -35,15 +35,11 @@ export class UserComponent implements OnInit {
   getItems() {
     this.userService.getUser().subscribe({
       next: (v) => {
-        console.log(v);
         this.items = v;
       },
       error: (e) => {
-        console.log(e);
-      },
-      complete: () => {
-        console.log('complete');
-      },
+        this.notifyService.show('error',e,'');
+      }
     });
   }
 
@@ -61,9 +57,7 @@ export class UserComponent implements OnInit {
         console.log("onDelete() error:",e);
         this.notifyService.show('error','ผิดพลาด:'+e,'');
       },
-      complete:() =>{
-
-      }
+      complete:() =>{  }
     });
   }
 

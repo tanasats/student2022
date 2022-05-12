@@ -12,6 +12,25 @@ class _userClass {
     let sql = db.format("DELETE FROM users WHERE userid=?", [id]);
     return db.execute(sql);
   }
+  update({ id, datas }) {
+    let sql = db.format("UPDATE users SET ? WHERE userid=?", [datas, id]);
+    return db.query(sql);
+  }
+  create({ datas }) {
+    let sql = db.format("INSERT INTO users SET ?", [datas]);
+	  console.log(sql);
+    return db.query(sql);
+  }
+  getById({ id = "" }) {
+    let sql = db.format("SELECT * FROM users WHERE users.userid = ?", [id]);
+    return db.execute(sql);
+  }
+
+
+
+
+
+
 
 
 

@@ -7,10 +7,10 @@
                     <button class='btn p-0 m-0' [routerLink]="['../']" routerLinkActive="router-link-active"><i
                             class="bi bi-chevron-left me-1"></i>ย้อนกลับ</button>
                 </div>
-                <div class="align-self-center ms-2"><button class="btn btn-sm btn-info text-white">
-                        <!-- <fa-icon [icon]="faAdd"></fa-icon> -->
+                <div class="align-self-center ms-2">
+                    <!-- <button class="btn btn-sm btn-info text-white">
                         <i class="bi bi-arrow-repeat"></i>
-                    </button>
+                    </button> -->
                 </div>
             </div>
 
@@ -45,7 +45,7 @@
                         <div class="row mt-3">
                             <div class="col-12">
                                 <button type="reset" class="btn btn-secondary me-2">Reset</button>
-                                <button type="submit" class="btn btn-success" (click)="onSubmit()">Save</button>
+                                <button type="submit" class="btn btn-success" [disabled]="!formUser.valid"  (click)="onSubmit()">Save</button>
                             </div>
                         </div>
 

@@ -1,7 +1,8 @@
+import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { CoreModule } from './core/core.module';
@@ -34,7 +35,9 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     NgbModule,
     AdminModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

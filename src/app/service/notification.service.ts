@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 export class NotificationService {
 
   constructor(private toastr: ToastrService) { }
+  
   show(type:any,message:any,title:any){
     switch(type){
       case "success":
@@ -21,6 +22,9 @@ export class NotificationService {
         case "warning":
           this.toastr.warning(message,title);
           break;  
+        default:
+          this.toastr.error(message,'Unknow notify type');
+          break;
     }
   }
    
