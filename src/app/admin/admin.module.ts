@@ -6,8 +6,11 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { UserComponent } from './page/user/user.component';
-import { UserUpdateComponent } from './page/user/user-update/user-update.component';
-import { UserCreateComponent } from './page/user/user-create/user-create.component';
+import { UserUpdateComponent } from './page/user/user-update.component';
+import { UserCreateComponent } from './page/user/user-create.component';
+import { ActtypeComponent } from './page/acttype/acttype.component';
+import { ActtypeUpdateComponent } from './page/acttype/acttype-update.component';
+import { ActtypeCreateComponent } from './page/acttype/acttype-create.component';
 
 
 
@@ -17,7 +20,10 @@ import { UserCreateComponent } from './page/user/user-create/user-create.compone
     DashboardComponent,
     UserComponent,
     UserUpdateComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    ActtypeComponent,
+    ActtypeUpdateComponent,
+    ActtypeCreateComponent
   ],
   imports: [
     CommonModule,

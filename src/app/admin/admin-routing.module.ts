@@ -1,5 +1,8 @@
-import { UserCreateComponent } from './page/user/user-create/user-create.component';
-import { UserUpdateComponent } from './page/user/user-update/user-update.component';
+import { ActtypeUpdateComponent } from './page/acttype/acttype-update.component';
+import { ActtypeCreateComponent } from './page/acttype/acttype-create.component';
+import { ActtypeComponent } from './page/acttype/acttype.component';
+import { UserCreateComponent } from './page/user/user-create.component';
+import { UserUpdateComponent } from './page/user/user-update.component';
 import { UserComponent } from './page/user/user.component';
 import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { AdminComponent } from './admin.component';
@@ -14,8 +17,11 @@ const routes: Routes = [
     {path:'',redirectTo:'dashboard',pathMatch:'full'},
     {path:'dashboard',component:DashboardComponent},
     {path:'user',component:UserComponent},
-    {path:'user/update/:id',component:UserUpdateComponent},
     {path:'user/create',component:UserCreateComponent},
+    {path:'user/update/:id',component:UserUpdateComponent},
+    {path:'acttype',component:ActtypeComponent},
+    {path:'acttype/create',component:ActtypeCreateComponent},
+    {path:'acttype/update/:id',component:ActtypeUpdateComponent},
   ]
 },
   { path: '**', redirectTo:'',pathMatch:'full'}

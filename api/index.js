@@ -37,7 +37,8 @@ app.get('/',(req,res)=>{
 // USER ROUTE
 const userRouteV1 = require('./route/user.route');
 app.use('/api/v1', userRouteV1);
-
+const acttypeRouteV1 = require('./route/acttype.route');
+app.use('/api/v1', acttypeRouteV1);
 
 
 const port = process.env.SERVER_PORT || 3000;

@@ -3,6 +3,7 @@ import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
+  HttpParams,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -10,20 +11,37 @@ import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
-  private endpoint = 'http://localhost:3000/api/v1/user';
+export class ActtypeService {
+  private endpoint = 'http://localhost:3000/api/v1/acttype';
   constructor(private http: HttpClient) {}
 
+
+  // get httpOptions() {
+  //   let token = localStorage.getItem('access-token') || '';
+  //   return {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json',
+  //       //'Content-Type': 'multipart/form-data; charset=utf-8',
+  //       'Cache-Control': 'no-cache',
+  //       'x-access-token': token,
+  //     }),
+  //   };
+  // }
   get httpOptions() {
     let token = localStorage.getItem('access-token') || '';
     return {
-      headers: new HttpHeaders({
+      headers: this.httpHeaders
+    };
+  }
+
+  get httpHeaders() {
+    let token = localStorage.getItem('access-token') || '';
+    return new HttpHeaders({
         'Content-Type': 'application/json',
         //'Content-Type': 'multipart/form-data; charset=utf-8',
         'Cache-Control': 'no-cache',
         'x-access-token': token,
-      }),
-    };
+      });
   }
 
   private handleError(error: any) {
@@ -42,32 +60,28 @@ export class UserService {
     }
     return throwError(() => {
       return errorMsg;
-    }); //return throwError(() => new Error(errorMsg));
-  }
-
-  private getServerErrorMessagex(error: HttpErrorResponse): string {
-    switch (error.status) {
-      case 0: {
-        return `${error.statusText}`;
-      }
-      case 404: {
-        return `Not Found: ${error.url}`; //${error.message}`;
-      }
-      case 403: {
-        return `Access Denied: ${error.url}`; //${error.message}`;
-      }
-      case 500: {
-        return `Internal Server Error: ${error.statusText}`; //${error.message}`;
-      }
-      default: {
-        return `Unknown Server Error: ${error.statusText}`; //${error.message}`;
-      }
-    }
+    });
   }
 
   getAll(): Observable<any> {
     return this.http
       .get(this.endpoint + 's', this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  filter(parameters:any): Observable<any> {
+    let params = new HttpParams()
+    .set('page', parameters.page)
+    .set('pagesize',parameters.pagesize)
+    .set('keyword',parameters.keyword);
+    return this.http
+      .get(this.endpoint + 's',{headers:this.httpHeaders,params:params})
+      .pipe(catchError(this.handleError));
+  }
+
+  getById(id: number): Observable<any> {
+    return this.http
+      .get(this.endpoint + '/' + id, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
@@ -85,14 +99,7 @@ export class UserService {
 
   update(datas: any): Observable<any> {
     return this.http
-      .put(this.endpoint + '/' + datas.userid, datas, this.httpOptions)
+      .put(this.endpoint + '/' + datas.acttypeid, datas, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
-
-  getById(id:number): Observable<any> {
-    return this.http
-      .get(this.endpoint + '/'+id, this.httpOptions)
-      .pipe(catchError(this.handleError));
-  }
-
-} // class
+} //class

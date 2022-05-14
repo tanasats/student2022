@@ -1,33 +1,46 @@
-import { IUser } from 'src/app/interface/user';
-import { UserService } from 'src/app/service/user.service';
+import { IActtype } from 'src/app/interface/acttype';
+import { ActtypeService } from 'src/app/service/acttype.service';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from 'src/app/service/notification.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 
+
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css'],
+  selector: 'app-acttype',
+  templateUrl: './acttype.component.html',
+  styleUrls: ['./acttype.component.css']
 })
-export class UserComponent implements OnInit {
-  public items: IUser[]=[];
+export class ActtypeComponent implements OnInit {
+  public items: IActtype[]=[];
   public closeResult:string="";
 
+  public page:number=1;
+  public pagesize:number=10;
+  public keyword:string="";
+
+  public itemsfound:number=0;
+  public pagetotal:number=0;
+
   constructor(
-    private userService: UserService,
+    private acttypeService: ActtypeService,
     private notifyService: NotificationService,
     private modalService: NgbModal,
-  ) {}
+  ) { } 
 
   ngOnInit(): void {
     this.getItems();
   }
 
   getItems() {
-    this.userService.getAll().subscribe({
+    //this.acttypeService.getAll().subscribe({
+      this.acttypeService.filter({page:this.page,pagesize:this.pagesize,keyword:this.keyword}).subscribe({
       next: (v) => {
-        this.items = v;
+        console.log(v);
+        this.pagetotal= v.totalpage;
+        this.itemsfound = v.currentcount;
+        this.items = v.datas;
+        if(this.page>this.pagetotal) this.changepage(1);
       },
       error: (e) => {
         this.notifyService.show('error',e,'');
@@ -37,7 +50,7 @@ export class UserComponent implements OnInit {
 
   onDelete(id: any) {
     console.log("onDelete("+id+")")
-    this.userService.delete(id).subscribe({
+    this.acttypeService.delete(id).subscribe({
       next:(v) =>{
         console.log(v);
         if(v.affectedRows == 1){
@@ -53,17 +66,17 @@ export class UserComponent implements OnInit {
     });
   }
 
-  deleteItem(item: IUser) {
+  deleteItem(item: IActtype) {
     const modalRef = this.modalService.open(ConfirmDialogComponent);
     modalRef.componentInstance.title = "ยืนยันลบข้อมูล";
-    modalRef.componentInstance.content = "รหัส " + item.userid + " " + item.username;
+    modalRef.componentInstance.content = "รหัส " + item.acttypeid + " " + item.acttypename;
     modalRef.result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
         if (result == "Ok") {
           this.items.forEach((el, index) => {
-            if (el.userid == item.userid) {
-              this.onDelete(item.userid);
+            if (el.acttypeid == item.acttypeid) {
+              this.onDelete(item.acttypeid);
             }
           });
         }
@@ -84,9 +97,29 @@ export class UserComponent implements OnInit {
     }
   }
 
+  searchkeydown(event:any){
+    if (event.key === "Enter") {
+      console.log(this.keyword);
+      this.getItems();
+    }
+  }
+  changepage(pageno:number){
+    console.log("set page "+pageno);
+    this.page=pageno;
+    this.getItems();
+  }
+  previouspage(){
+    if(this.page>1){
+      this.page--;
+      this.getItems();
+    } 
+  }
+  nextpage(){
+    if(this.page<this.pagetotal){
+      this.page++;
+      this.getItems();
+    } 
+  }
 
 
-
-
-
-}
+}//class

@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+
+            <div class="d-flex py-2">
+                <div class="me-auto">
+                    <button class='btn p-0 m-0' [routerLink]="['../../']" routerLinkActive="router-link-active"><i
+                            class="bi bi-chevron-left me-1"></i>ย้อนกลับ</button>
+                </div>
+                <div class="align-self-center ms-2">
+                    <button class="btn btn-sm btn-info text-white" (click)="getItem()">
+                        <i class="bi bi-arrow-repeat"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-msu-yellow1 h5">
+                    แก้ไขข้อมูล
+                </div>
+                <div class="card-body">
+
+
+                    <form [formGroup]="formActtype" #ngForm="ngForm" autocomplete="off">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <label class="form-label">รหัส</label>
+                                <input formControlName="acttypeid" class="form-control" readonly>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-6">
+                                <label class="form-label">ชื่อ</label>
+                                <input formControlName="acttypename" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <button type="reset" class="btn btn-secondary me-2">Reset</button>
+                                <button type="submit" class="btn btn-success" [disabled]="!formActtype.valid" (click)="onSubmit()">Save</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </div>
+
+            {{item|json}}
+
+
+
+
+
+        </div>
+    </div>
+</div>

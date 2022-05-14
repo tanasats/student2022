@@ -1,0 +1,70 @@
+<div class="container-fluid mt-2">
+    <div class="row">
+        <div class="col">
+            <div class="h5">
+                ข้อมูลประเภทกิจกรรม
+            </div>
+            <div class="d-flex py-2">
+                <div class="me-auto">
+                    <div class="input-group">
+                        <input [(ngModel)]="keyword" (keydown)="searchkeydown($event)" type="text" class="form-control" placeholder="ค้นหา" aria-label="Recipient's username"
+                            aria-describedby="button-addon2">
+                        <button class="btn btn-success text-white" type="button" id="button-addon2" (click)="getItems()">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="align-self-center"><button class="btn btn-success text-white" (click)="getItems()">
+                    <i class="bi bi-arrow-repeat"></i>
+                    </button></div>
+                <div class="align-self-center ms-2"><button class="btn btn-success text-white" [routerLink]="['create']">
+                    <i class="bi bi-plus-circle"></i>
+                    </button></div>
+            </div>
+
+            <table class="item-table">
+                <thead>
+                    <tr>
+                        <th>รหัส</th>
+                        <th>ชื่อ</th>
+                        <th>จัดการ</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let item of items">
+                    <tr>
+                        <td>{{ item.acttypeid }}</td>
+                        <td>{{ item.acttypename }}</td>
+                        <td class="fit">
+                            <button class="btn btn-sm btn-info text-white" [routerLink]="['update',item.acttypeid]"
+                                [state]="{data:item}">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="ms-2 btn btn-sm btn-info text-white" (click)="deleteItem(item);">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+ 
+            <div class="mt-2">พบ {{itemsfound}} รายการ  แสดงหน้า {{page}}/{{pagetotal}}</div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination pagination-sm">
+                    <li class="page-item"><a class="page-link" href="javascript:void(0)"
+                            (click)="previouspage()">Previous</a></li>
+                    <li *ngFor="let pageno of [].constructor(pagetotal);let i = index" class="page-item"
+                        [ngClass]="{active: (i+1)===page}">
+                        <a class="page-link" href="javascript:void(0)" (click)="changepage(i+1)">{{i+1}}</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="nextpage()">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            
+
+        </div>
+    </div>
+
+</div>

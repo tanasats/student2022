@@ -1,4 +1,4 @@
-import { IUser } from './../../../../interface/user';
+import { IUser } from 'src/app/interface/user';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -48,7 +48,7 @@ export class UserCreateComponent implements OnInit {
         },
         error: (e) => {
           console.log(e);
-          this.notifyService.show('error',e,'ผิดพลาด');
+          this.notifyService.show('error',e,'');
         }
       })
     }
