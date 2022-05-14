@@ -38,8 +38,8 @@ export class ActtypeComponent implements OnInit {
       next: (v) => {
         console.log(v);
         this.pagetotal= v.totalpage;
-        this.itemsfound = v.currentcount;
-        this.items = v.datas;
+        this.itemsfound = v.itemscount;
+        this.items = v.items;
         if(this.page>this.pagetotal) this.changepage(1);
       },
       error: (e) => {

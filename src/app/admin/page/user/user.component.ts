@@ -14,6 +14,13 @@ export class UserComponent implements OnInit {
   public items: IUser[]=[];
   public closeResult:string="";
 
+  public page:number=1;
+  public pagesize:number=10;
+  public keyword:string="";
+
+  public itemsfound:number=0;
+  public pagetotal:number=0;
+
   constructor(
     private userService: UserService,
     private notifyService: NotificationService,
@@ -25,9 +32,14 @@ export class UserComponent implements OnInit {
   }
 
   getItems() {
-    this.userService.getAll().subscribe({
+    //this.acttypeService.getAll().subscribe({
+      this.userService.filter({page:this.page,pagesize:this.pagesize,keyword:this.keyword}).subscribe({
       next: (v) => {
-        this.items = v;
+        console.log(v);
+        this.pagetotal= v.totalpage;
+        this.itemsfound = v.itemscount;
+        this.items = v.items;
+        if(this.page>this.pagetotal) this.changepage(1);
       },
       error: (e) => {
         this.notifyService.show('error',e,'');
@@ -83,8 +95,30 @@ export class UserComponent implements OnInit {
       return  `with: ${reason}`;
     }
   }
-
-
+  
+  searchkeydown(event:any){
+    if (event.key === "Enter") {
+      console.log(this.keyword);
+      this.getItems();
+    }
+  }
+  changepage(pageno:number){
+    console.log("set page "+pageno);
+    this.page=pageno;
+    this.getItems();
+  }
+  previouspage(){
+    if(this.page>1){
+      this.page--;
+      this.getItems();
+    } 
+  }
+  nextpage(){
+    if(this.page<this.pagetotal){
+      this.page++;
+      this.getItems();
+    } 
+  }
 
 
 

@@ -1,49 +1,23 @@
 const acttypeModel = require("../model/acttype.model");
 
-exports.xfilter = (req, res) => {
-  console.log(req.body);
-  acttypeModel
-    .getAll()
-    .then(([row]) => {
-      let datas=row;
-      console.log(datas);
-
-      let result={
-        "metadata":{
-          "page":1
-        },
-        "datas":row
-      }
-      res.status(200).json(result);
-    })
-    .catch((error) => {
-      res.status(500).send(error);
-    });
-};
-
-
 exports.filter = async(req,res) => {
   //console.log('body',req.body);
-  //console.log('query',req.query);
+  console.log('query',req.query.keyword);
   try{
-    let page= parseInt( req.query.page );
-    let pagesize=parseInt( req.query.pagesize );
-    let keyword=req.query.keyword;
-  
+    let page = parseInt( req.query.page )||1;
+    let pagesize=parseInt( req.query.pagesize )||10;
+    let keyword= req.query.keyword||'';
     const [[_results], [[_count]]] = await Promise.all([
       acttypeModel.filter({page:page,pagesize:pagesize,keyword:keyword}),
       acttypeModel.countfilter({keyword:keyword})
     ]);
-    //console.log("_result:",_results);
-    //console.log("_count:",_count.value);
-    //console.log(_count.value/pagesize); 
     return res.status(200).json(
       {
         currentpage:page,
         totalpage:Math.ceil(_count.value/pagesize),
         pagesize:pagesize,
-        currentcount:_count.value,
-        datas:_results
+        itemscount:_count.value,
+        items:_results
       }
     )
   }catch(error){

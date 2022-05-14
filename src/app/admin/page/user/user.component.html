@@ -7,9 +7,9 @@
             <div class="d-flex py-2">
                 <div class="me-auto">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="ค้นหา" aria-label="Recipient's username"
+                        <input [(ngModel)]="keyword" (keydown)="searchkeydown($event)" type="text" class="form-control" placeholder="ค้นหา" aria-label="Recipient's username"
                             aria-describedby="button-addon2">
-                        <button class="btn btn-success text-white" type="button" id="button-addon2">
+                        <button class="btn btn-success text-white" type="button" id="button-addon2" (click)="getItems()">
                             <i class="bi bi-search"></i>
                         </button>
                     </div>
@@ -17,10 +17,11 @@
 
 
                 <div class="align-self-center"><button class="btn btn-success text-white" (click)="getItems()">
-                    <i class="bi bi-arrow-repeat"></i>
+                        <i class="bi bi-arrow-repeat"></i>
                     </button></div>
-                <div class="align-self-center ms-2"><button class="btn btn-success text-white" [routerLink]="['create']">
-                    <i class="bi bi-plus-circle"></i>
+                <div class="align-self-center ms-2"><button class="btn btn-success text-white"
+                        [routerLink]="['create']">
+                        <i class="bi bi-plus-circle"></i>
                     </button></div>
             </div>
 
@@ -48,6 +49,20 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div class="mt-2">พบ {{itemsfound}} รายการ แสดงหน้า {{page}}/{{pagetotal}}</div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination pagination-sm">
+                    <li class="page-item"><a class="page-link" href="javascript:void(0)"
+                            (click)="previouspage()">Previous</a></li>
+                    <li *ngFor="let pageno of [].constructor(pagetotal);let i = index" class="page-item"
+                        [ngClass]="{active: (i+1)===page}">
+                        <a class="page-link" href="javascript:void(0)" (click)="changepage(i+1)">{{i+1}}</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="javascript:void(0)" (click)="nextpage()">Next</a>
+                    </li>
+                </ul>
+            </nav>
 
         </div>
     </div>

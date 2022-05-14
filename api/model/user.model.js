@@ -2,29 +2,37 @@ const db = require("../config/db");
 
 class _userClass { 
 
-
-
-  getUser() {
+  getAll() {
     let sql = db.format("SELECT * FROM users");
     return db.execute(sql);
-  }
-  delete({ id }) {
-    let sql = db.format("DELETE FROM users WHERE userid=?", [id]);
-    return db.execute(sql);
-  }
-  update({ id, datas }) {
-    let sql = db.format("UPDATE users SET ? WHERE userid=?", [datas, id]);
-    return db.query(sql);
-  }
-  create({ datas }) {
-    let sql = db.format("INSERT INTO users SET ?", [datas]);
-	  console.log(sql);
-    return db.query(sql);
   }
   getById({ id = "" }) {
     let sql = db.format("SELECT * FROM users WHERE users.userid = ?", [id]);
     return db.execute(sql);
   }
+  filter({page,pagesize,keyword}){
+    let sql = db.format("SELECT * FROM  users WHERE username like ? LIMIT ?,?", ['%'+keyword+'%',(page-1)*pagesize,pagesize]);
+    return db.query(sql);
+  }
+  countfilter({keyword}) {
+    let sql = db.format("SELECT count(*) as value FROM users WHERE username like ?",['%'+keyword+'%']);
+    return db.execute(sql);
+  }
+
+  create({ datas }) {
+    let sql = db.format("INSERT INTO users SET ?", [datas]);
+	  console.log(sql);
+    return db.query(sql);
+  }
+  update({ id, datas }) {
+    let sql = db.format("UPDATE users SET ? WHERE userid=?", [datas, id]);
+    return db.query(sql);
+  }
+  delete({ id }) {
+    let sql = db.format("DELETE FROM users WHERE userid=?", [id]);
+    return db.execute(sql);
+  }
+
 
 
 

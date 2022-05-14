@@ -1,7 +1,7 @@
 const userModel = require("../model/user.model");
 const bcrypt = require("bcrypt");
 
-exports.filter = (req, res) => {
+exports.filterx = (req, res) => {
   //console.log(req);
   userModel
     .getUser()
@@ -12,6 +12,32 @@ exports.filter = (req, res) => {
       res.status(500).send(error);
     });
 };
+
+exports.filter = async(req,res) => {
+  //console.log('body',req.body);
+  console.log('query',req.query.keyword);
+  try{
+    let page = parseInt( req.query.page )||1;
+    let pagesize=parseInt( req.query.pagesize )||10;
+    let keyword= req.query.keyword||'';
+    const [[_results], [[_count]]] = await Promise.all([
+      userModel.filter({page:page,pagesize:pagesize,keyword:keyword}),
+      userModel.countfilter({keyword:keyword})
+    ]);
+    return res.status(200).json(
+      {
+        currentpage:page,
+        totalpage:Math.ceil(_count.value/pagesize),
+        pagesize:pagesize,
+        itemscount:_count.value,
+        items:_results
+      }
+    )
+  }catch(error){
+    console.log(error);
+    res.status(400).json(error);
+  }
+}
 
 
 exports.delete = (req, res) => {
