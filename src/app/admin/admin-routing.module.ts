@@ -16,6 +16,7 @@ import { FacultyCreateComponent } from './page/faculty/faculty-create.component'
 import { FacultyUpdateComponent } from './page/faculty/faculty-update.component';
 
 
+
 const routes: Routes = [
   //{path:'',redirectTo:'admin/dashboard',pathMatch:'full'},
   //{ path: 'dashboard',redirectTo:'admin/dashboard'},
