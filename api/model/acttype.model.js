@@ -35,5 +35,5 @@ class _class {
 
 }//class
 
-let userClassModel = new _class();
-module.exports = userClassModel;
+let ClassModel = new _class();
+module.exports = ClassModel;

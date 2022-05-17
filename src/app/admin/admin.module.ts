@@ -11,6 +11,12 @@ import { UserCreateComponent } from './page/user/user-create.component';
 import { ActtypeComponent } from './page/acttype/acttype.component';
 import { ActtypeUpdateComponent } from './page/acttype/acttype-update.component';
 import { ActtypeCreateComponent } from './page/acttype/acttype-create.component';
+import { ActivityComponent } from './page/activity/activity.component';
+import { ActivityCreateComponent } from './page/activity/activity-create.component';
+import { ActivityUpdateComponent } from './page/activity/activity-update.component';
+import { FacultyComponent } from './page/faculty/faculty.component';
+import { FacultyCreateComponent } from './page/faculty/faculty-create.component';
+import { FacultyUpdateComponent } from './page/faculty/faculty-update.component';
 
 
 
@@ -23,7 +29,13 @@ import { ActtypeCreateComponent } from './page/acttype/acttype-create.component'
     UserCreateComponent,
     ActtypeComponent,
     ActtypeUpdateComponent,
-    ActtypeCreateComponent
+    ActtypeCreateComponent,
+    ActivityComponent,
+    ActivityCreateComponent,
+    ActivityUpdateComponent,
+    FacultyComponent,
+    FacultyCreateComponent,
+    FacultyUpdateComponent
   ],
   imports: [
     CommonModule,

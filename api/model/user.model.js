@@ -1,6 +1,6 @@
 const db = require("../config/db");
 
-class _userClass { 
+class _Class { 
 
   getAll() {
     let sql = db.format("SELECT * FROM users");
@@ -107,6 +107,6 @@ class _userClass {
   
 }//class
 
-let userClassModel = new _userClass();
+let ClassModel = new _Class();
 // export instance of class
-module.exports = userClassModel;
+module.exports = ClassModel;

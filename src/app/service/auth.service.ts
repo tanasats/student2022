@@ -1,19 +1,19 @@
+import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
+  HttpParams,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-//import 'rxjs/add/operator/catch';
-
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class MsuAuthService {
-  private endpoint = 'https://data.msu.ac.th/api/v1/auth';
+export class AuthService {
+  private endpoint = 'http://localhost:3000/api/v1/auth';
+  private _authorized:boolean=false;
 
   get httpOptions() {
     let token = localStorage.getItem('access-token') || '';
@@ -52,7 +52,7 @@ export class MsuAuthService {
   }
 
   constructor(private http: HttpClient) {}
-
+  
   signin(data: any): Observable<any> {
     console.log('sign data: ', data);
     return this.http
@@ -60,9 +60,12 @@ export class MsuAuthService {
       .pipe(catchError(this.handleError));
   }
 
-  me(): Observable<any> {
-    return this.http
-      .get(this.endpoint + '/me', this.httpOptions)
-      .pipe(catchError(this.handleError));
+  authorized(){
+    return this._authorized;
   }
+
+  
+
+
+
 }

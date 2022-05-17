@@ -1,4 +1,6 @@
-import { MsuAuthService } from './../../../service/msu-auth.service';
+import { AuthService } from './../../../service/auth.service';
+import { MsuAuthService } from 'src/app/service/msu-auth.service';
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -22,7 +24,8 @@ export class SignInComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private msuAuthService: MsuAuthService
+    private msuAuthService: MsuAuthService,
+    private authService:AuthService,
   ) {}
 
   ngOnInit(): void {}
@@ -31,7 +34,22 @@ export class SignInComponent implements OnInit {
     if (this.frmLogin.valid) {
       console.log('submit Login', form.value);
       this.msuAuthService.signin(form.value).subscribe({
-        next: (res) => { console.log(res);},
+      //  this.authService.signin(form.value).subscribe({
+        next: (res) => { 
+          console.log(res);
+          // msu authorized ok
+            
+
+
+          if(res.access_token){
+            localStorage.setItem('access-token',res.access_token);
+
+            
+          }
+
+
+
+        },//next:
         error: (err) => { console.log(err);},
         complete: () => { console.log("complete msuauthservice")},
       });

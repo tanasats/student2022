@@ -35,6 +35,8 @@ app.get('/',(req,res)=>{
 //const authRouteV1 = require('./route/auth.route');
 //app.use('/api/v1', authRouteV1);
 // USER ROUTE
+const authRouteV1 = require('./route/auth.route');
+app.use('/api/v1', authRouteV1);
 const userRouteV1 = require('./route/user.route');
 app.use('/api/v1', userRouteV1);
 const acttypeRouteV1 = require('./route/acttype.route');
