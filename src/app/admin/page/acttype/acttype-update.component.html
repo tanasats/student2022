@@ -35,8 +35,9 @@
 
                         <div class="row mt-3">
                             <div class="col-12">
-                                <button type="reset" class="btn btn-secondary me-2">Reset</button>
-                                <button type="submit" class="btn btn-success" [disabled]="!formActtype.valid" (click)="onSubmit()">Save</button>
+                                <!-- <button type="reset" class="btn btn-secondary me-2">Reset</button> -->
+                                <button type="submit" class="btn btn-success me-2" [disabled]="!formActtype.valid" (click)="onSubmit()">บันทึก</button>
+                                <button type="button" [routerLink]="['../../']" class="btn btn-secondary">ยกเลิก</button>
                             </div>
                         </div>
 
@@ -45,9 +46,6 @@
 
                 </div>
             </div>
-
-            {{item|json}}
-
 
 
 

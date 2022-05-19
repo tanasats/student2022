@@ -1,44 +1,45 @@
 const userModel = require("../model/user.model");
 const bcrypt = require("bcrypt");
 
-exports.filterx = (req, res) => {
-  //console.log(req);
-  userModel
-    .getUser()
-    .then(([row]) => {
-      res.status(200).json(row);
-    })
-    .catch((error) => {
-      res.status(500).send(error);
-    });
-};
-
-exports.filter = async(req,res) => {
+exports.filter = async (req, res) => {
   //console.log('body',req.body);
-  console.log('query',req.query.keyword);
-  try{
-    let page = parseInt( req.query.page )||1;
-    let pagesize=parseInt( req.query.pagesize )||10;
-    let keyword= req.query.keyword||'';
+  console.log("query", req.query.keyword);
+  try {
+    let page = parseInt(req.query.page) || 1;
+    let pagesize = parseInt(req.query.pagesize) || 10;
+    let keyword = req.query.keyword || "";
     const [[_results], [[_count]]] = await Promise.all([
-      userModel.filter({page:page,pagesize:pagesize,keyword:keyword}),
-      userModel.countfilter({keyword:keyword})
+      userModel.filter({ page: page, pagesize: pagesize, keyword: keyword }),
+      userModel.countfilter({ keyword: keyword }),
     ]);
-    return res.status(200).json(
-      {
-        currentpage:page,
-        totalpage:Math.ceil(_count.value/pagesize),
-        pagesize:pagesize,
-        itemscount:_count.value,
-        items:_results
-      }
-    )
-  }catch(error){
+    return res.status(200).json({
+      currentpage: page,
+      totalpage: Math.ceil(_count.value / pagesize),
+      pagesize: pagesize,
+      itemscount: _count.value,
+      items: _results,
+    });
+  } catch (error) {
     console.log(error);
     res.status(400).json(error);
   }
-}
+};
 
+exports.roles = (req, res) => {
+  if (req.params.id) {
+    userModel
+      .roles({ id: req.params.id })
+      .then(([row]) => {
+        res.status(200).json(row);
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(400).send(error);
+      });
+  } else {
+    res.status(400).send("Invalid request parameter");
+  }
+};
 
 exports.delete = (req, res) => {
   if (req.params.id) {
@@ -88,7 +89,6 @@ exports.update = async (req, res) => {
   }
 };
 
-
 exports.create = async (req, res) => {
   const datas = req.body;
   datas.cdate = new Date();
@@ -126,38 +126,6 @@ exports.getById = (req, res) => {
       res.status(400).send(error);
     });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 exports.createxx = async (req, res) => {
   const datas = req.body;
@@ -231,7 +199,6 @@ exports.findById = (req, res) => {
       res.status(400).send(error);
     });
 };
-
 
 exports.updateUser = async (req, res) => {
   const id = req.params.id;

@@ -25,6 +25,7 @@ export class CurrentUserService {
       username: '',
       displayname: '',
       email: '',
+      roles:[],
     };
   }
 
@@ -46,10 +47,16 @@ export class CurrentUserService {
   set email(email) {
     this._currentuser.email = email;
   }
-  get authorized() {
+  get roles(){
+    return this._currentuser.roles;
+  }
+  set roles(roles:any[]){
+    this._currentuser.roles=roles;
+  }
+  get islogin() {
     return this._currentuser.islogin;
   }
-  set authorized(bool: boolean) {
+  set islogin(bool: boolean) {
     this._currentuser.islogin = bool;
     this.fireIsLoggedIn.emit(this._currentuser);
   }

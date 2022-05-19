@@ -29,6 +29,7 @@ export class UserUpdateComponent implements OnInit {
     this.formUser = this.formBuilder.group({
       userid: [this.itemId, [Validators.required]],
       username: [null, [Validators.required]],
+      displayname: [null, []],
       password: [null, []],
       email: [null, []],
       cdate: [null, []],

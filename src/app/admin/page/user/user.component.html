@@ -29,6 +29,7 @@
                 <thead>
                     <tr>
                         <th>รหัส</th>
+                        <th>username</th>
                         <th>ชื่อผู้ใช้งาน</th>
                         <th>จัดการ</th>
                     </tr>
@@ -37,6 +38,7 @@
                     <tr>
                         <td>{{ item.userid }}</td>
                         <td>{{ item.username }}</td>
+                        <td>{{ item.displayname }}</td>
                         <td class="fit">
                             <button class="btn btn-sm btn-info text-white" [routerLink]="['update',item.userid]"
                                 [state]="{data:item}">
@@ -46,7 +48,12 @@
                                 <i class="bi bi-trash"></i>
                             </button>
                         </td>
-                    </tr>
+                    </tr>  
+                </tbody>
+                <tbody *ngIf="!items.length">
+                    <td colspan="4" class="text-center">
+                        <span class="text-info spinner-border spinner-border-lg align-center"></span>
+                    </td>
                 </tbody>
             </table>
 

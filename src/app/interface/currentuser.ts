@@ -3,4 +3,5 @@ export interface ICurrentuser {
     username:string,
     displayname:string, 
     email:string,
+    roles:any[],
 }

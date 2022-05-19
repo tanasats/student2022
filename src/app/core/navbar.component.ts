@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ICurrentuser } from './../interface/currentuser';
 import { CurrentUserService } from './../service/current-user.service';
 import { AuthService } from 'src/app/service/auth.service';
@@ -15,7 +16,8 @@ export class NavbarComponent implements OnInit {
 
   constructor( 
     public authService:AuthService,
-    public currUserService:CurrentUserService 
+    public currUserService:CurrentUserService,
+    private router: Router,
     ) {   }
 
   ngOnInit(): void {
@@ -30,6 +32,7 @@ export class NavbarComponent implements OnInit {
   logout(){
     console.log("logout()");
     this.currUserService.logout();
+    this.router.navigate(['home']);
   }
 
   // ngAfterContentInit() { // activate when user has browser refresh

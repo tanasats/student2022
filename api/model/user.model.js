@@ -11,6 +11,7 @@ class _Class {
     return db.execute(sql);
   }
   filter({page,pagesize,keyword}){
+    //let sql = db.format("SELECT * FROM  users WHERE username like ? LIMIT ?,?", ['%'+keyword+'%',(page-1)*pagesize,pagesize]);
     let sql = db.format("SELECT * FROM  users WHERE username like ? LIMIT ?,?", ['%'+keyword+'%',(page-1)*pagesize,pagesize]);
     return db.query(sql);
   }
@@ -18,6 +19,10 @@ class _Class {
     let sql = db.format("SELECT count(*) as value FROM users WHERE username like ?",['%'+keyword+'%']);
     return db.execute(sql);
   }
+  roles({ id }) {
+    let sql = db.format("SELECT userroles.userid,roles.* FROM userroles LEFT JOIN roles ON userroles.roleid=roles.roleid WHERE userid=?", [id]);
+    return db.execute(sql);
+  }  
 
   create({ datas }) {
     let sql = db.format("INSERT INTO users SET ?", [datas]);
@@ -32,8 +37,6 @@ class _Class {
     let sql = db.format("DELETE FROM users WHERE userid=?", [id]);
     return db.execute(sql);
   }
-
-
 
 
 

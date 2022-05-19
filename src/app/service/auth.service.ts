@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/service/user.service';
 import { CurrentUserService } from './current-user.service';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import {
@@ -42,10 +43,10 @@ export class AuthService {
     } else {
       // Server side error
       if (error instanceof HttpErrorResponse) {
-        if(error.error) {
-          errorMsg = error.error;
-        }else{
+        if(error.statusText) {
           errorMsg = error.statusText; //error.status + ' : ' + error.statusText;
+        }else{
+          errorMsg = error.error;
         }
       } else {
         errorMsg = error;
@@ -59,6 +60,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private currUserService:CurrentUserService,
+    private userService:UserService,
     //private jwt:JwtHelperService
     ) {
       console.log("# auth.service.constructor()");
@@ -67,11 +69,25 @@ export class AuthService {
         this.me().subscribe({
           next: ([[res]]) => {
             console.log("auth.service call me() res=",res)
-
+            this.userService.userroles(res.userid).subscribe({
+              next: (res) =>{
+                console.log("useroles=",res);
+                const roles:any = res;
+                let rolecode= roles.map( (item:any) =>{
+                  return item.rolecode;
+                })
+                console.log(rolecode);
+                this.currUserService.roles=rolecode;
+              },
+              error: (err) => {
+                console.log(err);
+                //this.notifyService.show('error','User roles '+err,'');
+              }
+            })
             this.currUserService.username=res.username;
             this.currUserService.displayname=res.displayname||res.username;
             this.currUserService.email=res.email;          
-            this.currUserService.authorized=true;  //<--this activate to emitt(data) to navbar
+            this.currUserService.islogin=true;  //<--this activate to emitt(data) to navbar
 
           },
           error: (err) => {
@@ -104,7 +120,6 @@ export class AuthService {
       .get(this.endpoint+'/me',this.httpOptions)
       .pipe(catchError(this.handleError));
   }
-
 
 
 }//class

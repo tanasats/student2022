@@ -95,4 +95,11 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
+  userroles(userid:number):Observable<any>{
+    return this.http
+      .get(this.endpoint+`/${userid}/roles`,this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+
 } // class

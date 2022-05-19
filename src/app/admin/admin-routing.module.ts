@@ -14,35 +14,40 @@ import { RouterModule, Routes } from '@angular/router';
 import { FacultyComponent } from './page/faculty/faculty.component';
 import { FacultyCreateComponent } from './page/faculty/faculty-create.component';
 import { FacultyUpdateComponent } from './page/faculty/faculty-update.component';
-
-
+import { AuthGuard } from '../service/auth.guard';
 
 const routes: Routes = [
   //{path:'',redirectTo:'admin/dashboard',pathMatch:'full'},
   //{ path: 'dashboard',redirectTo:'admin/dashboard'},
-  { path:'',component:AdminComponent,
-  children:[
-    {path:'',redirectTo:'dashboard',pathMatch:'full'},
-    {path:'dashboard',component:DashboardComponent},
-    {path:'activity',component:ActivityComponent},
-    {path:'activity/create',component:ActivityCreateComponent},
-    {path:'activity/update/:id',component:ActivityUpdateComponent},    
-    {path:'user',component:UserComponent},
-    {path:'user/create',component:UserCreateComponent},
-    {path:'user/update/:id',component:UserUpdateComponent},
-    {path:'acttype',component:ActtypeComponent},
-    {path:'acttype/create',component:ActtypeCreateComponent},
-    {path:'acttype/update/:id',component:ActtypeUpdateComponent},
-    {path:'faculty',component:FacultyComponent},
-    {path:'faculty/create',component:FacultyCreateComponent},
-    {path:'faculty/update/:id',component:FacultyUpdateComponent},      
-  ]
-},
-  { path: '**', redirectTo:'',pathMatch:'full'}
+  {
+    path: '',
+    component: AdminComponent,
+    canActivate: [AuthGuard],
+    data: {
+      userRoles: ['Admin'], // Multiple Allowed User
+    },
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'activity', component: ActivityComponent },
+      { path: 'activity/create', component: ActivityCreateComponent },
+      { path: 'activity/update/:id', component: ActivityUpdateComponent },
+      { path: 'user', component: UserComponent },
+      { path: 'user/create', component: UserCreateComponent },
+      { path: 'user/update/:id', component: UserUpdateComponent },
+      { path: 'acttype', component: ActtypeComponent },
+      { path: 'acttype/create', component: ActtypeCreateComponent },
+      { path: 'acttype/update/:id', component: ActtypeUpdateComponent },
+      { path: 'faculty', component: FacultyComponent },
+      { path: 'faculty/create', component: FacultyCreateComponent },
+      { path: 'faculty/update/:id', component: FacultyUpdateComponent },
+    ],
+  },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

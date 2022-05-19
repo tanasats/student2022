@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/service/user.service';
 import { CurrentUserService } from './../../../service/current-user.service';
 import { NotificationService } from 'src/app/service/notification.service';
 import { AuthService } from 'src/app/service/auth.service';
@@ -19,8 +20,8 @@ export class SignInComponent implements OnInit {
   public faSignIn = faSignIn;
 
   public frmLogin: FormGroup = this.fb.group({
-    username: ['', [Validators.required, Validators.minLength(3)]],
-    password: ['', Validators.required],
+    username: ['tanasat', [Validators.required, Validators.minLength(3)]],
+    password: ['3440600170765', Validators.required],
     //email: ['', [Validators.required, Validators.email]],
     //message: ['', [Validators.required, Validators.minLength(15)]],
   });
@@ -30,6 +31,7 @@ export class SignInComponent implements OnInit {
     private msuAuthService: MsuAuthService,
     private authService:AuthService,
     private currUserService:CurrentUserService,
+    private userService:UserService,
     private notifyService: NotificationService,
   ) {}
 
@@ -53,11 +55,26 @@ export class SignInComponent implements OnInit {
                   next: ([[res]]) => { //get user form database
                     console.log(res);
                     //--- success signin-----
-                    
+                    this.userService.userroles(res.userid).subscribe({
+                      next: (res) =>{
+                        console.log("useroles=",res);
+                        const roles:any = res;
+                        let rolecode= roles.map( (item:any) =>{
+                          return item.rolecode;
+                        })
+                        console.log(rolecode);
+                        this.currUserService.roles=rolecode;
+                      },
+                      error: (err) => {
+                        console.log(err);
+                        this.notifyService.show('error','User roles '+err,'');
+                      }
+                    })
+
                     this.currUserService.username=res.username;
                     this.currUserService.displayname=res.displayname||res.username;
                     this.currUserService.email=res.email;
-                    this.currUserService.authorized=true;  //<--this activate to emitt(data) to navbar
+                    this.currUserService.islogin=true;  //<--this activate to emitt(data) to navbar
                     
                     this.router.navigate(['home']);  
                   },
@@ -88,3 +105,7 @@ export class SignInComponent implements OnInit {
     }
   }
 }
+function item(item: any, arg1: (any: any) => any) {
+  throw new Error('Function not implemented.');
+}
+

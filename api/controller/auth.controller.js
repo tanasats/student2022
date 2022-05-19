@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 exports.tokenSignin = (req, res) => {
   var _token = req.body.token;
-  console.log(_token);
+  //console.log(_token);
   const _secret = config.appSecret;
   jwt.verify(_token, _secret, function (err, decoded) {
     if (err) {
@@ -70,23 +70,17 @@ exports.signin = async (req, res) => {
 
 exports.me = (req, res) => {
   var token = req.headers["x-access-token"];
-  console.log(token);
-
   try {
     const _decode = jwt.verify(token, config.secret);
-    console.log(_decode);
     authModel
       .findUsername(_decode.username)
       .then((row) => {
-        console.log(row);
         res.status(200).send(row);
       })
       .catch((error) => {
-        console.log(error);
         res.status(401).send(error);
       });
   } catch (err) {
-    console.log(err.message);
-    res.status(401).send(err.message);
+    res.status(500).send(err);
   }
 };

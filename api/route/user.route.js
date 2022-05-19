@@ -19,6 +19,7 @@ router.get("/users",userController.filter);
 
 //router.get("/user/info",authJwt.verifyToken,userController.getUserInfo);
 router.get("/user/:id",/*authJwt.verifyToken,*/ userController.getById);
+router.get("/user/:id/roles",/*authJwt.verifyToken,*/userController.roles);
 //router.get("/user/:id/roles",/*authJwt.verifyToken,*/ userController.getUserRole);
 
 
