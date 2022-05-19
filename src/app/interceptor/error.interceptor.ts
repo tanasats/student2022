@@ -17,6 +17,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   constructor(private notifyService: NotificationService,) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    //console.log("ErrorInterceptor work!");
     return next.handle(request)
     .pipe(
       catchError((requestError)=>{

@@ -49,11 +49,15 @@ export class ActtypeService {
     console.log(error);
     if (error.error instanceof ErrorEvent) {
       // Client side error
-      errorMsg = `Error: ${error.error.message}`;
+      errorMsg = `Client Error: ${error.error.message}`;
     } else {
       // Server side error
       if (error instanceof HttpErrorResponse) {
-        errorMsg = error.status + ' : ' + error.statusText;
+        if(error.error) {
+          errorMsg = error.error;
+        }else{
+          errorMsg = error.statusText; //error.status + ' : ' + error.statusText;
+        }
       } else {
         errorMsg = error;
       }

@@ -11,5 +11,7 @@ const { authJwt } = require("../middleware/auth");
 // Get all user
 router.post("/auth/signin",authController.signin);
 //router.get("/users", /*authJwt.verifyToken,*/userController.listallUser);
+router.post("/auth/tokensignin",authController.tokenSignin);
+router.get("/auth/me",authController.me);
 
 module.exports = router;

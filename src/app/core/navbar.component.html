@@ -69,9 +69,21 @@
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form> -->
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/sign-in" routerLinkActive="active">เข้าสู่ระบบ</a>
+
+            <li *ngIf="!islogin" class="nav-item">
+                <a  class="nav-link" routerLink="/sign-in" routerLinkActive="active">เข้าสู่ระบบ</a>
             </li>
+            <li *ngIf="islogin" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{displayname}}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" routerLink="/admin" routerLinkActive="active">profile</a></li>
+                <li><hr class="dropdown-divider"></li> 
+                <li><a class="dropdown-item" href="javascript:void(0)" (click)="logout()">ออกจากระบบ</a></li>
+              </ul>
+            </li>
+
         </ul>
       </div>
     </div>

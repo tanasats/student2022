@@ -1,4 +1,7 @@
-import { ErrorInterceptor } from './interceptor/error.interceptor';
+import { authInterceptorProviders } from './interceptor/auth.interceptor';
+//import { AuthInterceptor } from 'src/app/interceptor/auth.interceptor';
+import { ErrorInterceptor } from 'src/app/interceptor/error.interceptor';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,7 +39,8 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     AdminModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    authInterceptorProviders,
   ],
   bootstrap: [AppComponent]
 })
