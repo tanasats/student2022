@@ -25,6 +25,7 @@ export class CurrentUserService {
       username: '',
       displayname: '',
       email: '',
+      role:'',
       roles:[],
     };
   }
@@ -47,6 +48,12 @@ export class CurrentUserService {
   set email(email) {
     this._currentuser.email = email;
   }
+  get role(){
+    return this._currentuser.role;
+  }
+  set role(rolecode){
+    this._currentuser.role=rolecode;
+  }
   get roles(){
     return this._currentuser.roles;
   }
@@ -63,9 +70,7 @@ export class CurrentUserService {
 
   logout() {
     this._currentuser = this.initCurrentUser;
-    //and remove accesstoken form localstorage
-    localStorage.removeItem('access-token');
-    //localStorage.clear();
+    localStorage.removeItem('access-token'); //localStorage.clear();
     this.fireIsLoggedIn.emit(this._currentuser);
   }
 } //class

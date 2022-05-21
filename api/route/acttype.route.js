@@ -4,7 +4,7 @@ const acttypeController = require("../controller/acttype.controller");
 const { authJwt } = require("../middleware/auth");
 
 // Read
-router.get("/acttypes",acttypeController.filter);
+router.get("/acttypes",/*authJwt.verifyToken,*/acttypeController.filter);
 router.get("/acttype/:id",/*authJwt.verifyToken,*/ acttypeController.getById);
 // Create
 router.post("/acttype", /*authJwt.verifyToken,*/ acttypeController.create);

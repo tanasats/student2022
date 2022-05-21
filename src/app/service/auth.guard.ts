@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot ): boolean {
     console.log(route.data);
-    console.log('canActivate on ' + state.url);
+    console.log('check canActivate on ' + state.url);
     if (!this.currUserService.islogin) {
       console.log('[AuthGuard] You are not allowed to view this page.'+state.url );
       //this.router.navigate(['sign-in'], { queryParams: { retUrl: state.url } });
@@ -35,7 +35,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 
   private checkAllowRole(ExpectedRole:any[]):boolean{
-    const currentUserRole = this.currUserService.roles;
+    //const currentUserRole = this.currUserService.roles; //<-- check from all role of user has
+    const currentUserRole = this.currUserService.role;    //<-- check from current role of user
     console.log("checkAllowRole() current user rules is ",currentUserRole);
     let result = ExpectedRole.some(r=> currentUserRole.includes(r))
     console.log('checkAllowRole()=',result);

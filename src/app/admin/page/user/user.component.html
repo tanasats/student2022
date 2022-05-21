@@ -31,7 +31,8 @@
                         <th>รหัส</th>
                         <th>username</th>
                         <th>ชื่อผู้ใช้งาน</th>
-                        <th>จัดการ</th>
+                        <th>สิทธ์การใช้งาน</th>
+                        <th class="text-center"><i class="bi bi-gear"></i></th>
                     </tr>
                 </thead>
                 <tbody *ngFor="let item of items">
@@ -39,6 +40,11 @@
                         <td>{{ item.userid }}</td>
                         <td>{{ item.username }}</td>
                         <td>{{ item.displayname }}</td>
+                        <td>
+                            <span *ngFor="let role of item.roles" class="badge rounded-pill bg-info">
+                                {{role.rolecode}}
+                            </span>
+                        </td>
                         <td class="fit">
                             <button class="btn btn-sm btn-info text-white" [routerLink]="['update',item.userid]"
                                 [state]="{data:item}">

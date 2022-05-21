@@ -9,7 +9,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root', 
 })
 export class ActtypeService {
   private endpoint = 'http://localhost:3000/api/v1/acttype';

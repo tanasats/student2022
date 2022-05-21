@@ -2,33 +2,87 @@ const userModel = require("../model/user.model");
 const bcrypt = require("bcrypt");
 
 exports.filter = async (req, res) => {
-  //console.log('body',req.body);
-  console.log("query", req.query.keyword);
+  console.time('test');
   try {
     let page = parseInt(req.query.page) || 1;
     let pagesize = parseInt(req.query.pagesize) || 10;
     let keyword = req.query.keyword || "";
-    const [[_results], [[_count]]] = await Promise.all([
+    const [ [_users], [[_count]],[_roles] ] = await Promise.all([
       userModel.filter({ page: page, pagesize: pagesize, keyword: keyword }),
       userModel.countfilter({ keyword: keyword }),
+      userModel.getallusersroles(),
     ]);
+
+    // const userid_list = _users.map((user) =>{
+    //   return user.userid;
+    // })
+    // console.log(userid_list);
+
+    // prepare hierarchy format 
+    const datas = _users.map((user,user_index) => {
+      const myroles = _roles.filter((role) => role.userid==user.userid);
+      user.roles = myroles; //JSON.stringify(myroles);
+      return user;
+    });
+    console.timeEnd('test');
     return res.status(200).json({
       currentpage: page,
       totalpage: Math.ceil(_count.value / pagesize),
       pagesize: pagesize,
       itemscount: _count.value,
-      items: _results,
+      items: datas,
     });
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     res.status(400).json(error);
   }
+  
 };
 
-exports.roles = (req, res) => {
+exports.test = (req,res) =>{
+  userModel.test()
+    .then(([row]) =>{
+      console.log(row);
+      const _roles = row.map((element,index,arr)=>{      
+        const item = {
+          "userid":element.userid,
+          "roleid":element.roleid,
+          "rolecode":element.rolecode,
+          "rolename":element.rolename
+        };
+        return item;
+      })
+      const _users = row.map((element)=>{
+        return {  userid: element.userid,
+                  username: element.username,
+                  displayname:element.displayname,
+                  email:element.email,
+                  adusername:element.adusername,
+                  cdate:element.cdate,
+                  mdate:element.mdate
+                }
+      }).filter((element,index,arr)=>{
+        const _userid = arr.map((element)=>element.userid);
+        //console.log(_userid.indexOf(element.userid),index);
+        return _userid.indexOf(element.userid)===index;
+      })     
+      const users = _users.map((user)=>{
+        const myroles = _roles.filter((role) => role.userid==user.userid);
+        user.roles = myroles;
+        return user;
+      })
+      res.status(200).json(users);
+    })
+    .catch((err) =>{
+      res.status(400).send(err);
+    })
+}
+
+
+exports.getuserrole = (req, res) => {
   if (req.params.id) {
     userModel
-      .roles({ id: req.params.id })
+      .getUserroleById({ id: req.params.id })
       .then(([row]) => {
         res.status(200).json(row);
       })
@@ -115,16 +169,36 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.getById = (req, res) => {
-  userModel
-    .getById({ id: req.params.id })
-    .then(([row]) => {
-      res.status(200).json(row);
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(400).send(error);
-    });
+exports.getById = async (req, res) => {
+  // userModel
+  //   .getById({ id: req.params.id })
+  //   .then(([row]) => {
+  //     res.status(200).json(row);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //     res.status(400).send(error);
+  //   });
+    try {
+      const id = req.params.id;
+      const [ [user],[roles] ] = await Promise.all([
+        userModel.getById({id: id}),
+        userModel.getUserroleById({id: id}),
+      ]);
+      // prepare hierarchy format 
+      const datas = user.map((user,user_index) => {
+        const myroles = roles.filter((role) => role.userid==user.userid);
+        user.roles = myroles; //JSON.stringify(myroles);
+        return user;
+      })
+      return res.status(200).json(datas);
+    } catch (error) {
+      //console.log(error);
+      res.status(400).json(error);
+    }
+
+
+
 };
 
 exports.createxx = async (req, res) => {

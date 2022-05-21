@@ -64,6 +64,7 @@ td.fit, th.fit {
     background-color: #fbb600;
     color: #000;
     white-space: nowrap;
+    font-weight: normal;
 }
 .item-table td{
     display: table-cell;

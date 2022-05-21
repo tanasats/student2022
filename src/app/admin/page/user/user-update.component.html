@@ -46,6 +46,15 @@
                                 <input formControlName="email" class="form-control">
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                
+                                    <span *ngFor="let role of item.roles" class="badge rounded-pill bg-info">
+                                        {{role.rolecode}}
+                                    </span>
+                               
+                            </div>
+                        </div>
                         <div class="row mt-3">
                             <div class="col-12">
                                 <!-- <button type="reset" class="btn btn-secondary me-2">Reset</button> -->

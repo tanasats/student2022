@@ -7,7 +7,7 @@ class _class {
     return db.execute(sql);
   }
   getById({id = ""}) {
-    let sql = db.format("SELECT * FROM acttype WHERE acttype.acttypeid = ?", [id]);
+    let sql = db.format("SELECT * FROM acttype WHERE acttypeid = ?", [id]);
     return db.execute(sql);
   }
   filter({page,pagesize,keyword}){

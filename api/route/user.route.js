@@ -17,9 +17,11 @@ router.get("/users",userController.filter);
 //router.get("/user/findmeauth", authJwt.verifyToken, userController.findMeAuth);
 //router.get("/user/isregistered",authJwt.verifyToken, userController.isregistered);
 
+router.get("/user/test",userController.test);
 //router.get("/user/info",authJwt.verifyToken,userController.getUserInfo);
 router.get("/user/:id",/*authJwt.verifyToken,*/ userController.getById);
-router.get("/user/:id/roles",/*authJwt.verifyToken,*/userController.roles);
+router.get("/user/:id/roles",/*authJwt.verifyToken,*/userController.getuserrole);
+
 //router.get("/user/:id/roles",/*authJwt.verifyToken,*/ userController.getUserRole);
 
 

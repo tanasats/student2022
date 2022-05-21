@@ -39,9 +39,12 @@ const authRouteV1 = require('./route/auth.route');
 app.use('/api/v1', authRouteV1);
 const userRouteV1 = require('./route/user.route');
 app.use('/api/v1', userRouteV1);
+const activityRouteV1 = require('./route/activity.route');
+app.use('/api/v1', activityRouteV1);
 const acttypeRouteV1 = require('./route/acttype.route');
 app.use('/api/v1', acttypeRouteV1);
-
+const facultyRouteV1 = require('./route/faculty.route');
+app.use('/api/v1', facultyRouteV1);
 
 const port = process.env.SERVER_PORT || 3000;
 app.listen(port, () => {

@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   public islogin=false;
+  public role="";
   public displayname="";
 
   constructor( 
@@ -23,9 +24,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     // subscribe currentuserservice emit
     this.currUserService.getEmitter().subscribe((currUserObject:ICurrentuser) => { 
-      this.islogin=currUserObject.islogin;
-      this.displayname=currUserObject.displayname;
-      console.log("Navebar.component getEmitter(currUserObject) form currUserService =",currUserObject); 
+      console.log("Navebar.component getEmitter(currUserObject) form currUserService =",JSON.stringify(currUserObject)); 
+        this.islogin=currUserObject.islogin;
+        this.displayname=currUserObject.displayname;
+        this.role=currUserObject.role;
     }); 
   }
  

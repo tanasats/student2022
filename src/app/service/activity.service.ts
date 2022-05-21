@@ -9,32 +9,31 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class UserService {
-  private endpoint = 'http://localhost:3000/api/v1/user';
+export class ActivityService {
+  private endpoint = 'http://localhost:3000/api/v1/activity';
   constructor(private http: HttpClient) {}
 
   get httpOptions() {
     let token = localStorage.getItem('access-token') || '';
     return {
-      headers: this.httpHeaders,
+      headers: this.httpHeaders
     };
   }
 
   get httpHeaders() {
     let token = localStorage.getItem('access-token') || '';
     return new HttpHeaders({
-      'Content-Type': 'application/json',
-      //'Content-Type': 'multipart/form-data; charset=utf-8',
-      'Cache-Control': 'no-cache',
-      'x-access-token': token,
-    });
+        'Content-Type': 'application/json',
+        //'Content-Type': 'multipart/form-data; charset=utf-8',
+        'Cache-Control': 'no-cache',
+        'x-access-token': token,
+      });
   }
 
   private handleError(error: any) {
     let errorMsg: string;
-    //console.log("xxxxxxx");
     console.log(error);
     if (error.error instanceof ErrorEvent) {
       // Client side error
@@ -42,13 +41,13 @@ export class UserService {
     } else {
       // Server side error
       if (error instanceof HttpErrorResponse) {
-        if (error.error.message) {
-          errorMsg = error.error.message;
-        } else {
+        if(error.error) {
+          errorMsg = error.error;
+        }else{
           errorMsg = error.statusText; //error.status + ' : ' + error.statusText;
         }
       } else {
-          errorMsg = error;
+        errorMsg = error;
       }
     }
     return throwError(() => {
@@ -56,19 +55,20 @@ export class UserService {
     });
   }
 
+
   getAll(): Observable<any> {
     return this.http
       .get(this.endpoint + 's', this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
-  filter(parameters: any): Observable<any> {
+  filter(parameters:any): Observable<any> {
     let params = new HttpParams()
-      .set('page', parameters.page)
-      .set('pagesize', parameters.pagesize)
-      .set('keyword', parameters.keyword);
+    .set('page', parameters.page)
+    .set('pagesize',parameters.pagesize)
+    .set('keyword',parameters.keyword);
     return this.http
-      .get(this.endpoint + 's', { headers: this.httpHeaders, params: params })
+      .get(this.endpoint + 's',{headers:this.httpHeaders,params:params})
       .pipe(catchError(this.handleError));
   }
 
@@ -92,13 +92,10 @@ export class UserService {
 
   update(datas: any): Observable<any> {
     return this.http
-      .put(this.endpoint + '/' + datas.userid, datas, this.httpOptions)
+      .put(this.endpoint + '/' + datas.activityid, datas, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
-  userroles(userid: number): Observable<any> {
-    return this.http
-      .get(this.endpoint + `/${userid}/roles`, this.httpOptions)
-      .pipe(catchError(this.handleError));
-  }
-} // class
+
+
+}//class

@@ -81,6 +81,6 @@ exports.me = (req, res) => {
         res.status(401).send(error);
       });
   } catch (err) {
-    res.status(500).send(err);
+    res.status(401).send(err);
   }
 };

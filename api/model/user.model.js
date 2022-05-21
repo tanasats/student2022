@@ -1,115 +1,57 @@
 const db = require("../config/db");
 
-class _Class { 
+class _Class {  
 
   getAll() {
-    let sql = db.format("SELECT * FROM users");
+    const sql = db.format("SELECT * FROM users");
     return db.execute(sql);
   }
   getById({ id = "" }) {
-    let sql = db.format("SELECT * FROM users WHERE users.userid = ?", [id]);
+    const sql = db.format("SELECT * FROM users WHERE users.userid = ?", [id]);
     return db.execute(sql);
   }
+
   filter({page,pagesize,keyword}){
-    //let sql = db.format("SELECT * FROM  users WHERE username like ? LIMIT ?,?", ['%'+keyword+'%',(page-1)*pagesize,pagesize]);
-    let sql = db.format("SELECT * FROM  users WHERE username like ? LIMIT ?,?", ['%'+keyword+'%',(page-1)*pagesize,pagesize]);
+    //const sql = db.format("SELECT * FROM  users WHERE username like ? LIMIT ?,?", ['%'+keyword+'%',(page-1)*pagesize,pagesize]);
+    const sql = db.format("SELECT * FROM  users WHERE username like ? LIMIT ?,?", ['%'+keyword+'%',(page-1)*pagesize,pagesize]);
     return db.query(sql);
   }
+
   countfilter({keyword}) {
-    let sql = db.format("SELECT count(*) as value FROM users WHERE username like ?",['%'+keyword+'%']);
+    const sql = db.format("SELECT count(*) as value FROM users WHERE username like ?",['%'+keyword+'%']);
     return db.execute(sql);
   }
-  roles({ id }) {
-    let sql = db.format("SELECT userroles.userid,roles.* FROM userroles LEFT JOIN roles ON userroles.roleid=roles.roleid WHERE userid=?", [id]);
+
+  getUserroleById({ id }) {
+    const sql = db.format("SELECT userroles.userid,roles.* FROM userroles LEFT JOIN roles ON userroles.roleid=roles.roleid WHERE userid=?", [id]);
     return db.execute(sql);
   }  
 
+  getallusersroles(){
+    const sql = db.format("select userroles.userid,roles.* from userroles left join roles on userroles.roleid = roles.roleid");
+    return db.execute(sql);
+  }
+  
   create({ datas }) {
-    let sql = db.format("INSERT INTO users SET ?", [datas]);
+    const sql = db.format("INSERT INTO users SET ?", [datas]);
 	  console.log(sql);
     return db.query(sql);
   }
   update({ id, datas }) {
-    let sql = db.format("UPDATE users SET ? WHERE userid=?", [datas, id]);
+    const sql = db.format("UPDATE users SET ? WHERE userid=?", [datas, id]);
     return db.query(sql);
   }
   delete({ id }) {
-    let sql = db.format("DELETE FROM users WHERE userid=?", [id]);
+    const sql = db.format("DELETE FROM users WHERE userid=?", [id]);
     return db.execute(sql);
   }
 
 
-
-
-
-
-
-
-
-  findById({ id = "" }) {
-    let sql = db.format("SELECT * FROM USER WHERE user.id = ?", [id]);
+  test(){
+    const sql = db.format("SELECT users.*,roles.roleid,roles.rolecode,roles.rolename from users left join userroles on users.userid=userroles.userid left join roles on userroles.roleid=roles.roleid");
     return db.execute(sql);
-  }
-  findByEmail({ email = "" }) {
-    let sql =  db.format("SELECT * FROM USER WHERE user.email = ?", [email]);
-    return db.execute(sql);
-  }
-  userByRole({ id = "" }) {
-    let sql = db.format("SELECT * FROM userrole WHERE userrole.roleid = ?", [id]);
-    return db.execute(sql);
-  }
-  addUser({ datas }) {
-    let sql = db.format("INSERT INTO USER SET ?", [datas]);
-	console.log(sql);
-    return db.query(sql);
-  }
-  updateUser({ id, datas }) {
-    let sql = db.format("UPDATE USER SET ? WHERE id=?", [datas, id]);
-    return db.query(sql);
-  }
-  deleteUser({ id }) {
-    let sql = db.format("DELETE FROM USER WHERE id=?", [id]);
-    return db.execute(sql);
-  }
-  listallRole() {  
-	  console.log("listallrow");
-    let sql = db.format("SELECT * FROM role");
-    return db.execute(sql);
-  }
-  addUserRole({userid,roleid}){
-	let sql = db.format("INSERT INTO userrole (userid,roleid) VALUES(?,?)",[userid,roleid]);
-	console.log(sql);
-	return db.execute(sql);
-  }
-  addUserRoles({userid,roleid}){
-	let sql = db.format("INSERT INTO userrole (userid,roleid) VALUES(?,?)",[userid,roleid]);
-	return db.execute(sql);
-  }  
-  getuserrole({userid}){
-	  let sql = db.format("SELECT * FROM userrole LEFT JOIN role ON userrole.roleid=role.id WHERE userrole.userid=? ORDER BY userrole.roleid",[userid]);
-	  console.log(sql);
-	  return db.execute(sql);
-  }
-  findMeAuth({authaccount}){
-	  let sql = db.format("SELECT * FROM user WHERE authaccount=?",[authaccount]);
-	  console.log(sql);
-	  return db.execute(sql);
-  }
-  isregistered({authaccount}){
-	  let sql = db.format("SELECT * FROM user WHERE authaccount=?",[authaccount]);
-	  console.log(sql);
-	  return db.execute(sql);
-  }  
-  getUserInfo({authaccount}){
-	let sql = db.format("select * from user left join userrole on user.id=userrole.userid left join role on userrole.roleid=role.id where authaccount=?",[authaccount]);
-	console.log(sql);
-	return db.execute(sql);
-  }
-  
-  
-  
+  } 
 }//class
 
-let ClassModel = new _Class();
-// export instance of class
+const ClassModel = new _Class();
 module.exports = ClassModel;

@@ -1,4 +1,4 @@
-const acttypeModel = require("../model/acttype.model");
+const activityModel = require("../model/activity.model");
 
 exports.filter = async(req,res) => {
   try{
@@ -6,8 +6,8 @@ exports.filter = async(req,res) => {
     let pagesize=parseInt( req.query.pagesize )||10;
     let keyword= req.query.keyword||'';
     const [[_results], [[_count]]] = await Promise.all([
-      acttypeModel.filter({page:page,pagesize:pagesize,keyword:keyword}),
-      acttypeModel.countfilter({keyword:keyword})
+      activityModel.filter({page:page,pagesize:pagesize,keyword:keyword}),
+      activityModel.countfilter({keyword:keyword})
     ]);
     return res.status(200).json(
       {
@@ -25,7 +25,7 @@ exports.filter = async(req,res) => {
 }
 
 exports.getById = (req, res) => {
-  acttypeModel
+  activityModel
     .getById({ id: req.params.id })
     .then(([row]) => {
       res.status(200).json(row);
@@ -38,7 +38,7 @@ exports.getById = (req, res) => {
 
 exports.delete = (req, res) => {
   if (req.params.id) {
-    acttypeModel
+    activityModel
       .delete({ id: req.params.id })
       .then(([row]) => {
         res.status(200).json(row);
@@ -67,7 +67,7 @@ exports.update = async (req, res) => {
     }
     delete datas.cdate;
     datas.mdate = new Date();
-    acttypeModel
+    activityModel
       .update({ id: id, datas: datas })
       .then(([row]) => {
         res.status(200).json(row);
@@ -89,9 +89,9 @@ exports.create = async (req, res) => {
   const datas = req.body;
   datas.cdate = new Date();
   datas.mdate = new Date();
-  if (req.body.acttypename) {
+  if (req.body.activityname) {
     console.log("data:", datas);
-    acttypeModel
+    activityModel
       .create({ datas: datas })
       .then(([row]) => {
         console.log("create()->result:", row);
