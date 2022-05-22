@@ -48,11 +48,12 @@ export class SignInComponent implements OnInit {
             localStorage.setItem('access-token', res.access_token);
             this.authService.tokenSignin(res.access_token).subscribe({
               next: (res) => {
-                const _user = res;
                 localStorage.setItem('access-token', res.access_token);
                 this.authService.me().subscribe({
                   next: ([[res]]) => {
                     //get user form database
+                    console.log('sign-in.component call me() res=', res);
+                    const _user: any = res;
                     console.log(res);
                     //--- success signin-----
                     this.userService.userroles(res.userid).subscribe({
@@ -61,7 +62,7 @@ export class SignInComponent implements OnInit {
                         let _rolecode = _roles.map((item: any) => {
                           return item.rolecode;
                         });
-                        console.log('useroles=', _rolecode);
+                        console.log('useroles=', _rolecode); 
 
                         this.currUserService.username = _user.username;
                         this.currUserService.displayname = _user.displayname;
