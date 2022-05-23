@@ -1,7 +1,7 @@
-<div class="container-fluid mt-2">
+<div class="container-fluid">
     <div class="row">
         <div class="col">
-            <div class="h5">
+            <div class="h5 mt-3">
                 ข้อมูลกิจกรรม
             </div>
             <div class="d-flex py-2">
@@ -12,9 +12,11 @@
                         <button class="btn btn-success text-white" type="button" id="button-addon2" (click)="getItems()">
                             <i class="bi bi-search"></i>
                         </button>
+                        <div *ngIf="loading" class="ms-3">
+                            <span class="text-info spinner-border spinner-border-lg align-center"></span>
+                        </div>
                     </div>
                 </div>
-
 
                 <div class="align-self-center"><button class="btn btn-success text-white" (click)="getItems()">
                         <i class="bi bi-arrow-repeat"></i>
@@ -41,9 +43,7 @@
                         <td>{{ item.activitycode }}</td>
                         <td>{{ item.activityname }}</td>
                         <td>
-                            <span *ngFor="let role of item.roles" class="badge rounded-pill bg-info">
-                                {{role.rolecode}}
-                            </span>
+                            {{ item.statusvalue}}
                         </td>
                         <td class="fit">
                             <button class="btn btn-sm btn-info text-white" [routerLink]="['update',item.activityid]"
@@ -56,11 +56,11 @@
                         </td>
                     </tr>  
                 </tbody>
-                <tbody *ngIf="!items.length">
+                <tbody *ngIf="!loading && !itemsfound">    
                     <td colspan="4" class="text-center">
-                        <span class="text-info spinner-border spinner-border-lg align-center"></span>
+                        <span class="text-warning">Not found !</span>
                     </td>
-                </tbody>
+                </tbody>                
             </table>
 
             <div class="mt-2">พบ {{itemsfound}} รายการ แสดงหน้า {{page}}/{{pagetotal}}</div>

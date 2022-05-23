@@ -20,6 +20,7 @@ export class UserComponent implements OnInit {
 
   public itemsfound:number=0;
   public pagetotal:number=0;
+  public loading:boolean=false;
 
   constructor(
     private userService: UserService,
@@ -32,14 +33,16 @@ export class UserComponent implements OnInit {
   }
 
   getItems() {
+    this.loading=true;
     //this.acttypeService.getAll().subscribe({
       this.userService.filter({page:this.page,pagesize:this.pagesize,keyword:this.keyword}).subscribe({
       next: (v) => {
+        this.loading=false;
         console.log(v);
         this.pagetotal= v.totalpage;
         this.itemsfound = v.itemscount;
         this.items = v.items;
-        if(this.page>this.pagetotal) this.changepage(1);
+        if (this.page > this.pagetotal && this.itemsfound) this.changepage(this.page - 1);
       },
       error: (e) => {
         this.notifyService.show('error',e,'');
@@ -102,9 +105,13 @@ export class UserComponent implements OnInit {
       this.getItems();
     }
   }
-  changepage(pageno:number){
-    console.log("set page "+pageno);
-    this.page=pageno;
+  changepage(pageno: number) {
+    console.log('set page ' + pageno);
+    if (pageno < 1) {
+      this.page = 1;
+    } else {
+      this.page = pageno;
+    }
     this.getItems();
   }
   previouspage(){

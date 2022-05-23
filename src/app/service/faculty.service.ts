@@ -9,27 +9,38 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class ActivityService {
-  private endpoint = 'http://localhost:3000/api/v1/activity';
+export class FacultyService {
+  private endpoint = 'http://localhost:3000/api/v1/faculty';
   constructor(private http: HttpClient) {}
 
+  // get httpOptions() {
+  //   let token = localStorage.getItem('access-token') || '';
+  //   return {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json',
+  //       //'Content-Type': 'multipart/form-data; charset=utf-8',
+  //       'Cache-Control': 'no-cache',
+  //       'x-access-token': token,
+  //     }),
+  //   };
+  // }
   get httpOptions() {
     let token = localStorage.getItem('access-token') || '';
     return {
-      headers: this.httpHeaders
+      headers: this.httpHeaders,
     };
   }
 
   get httpHeaders() {
     let token = localStorage.getItem('access-token') || '';
     return new HttpHeaders({
-        'Content-Type': 'application/json',
-        //'Content-Type': 'multipart/form-data; charset=utf-8',
-        'Cache-Control': 'no-cache',
-        'x-access-token': token,
-      });
+      'Content-Type': 'application/json',
+      //'Content-Type': 'multipart/form-data; charset=utf-8',
+      'Cache-Control': 'no-cache',
+      'x-access-token': token,
+    });
   }
 
   private handleError(error: any) {
@@ -41,9 +52,9 @@ export class ActivityService {
     } else {
       // Server side error
       if (error instanceof HttpErrorResponse) {
-        if(error.error) {
-          errorMsg = error.error.code;
-        }else{
+        if (error.error) {
+          errorMsg = error.error;
+        } else {
           errorMsg = error.statusText; //error.status + ' : ' + error.statusText;
         }
       } else {
@@ -55,20 +66,19 @@ export class ActivityService {
     });
   }
 
-
   getAll(): Observable<any> {
     return this.http
       .get(this.endpoint + 's', this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
-  filter(parameters:any): Observable<any> {
+  filter(parameters: any): Observable<any> {
     let params = new HttpParams()
-    .set('page', parameters.page)
-    .set('pagesize',parameters.pagesize)
-    .set('keyword',parameters.keyword);
+      .set('page', parameters.page)
+      .set('pagesize', parameters.pagesize)
+      .set('keyword', parameters.keyword);
     return this.http
-      .get(this.endpoint + 's',{headers:this.httpHeaders,params:params})
+      .get(this.endpoint + 's', { headers: this.httpHeaders, params: params })
       .pipe(catchError(this.handleError));
   }
 
@@ -92,10 +102,36 @@ export class ActivityService {
 
   update(datas: any): Observable<any> {
     return this.http
-      .put(this.endpoint + '/' + datas.activityid, datas, this.httpOptions)
+      .put(this.endpoint + '/' + datas.acttypeid, datas, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
+  getOption(): Observable<any> {
+    return new Observable((observer) => {
+      try {
+        this.http
+          .get(this.endpoint + 's?pagesize=100', this.httpOptions)
+          .pipe(catchError(this.handleError))
+          .subscribe({
+            next: (res: any) => {
+              const datas = res.items.map((item: any) => {
+                return {
+                  value: item.facultyid,
+                  name: item.facultyname,
+                  selected: false,
+                };
+              });
+              observer.next(datas);
+            },
+            error: (err) => {
+              observer.error(err);
+            },
+          });
+      } catch (err) {
+        observer.error(err);
+      }
+    });
+  }
 
 
-}//class
+} // class

@@ -106,4 +106,35 @@ export class ActtypeService {
       .put(this.endpoint + '/' + datas.acttypeid, datas, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
+
+  getOption(): Observable<any> {
+    return new Observable((observer) => {
+      try {
+        this.http
+          .get(this.endpoint + 's?pagesize=100', this.httpOptions)
+          .pipe(catchError(this.handleError))
+          .subscribe({
+            next: (res: any) => {
+              const datas = res.items.map((item: any) => {
+                return {
+                  value: item.acttypeid,
+                  name: item.acttypename,
+                  selected: false,
+                };
+              });
+              observer.next(datas);
+            },
+            error: (err) => {
+              observer.error(err);
+            },
+          });
+      } catch (err) {
+        observer.error(err);
+      }
+    });
+  }
+
+
+
+
 } //class

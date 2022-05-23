@@ -19,10 +19,11 @@ import { AuthGuard } from '../service/auth.guard';
 const routes: Routes = [
   //{path:'',redirectTo:'admin/dashboard',pathMatch:'full'},
   //{ path: 'dashboard',redirectTo:'admin/dashboard'},
+  //{path: 'admin',redirectTo:'admin/dashboard',pathMatch:'full'},
   {
     path: '',
     component: AdminComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard], 
     data: {
       userRoles: ['Admin'], // Multiple Allowed User
     },
@@ -41,9 +42,10 @@ const routes: Routes = [
       { path: 'faculty', component: FacultyComponent },
       { path: 'faculty/create', component: FacultyCreateComponent },
       { path: 'faculty/update/:id', component: FacultyUpdateComponent },
+      { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  // { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({

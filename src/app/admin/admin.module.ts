@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
@@ -42,6 +43,7 @@ import { FacultyUpdateComponent } from './page/faculty/faculty-update.component'
     ReactiveFormsModule,
     AdminRoutingModule,
     FormsModule,
+    NgbModule,
 
   ]
 })
