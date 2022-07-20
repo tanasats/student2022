@@ -9,7 +9,9 @@ html body{
     --msu-yellow1: rgb(251, 182, 0);
     --msu-gray: rgb(147, 151, 154);
     --msu-appbar: rgb(52, 74, 97);
+    
   }
+
 .bg-msu-yellow1{
     background-color: var(--msu-yellow1);
 }

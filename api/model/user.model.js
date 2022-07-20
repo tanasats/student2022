@@ -13,7 +13,7 @@ class _Class {
 
   filter({page,pagesize,keyword}){
     //const sql = db.format("SELECT * FROM  users WHERE username like ? LIMIT ?,?", ['%'+keyword+'%',(page-1)*pagesize,pagesize]);
-    const sql = db.format("SELECT * FROM  users WHERE username like ? LIMIT ?,?", ['%'+keyword+'%',(page-1)*pagesize,pagesize]);
+    const sql = db.format("SELECT * FROM  users WHERE ( username like ? or displayname like ? ) LIMIT ?,?", ['%'+keyword+'%','%'+keyword+'%',(page-1)*pagesize,pagesize]);
     return db.query(sql);
   }
 
