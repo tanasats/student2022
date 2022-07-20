@@ -9,7 +9,7 @@
                     <div class="input-group">
                         <input [(ngModel)]="keyword" (keydown)="searchkeydown($event)" type="text" class="form-control" placeholder="ค้นหา" aria-label="Recipient's username"
                             aria-describedby="button-addon2">
-                        <button class="btn btn-success text-white" type="button" id="button-addon2" (click)="getItems()">
+                        <button class="btn btn-info text-white" type="button" id="button-addon2" (click)="getItems()">
                             <i class="bi bi-search"></i>
                         </button>
                         <div *ngIf="loading" class="ms-3">
@@ -18,7 +18,7 @@
                     </div>
                 </div>
 
-                <div class="align-self-center"><button class="btn btn-success text-white" (click)="getItems()">
+                <div class="align-self-center"><button class="btn btn-info text-white" (click)="getItems()">
                         <i class="bi bi-arrow-repeat"></i>
                     </button></div>
                 <div class="align-self-center ms-2"><button class="btn btn-success text-white"
@@ -39,18 +39,18 @@
                 </thead>
                 <tbody *ngFor="let item of items">
                     <tr>
-                        <td>{{ item.activityid }}</td>
-                        <td>{{ item.activitycode }}</td>
-                        <td>{{ item.activityname }}</td>
+                        <td>{{ item.activity_id }}</td>
+                        <td>{{ item.activity_code }}</td>
+                        <td>{{ item.activity_name }}</td>
                         <td>
-                            {{ item.statusvalue}}
+                            {{ item.activity_statuscode }}
                         </td>
                         <td class="fit">
-                            <button class="btn btn-sm btn-info text-white" [routerLink]="['update',item.activityid]"
+                            <button class="btn btn-sm btn-info text-white" [routerLink]="['update',item.activity_id]"
                                 [state]="{data:item}">
                                 <i class="bi bi-pencil"></i>
                             </button>
-                            <button class="ms-2 btn btn-sm btn-info text-white" (click)="deleteItem(item);">
+                            <button class="ms-2 btn btn-sm btn-danger text-white" (click)="deleteItem(item);">
                                 <i class="bi bi-trash"></i>
                             </button>
                         </td>

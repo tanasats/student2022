@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'; 
 import {
   HttpClient,
   HttpErrorResponse,
@@ -103,7 +103,7 @@ export class ActtypeService {
 
   update(datas: any): Observable<any> {
     return this.http
-      .put(this.endpoint + '/' + datas.acttypeid, datas, this.httpOptions)
+      .put(this.endpoint + '/' + datas.acttype_id, datas, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
@@ -117,8 +117,8 @@ export class ActtypeService {
             next: (res: any) => {
               const datas = res.items.map((item: any) => {
                 return {
-                  value: item.acttypeid,
-                  name: item.acttypename,
+                  value: item.acttype_id,
+                  name: item.acttype_name,
                   selected: false,
                 };
               });

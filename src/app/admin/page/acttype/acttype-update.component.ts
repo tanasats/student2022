@@ -4,20 +4,20 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/service/notification.service';
-import { Location } from "@angular/common";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-acttype-update',
   templateUrl: './acttype-update.component.html',
-  styleUrls: ['./acttype-update.component.css']
+  styleUrls: ['./acttype-update.component.css'],
 })
 export class ActtypeUpdateComponent implements OnInit {
   public item: IActtype;
   public itemID: number;
   public formActtype: FormGroup;
   constructor(
-    private acttypeService:ActtypeService,
-    private formBuilder: FormBuilder, 
+    private acttypeService: ActtypeService,
+    private formBuilder: FormBuilder,
     private notifyService: NotificationService,
     private route: ActivatedRoute,
     private location: Location
@@ -25,40 +25,40 @@ export class ActtypeUpdateComponent implements OnInit {
     this.item = history.state.data;
     this.itemID = this.route.snapshot.params['id'];
     this.formActtype = this.formBuilder.group({
-      acttypeid: [this.itemID, [Validators.required]],
-      acttypename: [null, [Validators.required]],
+      acttype_id: [this.itemID, [Validators.required]],
+      acttype_code: [null, [Validators.required]],
+      acttype_name: [null, [Validators.required]],
       cdate: [null, []],
       mdate: [null, []],
-    });    
-   }
+    });
+  }
 
   ngOnInit(): void {
     this.formActtype.patchValue(this.item);
   }
 
-  
   onSubmit() {
-    if(this.formActtype.valid){
+    if (this.formActtype.valid) {
       let datas = this.formActtype.getRawValue();
       this.acttypeService.update(datas).subscribe({
-        next: (v) =>{
+        next: (v) => {
           console.log(v);
-          if(v.affectedRows==1){
-          this.notifyService.show('success','บันทึกการแก้ไขแล้ว','');
-          this.location.back();
-        }else{
-          this.notifyService.show('error','บันทึกการแก้ไขผิดพลาด','');
-        }
+          if (v.affectedRows == 1) {
+            this.notifyService.show('success', 'บันทึกการแก้ไขแล้ว', '');
+            this.location.back();
+          } else {
+            this.notifyService.show('error', 'บันทึกการแก้ไขผิดพลาด', '');
+          }
         },
-        error: (e) =>{
+        error: (e) => {
           console.log(e);
-          this.notifyService.show('error',e,'')
-        }
-      })
+          this.notifyService.show('error', e, '');
+        },
+      });
     }
   }
 
-  getItem(){
+  getItem() {
     console.log(this.itemID);
     this.acttypeService.getById(this.itemID).subscribe({
       next: ([v]) => {
@@ -66,10 +66,8 @@ export class ActtypeUpdateComponent implements OnInit {
         this.formActtype.patchValue(v);
       },
       error: (e) => {
-        this.notifyService.show('error',e,'');
-      }
-    })
+        this.notifyService.show('error', e, '');
+      },
+    });
   }
-
 }
- 

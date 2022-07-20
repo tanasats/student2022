@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   public islogin=false;
   public role="";
   public displayname="";
+  public showNavBar = false;
 
   constructor( 
     public authService:AuthService,
@@ -35,6 +36,11 @@ export class NavbarComponent implements OnInit {
     console.log("logout()");
     this.currUserService.logout();
     this.router.navigate(['home']);
+    this.showNavBar=!this.showNavBar;
+  }
+
+  toggleNavbar(){
+    this.showNavBar=!this.showNavBar;
   }
 
   // ngAfterContentInit() { // activate when user has browser refresh

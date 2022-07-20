@@ -24,12 +24,16 @@
                     <form [formGroup]="formActtype" #ngForm="ngForm" autocomplete="off">
                         <div class="row">
                             <div class="col-lg-3 col-md-4 col-sm-6">
+                                <label class="form-label">ID</label>
+                                <input formControlName="acttype_id" class="form-control"  placeholder="อัตโนมัติ" readonly>
+                            </div>                            
+                            <div class="col-lg-3 col-md-4 col-sm-6">
                                 <label class="form-label">รหัส</label>
-                                <input formControlName="acttypeid" class="form-control" readonly>
+                                <input formControlName="acttype_code" class="form-control">
                             </div>
                             <div class="col-lg-9 col-md-8 col-sm-6">
                                 <label class="form-label">ชื่อ</label>
-                                <input formControlName="acttypename" class="form-control">
+                                <input formControlName="acttype_name" class="form-control">
                             </div>
                         </div>
 

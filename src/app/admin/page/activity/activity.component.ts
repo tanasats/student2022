@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./activity.component.css'],
 })
 export class ActivityComponent implements OnInit {
-  public items: any[] = [];
+  public items: IActivity[] = [];
   public closeResult: string = '';
 
   public page: number = 1;
@@ -81,14 +81,14 @@ export class ActivityComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmDialogComponent);
     modalRef.componentInstance.title = 'ยืนยันลบข้อมูล';
     modalRef.componentInstance.content =
-      'รหัส ' + item.activityid + ' ' + item.activityname;
+      'รหัส ' + item.activity_id + ' ' + item.activity_name;
     modalRef.result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
         if (result == 'Ok') {
           this.items.forEach((el, index) => {
-            if (el.activityid == item.activityid) {
-              this.onDelete(item.activityid);
+            if (el.activity_id == item.activity_id) {
+              this.onDelete(item.activity_id);
             }
           });
         }
@@ -116,6 +116,7 @@ export class ActivityComponent implements OnInit {
       this.getItems();
     }
   }
+  
   changepage(pageno: number) {
     console.log('set page ' + pageno);
     if (pageno < 1) {

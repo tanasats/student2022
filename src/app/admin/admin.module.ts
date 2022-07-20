@@ -16,9 +16,8 @@ import { ActivityComponent } from './page/activity/activity.component';
 import { ActivityCreateComponent } from './page/activity/activity-create.component';
 import { ActivityUpdateComponent } from './page/activity/activity-update.component';
 import { FacultyComponent } from './page/faculty/faculty.component';
-import { FacultyCreateComponent } from './page/faculty/faculty-create.component';
-import { FacultyUpdateComponent } from './page/faculty/faculty-update.component';
-
+import { ActorganizationComponent } from './page/actorganization/actorganization.component';
+import { TestComponent } from './page/test/test.component';
 
 
 @NgModule({
@@ -35,8 +34,9 @@ import { FacultyUpdateComponent } from './page/faculty/faculty-update.component'
     ActivityCreateComponent,
     ActivityUpdateComponent,
     FacultyComponent,
-    FacultyCreateComponent,
-    FacultyUpdateComponent
+    ActorganizationComponent,
+    TestComponent,
+    
   ],
   imports: [
     CommonModule,

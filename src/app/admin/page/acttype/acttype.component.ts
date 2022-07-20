@@ -32,6 +32,13 @@ export class ActtypeComponent implements OnInit {
     this.getItems();
   }
 
+  searchkeydown(event: any) {
+    if (event.key === 'Enter') {
+      console.log(this.keyword);
+      this.getItems();
+    }
+  }
+
   getItems() {
     this.loading=true;
     //this.acttypeService.getAll().subscribe({
@@ -78,14 +85,14 @@ export class ActtypeComponent implements OnInit {
     const modalRef = this.modalService.open(ConfirmDialogComponent);
     modalRef.componentInstance.title = 'ยืนยันลบข้อมูล';
     modalRef.componentInstance.content =
-      'รหัส ' + item.acttypeid + ' ' + item.acttypename;
+      'รหัส ' + item.acttype_id + ' ' + item.acttype_name;
     modalRef.result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
         if (result == 'Ok') {
           this.items.forEach((el, index) => {
-            if (el.acttypeid == item.acttypeid) {
-              this.onDelete(item.acttypeid);
+            if (el.acttype_id == item.acttype_id) {
+              this.onDelete(item.acttype_id);
             }
           });
         }
@@ -106,12 +113,7 @@ export class ActtypeComponent implements OnInit {
     }
   }
 
-  searchkeydown(event: any) {
-    if (event.key === 'Enter') {
-      console.log(this.keyword);
-      this.getItems();
-    }
-  }
+
   changepage(pageno: number) {
     console.log('set page ' + pageno);
     if (pageno < 1) {
@@ -121,6 +123,7 @@ export class ActtypeComponent implements OnInit {
     }
     this.getItems();
   }
+  
   previouspage() {
     if (this.page > 1) {
       this.page--;

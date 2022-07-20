@@ -1,13 +1,13 @@
 export interface IUser {
-  userid: number,
+  user_id: number,
   username: string,
   password: string,
   displayname: string,
   email: string,
   roles: { 
-      roleid: number,
-      rolename: string,
-      rolecode: string }[],
+      role_id: number,
+      role_name: string,
+      role_code: string }[],
   cdate: string,
   mdate: string,
 } 

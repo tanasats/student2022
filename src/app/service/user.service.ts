@@ -92,13 +92,13 @@ export class UserService {
 
   update(datas: any): Observable<any> {
     return this.http
-      .put(this.endpoint + '/' + datas.userid, datas, this.httpOptions)
+      .put(this.endpoint + '/' + datas.user_id, datas, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
-  userroles(userid: number): Observable<any> {
+  userroles(user_id: number): Observable<any> {
     return this.http
-      .get(this.endpoint + `/${userid}/roles`, this.httpOptions)
+      .get(this.endpoint + `/${user_id}/roles`, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 } // class

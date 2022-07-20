@@ -19,14 +19,15 @@ export class ActtypeCreateComponent implements OnInit {
     private location: Location
   ) {
     this.formActtype = this.formBuilder.group({
-      acttypeid: [null,[]],
-      acttypename: [null,[Validators.required]],
+      acttype_id: [null,[]],
+      acttype_code: [null,[Validators.required]],
+      acttype_name: [null,[Validators.required]],
       cdate: [null,[]],
       mdate: [null,[]],   
     }); 
    }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
   }
 
   onSubmit(){

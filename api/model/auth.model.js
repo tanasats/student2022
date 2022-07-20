@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 class _Class {
 
   signin(username, password) {
-    let sql = db.format("SELECT * FROM users WHERE username=? AND password=?", [
+    let sql = db.format("SELECT * FROM user WHERE username=? AND password=?", [
       username,
       password,
     ]);
@@ -12,12 +12,12 @@ class _Class {
   }
 
   findAdUsername(username){
-    let sql = db.format("SELECT * FROM users WHERE adusername=?", [username]);
+    let sql = db.format("SELECT * FROM user WHERE adusername=?", [username]);
     return db.execute(sql);
   }
 
   findUsername(username) {
-    let sql = db.format("SELECT * FROM users WHERE username=?", [username]);
+    let sql = db.format("SELECT * FROM user WHERE username=?", [username]);
     return db.execute(sql);
   }
 } //class

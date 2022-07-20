@@ -27,7 +27,7 @@ export class UserUpdateComponent implements OnInit {
     this.itemId = this.route.snapshot.params['id'];
 
     this.formUser = this.formBuilder.group({
-      userid: [this.itemId, [Validators.required]],
+      user_id: [this.itemId, [Validators.required]],
       username: [null, [Validators.required]],
       displayname: [null, []],
       password: [null, []],

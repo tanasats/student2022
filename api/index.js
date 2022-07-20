@@ -18,8 +18,8 @@ var corsOptions = {
 app.use(cors(corsOptions));
 //app.use(cors());
 
-global.__basedir = 'c:/temp';
-
+//global.__basedir = 'c:/temp';
+global.__basedir = 'd:/ActivityTranscriptSystem/studentactivity/api'
 
 // trimmer MIDDLEWARE
 const {trimmer,debugShowURL} = require('./middleware/utils')
@@ -43,8 +43,18 @@ const activityRouteV1 = require('./route/activity.route');
 app.use('/api/v1', activityRouteV1);
 const acttypeRouteV1 = require('./route/acttype.route');
 app.use('/api/v1', acttypeRouteV1);
+const actorganizationRouteV1 = require('./route/actorganization.route');
+app.use('/api/v1', actorganizationRouteV1);
 const facultyRouteV1 = require('./route/faculty.route');
 app.use('/api/v1', facultyRouteV1);
+
+const uploadRouteV1 = require('./route/upload.route');
+app.use('/api/v1', uploadRouteV1);
+// app.post('/api/v1/upload',(req,res)=>{
+// 	console.log(req.body);
+// 	res.status(200).send({"status":"ok"});
+// }) 
+
 
 const port = process.env.SERVER_PORT || 3000;
 app.listen(port, () => {

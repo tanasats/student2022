@@ -71,22 +71,22 @@ export class AuthService {
         next: ([[res]]) => {
           console.log('auth.service call me() res=', res);
           const _user: any = res;
-          this.userService.userroles(res.userid).subscribe({
+          this.userService.userroles(res.user_id).subscribe({
             next: (res) => {
               console.log('useroles=', res);
               const _roles: any = res;
-              const _rolecode = _roles.map((item: any) => {
-                return item.rolecode;
+              const _role_code = _roles.map((item: any) => {
+                return item.role_code;
               });
-              console.log("useroles=",_rolecode);
+              console.log("useroles=",_role_code);
 
               this.currUserService.username = _user.username;
               this.currUserService.displayname = _user.displayname;
               this.currUserService.email = _user.email;
 
-              this.currUserService.roles = _rolecode;
-              if (_rolecode) {
-                this.currUserService.role = _rolecode[0];
+              this.currUserService.roles = _role_code;
+              if (_role_code) {
+                this.currUserService.role = _role_code[0];
               }
 
               this.currUserService.islogin = true; //<--this activate to emitt(data) to navbar

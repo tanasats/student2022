@@ -7,20 +7,16 @@ exports.filter = async (req, res) => {
     let page = parseInt(req.query.page) || 1;
     let pagesize = parseInt(req.query.pagesize) || 10;
     let keyword = req.query.keyword || "";
+
     const [ [_users], [[_count]],[_roles] ] = await Promise.all([
       userModel.filter({ page: page, pagesize: pagesize, keyword: keyword }),
       userModel.countfilter({ keyword: keyword }),
-      userModel.getallusersroles(),
+      userModel.getalluserrole(),
     ]);
-
-    // const userid_list = _users.map((user) =>{
-    //   return user.userid;
-    // })
-    // console.log(userid_list);
 
     // prepare hierarchy format 
     const datas = _users.map((user,user_index) => {
-      const myroles = _roles.filter((role) => role.userid==user.userid);
+      const myroles = _roles.filter((role) => role.user_id==user.user_id);
       user.roles = myroles; //JSON.stringify(myroles);
       return user;
     });
@@ -45,7 +41,7 @@ exports.test = (req,res) =>{
       console.log(row);
       const _roles = row.map((element,index,arr)=>{      
         const item = {
-          "userid":element.userid,
+          "user_id":element.user_id,
           "roleid":element.roleid,
           "rolecode":element.rolecode,
           "rolename":element.rolename
@@ -53,7 +49,7 @@ exports.test = (req,res) =>{
         return item;
       })
       const _users = row.map((element)=>{
-        return {  userid: element.userid,
+        return {  user_id: element.user_id,
                   username: element.username,
                   displayname:element.displayname,
                   email:element.email,
@@ -62,12 +58,12 @@ exports.test = (req,res) =>{
                   mdate:element.mdate
                 }
       }).filter((element,index,arr)=>{
-        const _userid = arr.map((element)=>element.userid);
-        //console.log(_userid.indexOf(element.userid),index);
-        return _userid.indexOf(element.userid)===index;
+        const _user_id = arr.map((element)=>element.user_id);
+        //console.log(_user_id.indexOf(element.user_id),index);
+        return _user_id.indexOf(element.user_id)===index;
       })     
       const users = _users.map((user)=>{
-        const myroles = _roles.filter((role) => role.userid==user.userid);
+        const myroles = _roles.filter((role) => role.user_id==user.user_id);
         user.roles = myroles;
         return user;
       })
@@ -187,7 +183,7 @@ exports.getById = async (req, res) => {
       ]);
       // prepare hierarchy format 
       const datas = user.map((user,user_index) => {
-        const myroles = roles.filter((role) => role.userid==user.userid);
+        const myroles = roles.filter((role) => role.user_id==user.user_id);
         user.roles = myroles; //JSON.stringify(myroles);
         return user;
       })
@@ -306,10 +302,10 @@ exports.updateUser = async (req, res) => {
 };
 
 exports.getUserRole = (req, res) => {
-  console.log("getuserrole() userid=", req.params.id);
+  console.log("getuserrole() user_id=", req.params.id);
   if (req.params.id) {
     userModel
-      .getuserrole({ userid: req.params.id })
+      .getuserrole({ user_id: req.params.id })
       .then(([row]) => {
         res.status(200).json(row);
       })
@@ -324,14 +320,14 @@ exports.getUserRole = (req, res) => {
 
 // find samAccountName in activitydb.user.authaccount
 // samAccountName it has in Token
-// verifytoken middleware it add samAccountName in to res.userId
+// verifytoken middleware it add samAccountName in to res.user_Id
 exports.findMeAuth = (req, res) => {
-  console.log(req.userId);
-  if (!req.userId) {
+  console.log(req.user_Id);
+  if (!req.user_Id) {
     res.status(400).send("invalid request token parameter");
   }
   userModel
-    .findMeAuth({ authaccount: req.userId })
+    .findMeAuth({ authaccount: req.user_Id })
     .then(([row]) => {
       res.status(200).json(row);
     })
@@ -342,12 +338,12 @@ exports.findMeAuth = (req, res) => {
 };
 
 exports.isregistered = (req, res) => {
-  console.log(req.userId);
-  if (!req.userId) {
+  console.log(req.user_Id);
+  if (!req.user_Id) {
     res.status(400).send("invalid request token parameter");
   }
   userModel
-    .isregistered({ authaccount: req.userId })
+    .isregistered({ authaccount: req.user_Id })
     .then(([row]) => {
       res.status(200).json(row);
     })
@@ -358,11 +354,11 @@ exports.isregistered = (req, res) => {
 };
 
 exports.addUserRole = (req, res) => {
-  if (!(req.body.userid && req.body.roleid)) {
+  if (!(req.body.user_id && req.body.roleid)) {
     res.status(400).send("invalid request parameter");
   } else {
     userModel
-      .addUserRole({ userid: req.body.userid, roleid: req.body.roleid })
+      .addUserRole({ user_id: req.body.user_id, roleid: req.body.roleid })
       .then(([row]) => {
         res.status(200).json(row);
       })
@@ -374,12 +370,12 @@ exports.addUserRole = (req, res) => {
 };
 
 exports.getUserInfo = (req, res) => {
-  console.log("getUserInfo() authaccount=", req.userId);
-  if (!req.userId) {
+  console.log("getUserInfo() authaccount=", req.user_Id);
+  if (!req.user_Id) {
     res.status(400).send("invalid request parameter");
   } else {
     userModel
-      .getUserInfo({ authaccount: req.userId })
+      .getUserInfo({ authaccount: req.user_Id })
       .then(([row]) => {
         res.status(200).json(row);
       })

@@ -1,6 +1,7 @@
 export interface IActtype {
-    acttypeid:number,
-    acttypename:string,
+    acttype_id:number,
+    acttype_code:string,
+    acttype_name:string,
     cdate:string,
     mdate:string,
 }

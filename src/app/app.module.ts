@@ -19,11 +19,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminModule } from './admin/admin.module';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     ConfirmDialogComponent,
-
+    
   ],
   imports: [
     BrowserModule,
@@ -33,7 +34,7 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-//    FontAwesomeModule,
+//  FontAwesomeModule,
     ToastrModule.forRoot(),
     NgbModule,
     AdminModule,

@@ -60,11 +60,6 @@ exports.update = async (req, res) => {
     return res.status(400).send({ message: "Invalid request parameter" });
   }
   if (req.params.id) {
-    if (datas.password) {
-      const saltRound = 10;
-      const salt = await bcrypt.genSalt(saltRound);
-      datas.password = await bcrypt.hash(datas.password, salt);
-    }
     delete datas.cdate;
     datas.mdate = new Date();
     activityModel
@@ -89,7 +84,8 @@ exports.create = async (req, res) => {
   const datas = req.body;
   datas.cdate = new Date();
   datas.mdate = new Date();
-  if (req.body.activityname) {
+  console.log()
+  if (req.body.activity_name) {
     console.log("data:", datas);
     activityModel
       .create({ datas: datas })

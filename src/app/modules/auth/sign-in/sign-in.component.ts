@@ -56,21 +56,21 @@ export class SignInComponent implements OnInit {
                     const _user: any = res;
                     console.log(res);
                     //--- success signin-----
-                    this.userService.userroles(res.userid).subscribe({
+                    this.userService.userroles(res.user_id).subscribe({
                       next: (res) => {
                         const _roles: any = res;
-                        let _rolecode = _roles.map((item: any) => {
-                          return item.rolecode;
+                        let _role_code = _roles.map((item: any) => {  
+                          return item.role_code;
                         });
-                        console.log('useroles=', _rolecode); 
+                        console.log('useroles=', _role_code); 
 
                         this.currUserService.username = _user.username;
                         this.currUserService.displayname = _user.displayname;
                         this.currUserService.email = _user.email;
 
-                        this.currUserService.roles = _rolecode;
-                        if (_rolecode) {
-                          this.currUserService.role = _rolecode[0];
+                        this.currUserService.roles = _role_code;
+                        if (_role_code) {
+                          this.currUserService.role = _role_code[0];
                         }
 
                         this.currUserService.islogin = true; //<--this activate to emitt(data) to navbar
@@ -78,11 +78,7 @@ export class SignInComponent implements OnInit {
                       },
                       error: (err) => {
                         console.log(err);
-                        this.notifyService.show(
-                          'error',
-                          'User roles ' + err,
-                          ''
-                        );
+                        this.notifyService.show('error','User roles ' + err,'');
                       },
                     });
                   },
@@ -99,19 +95,13 @@ export class SignInComponent implements OnInit {
             });
           }
         }, //next:
-        error: (err) => {
+        error: (err) => { //signin error
           console.log(err);
-          this.notifyService.show(
-            'error',
-            'Username หรือ Password ไม่ถูกต้อง',
-            err
-          );
+          this.notifyService.show('error',err,'sign-in error');
         },
         //complete: () => { console.log("complete msuauthservice")},
       });
     }
   }
 }
-function item(item: any, arg1: (any: any) => any) {
-  throw new Error('Function not implemented.');
-}
+

@@ -23,9 +23,10 @@ export class UserCreateComponent implements OnInit {
     private location: Location
   ) { 
     this.formUser = this.formBuilder.group({
-      userid: [null,[]],
+      user_id: [null,[]],
       username: [null,[Validators.required]],
       password: [null,[]],
+      displayname:[null,[]],
       email: [null,[]],
       cdate: [null,[]],
       mdate: [null,[]],   

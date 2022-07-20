@@ -8,7 +8,7 @@
 #sidebar-wrapper {
     min-height: 100vh;
     /* margin-left: -15rem; */
-    margin-left: -233px;
+    margin-left: -200px;
     transition: margin 0.25s ease-out;
 }
 
@@ -45,3 +45,6 @@
     -webkit-transform: rotate(180deg);
     -ms-transform: rotate(180deg);
   }
+.iconRight{
+    float:right;
+}

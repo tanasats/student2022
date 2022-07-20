@@ -1,3 +1,5 @@
+import { TestComponent } from './page/test/test.component';
+import { ActorganizationComponent } from './page/actorganization/actorganization.component';
 import { ActivityComponent } from './page/activity/activity.component';
 import { ActivityCreateComponent } from './page/activity/activity-create.component';
 import { ActivityUpdateComponent } from './page/activity/activity-update.component';
@@ -12,8 +14,6 @@ import { AdminComponent } from './admin.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FacultyComponent } from './page/faculty/faculty.component';
-import { FacultyCreateComponent } from './page/faculty/faculty-create.component';
-import { FacultyUpdateComponent } from './page/faculty/faculty-update.component';
 import { AuthGuard } from '../service/auth.guard';
 
 const routes: Routes = [
@@ -39,9 +39,10 @@ const routes: Routes = [
       { path: 'acttype', component: ActtypeComponent },
       { path: 'acttype/create', component: ActtypeCreateComponent },
       { path: 'acttype/update/:id', component: ActtypeUpdateComponent },
+      { path: 'actorganization', component: ActorganizationComponent },
       { path: 'faculty', component: FacultyComponent },
-      { path: 'faculty/create', component: FacultyCreateComponent },
-      { path: 'faculty/update/:id', component: FacultyUpdateComponent },
+
+      { path: 'test', component: TestComponent},
       { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },

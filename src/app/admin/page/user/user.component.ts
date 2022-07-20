@@ -71,14 +71,14 @@ export class UserComponent implements OnInit {
   deleteItem(item: IUser) {
     const modalRef = this.modalService.open(ConfirmDialogComponent);
     modalRef.componentInstance.title = "ยืนยันลบข้อมูล";
-    modalRef.componentInstance.content = "รหัส " + item.userid + " " + item.username;
+    modalRef.componentInstance.content = "รหัส " + item.user_id + " " + item.username;
     modalRef.result.then(
       (result) => {
         this.closeResult = `Closed with: ${result}`;
         if (result == "Ok") {
           this.items.forEach((el, index) => {
-            if (el.userid == item.userid) {
-              this.onDelete(item.userid);
+            if (el.user_id == item.user_id) {
+              this.onDelete(item.user_id);
             }
           });
         }

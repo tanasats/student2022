@@ -1,3 +1,4 @@
+import { IFaculty } from './../interface/faculty';
 import { Injectable } from '@angular/core';
 import {
   HttpClient,
@@ -12,8 +13,11 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class FacultyService {
+  private facultys: IFaculty[] = [];
   private endpoint = 'http://localhost:3000/api/v1/faculty';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    console.log("faculty.service constructor ###");
+  }
 
   // get httpOptions() {
   //   let token = localStorage.getItem('access-token') || '';
@@ -109,29 +113,42 @@ export class FacultyService {
   getOption(): Observable<any> {
     return new Observable((observer) => {
       try {
-        this.http
-          .get(this.endpoint + 's?pagesize=100', this.httpOptions)
-          .pipe(catchError(this.handleError))
-          .subscribe({
-            next: (res: any) => {
-              const datas = res.items.map((item: any) => {
-                return {
-                  value: item.facultyid,
-                  name: item.facultyname,
-                  selected: false,
-                };
-              });
-              observer.next(datas);
-            },
-            error: (err) => {
-              observer.error(err);
-            },
+        if (this.facultys.length) {
+          console.log("faculty data from memory ",this.facultys);
+          const datas = this.facultys.map((item: any) => {
+            return {
+              value: item.faculty_id,
+              name: item.faculty_name,
+              selected: false,
+            };
           });
+
+          observer.next(datas);
+        } else {
+          console.log("faculty data from server");
+          this.http
+            .get(this.endpoint + 's?pagesize=100', this.httpOptions)
+            .pipe(catchError(this.handleError))
+            .subscribe({
+              next: (res: any) => {
+                this.facultys=res.items;
+                const datas = res.items.map((item: any) => {
+                  return {
+                    value: item.faculty_id,
+                    name: item.faculty_name,
+                    selected: false,
+                  };
+                });
+                observer.next(datas);
+              },
+              error: (err) => {
+                observer.error(err);
+              },
+            });
+        }
       } catch (err) {
         observer.error(err);
       }
     });
   }
-
-
 } // class

@@ -92,7 +92,7 @@ export class ActivityService {
 
   update(datas: any): Observable<any> {
     return this.http
-      .put(this.endpoint + '/' + datas.activityid, datas, this.httpOptions)
+      .put(this.endpoint + '/' + datas.activity_id, datas, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 

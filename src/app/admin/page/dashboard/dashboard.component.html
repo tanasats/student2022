@@ -1,1 +1,13 @@
 <p>dashboard works!</p>
+
+<div *ngFor="let menu of vm.menu;let i=index;">
+    <a class="w-100 btn btn-light" data-bs-toggle="collapse" href="#collapseExample{{i}}" role="button"
+        aria-expanded="false" aria-controls="collapseExample">
+        {{menu.title}}
+    </a>
+    <div class="collapse" id="collapseExample{{i}}">
+        <a class="card card-body" *ngFor="let submenu of menu.item">
+            {{submenu}}
+        </a>
+    </div>
+</div>

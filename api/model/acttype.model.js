@@ -7,15 +7,15 @@ class _class {
     return db.execute(sql);
   }
   getById({id = ""}) {
-    let sql = db.format("SELECT * FROM acttype WHERE acttypeid = ?", [id]);
+    let sql = db.format("SELECT * FROM acttype WHERE acttype_id = ?", [id]);
     return db.execute(sql);
   }
   filter({page,pagesize,keyword}){
-    let sql = db.format("SELECT * FROM  acttype WHERE acttypename like ? LIMIT ?,?", ['%'+keyword+'%',(page-1)*pagesize,pagesize]);
+    let sql = db.format("SELECT * FROM  acttype WHERE acttype_name like ? LIMIT ?,?", ['%'+keyword+'%',(page-1)*pagesize,pagesize]);
     return db.query(sql);
   }
   countfilter({keyword}) {
-    let sql = db.format("SELECT count(*) as value FROM acttype WHERE acttypename like ?",['%'+keyword+'%']);
+    let sql = db.format("SELECT count(*) as value FROM acttype WHERE acttype_name like ?",['%'+keyword+'%']);
     return db.execute(sql);
   }
 
@@ -25,11 +25,11 @@ class _class {
     return db.query(sql);
   }
   update({ id, datas }) {
-    let sql = db.format("UPDATE acttype SET ? WHERE acttypeid=?", [datas, id]);
+    let sql = db.format("UPDATE acttype SET ? WHERE acttype_id=?", [datas, id]);
     return db.query(sql);
   }
   delete({ id }) {
-    let sql = db.format("DELETE FROM acttype WHERE acttypeid=?", [id]);
+    let sql = db.format("DELETE FROM acttype WHERE acttype_id=?", [id]);
     return db.execute(sql);
   }
 
