@@ -1,13 +1,39 @@
-<p>dashboard works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p>หน้าหลัก</p>
 
-<div *ngFor="let menu of vm.menu;let i=index;">
-    <a class="w-100 btn btn-light" data-bs-toggle="collapse" href="#collapseExample{{i}}" role="button"
-        aria-expanded="false" aria-controls="collapseExample">
-        {{menu.title}}
-    </a>
-    <div class="collapse" id="collapseExample{{i}}">
-        <a class="card card-body" *ngFor="let submenu of menu.item">
-            {{submenu}}
-        </a>
+
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+
+            <div *ngFor="let menu of vm.menu;let i=index;">
+                <a class="w-100 btn btn-light" data-bs-toggle="collapse" href="#collapseExample{{i}}" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    {{menu.title}}
+                </a>
+                <div class="collapse" id="collapseExample{{i}}">
+                    <a class="card card-body" *ngFor="let submenu of menu.item">
+                        {{submenu}}
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
+
 </div>

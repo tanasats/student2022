@@ -1,16 +1,16 @@
 <div [class.sb-sidenav-toggled]="openSidenav">
     <div class="d-flex" id="wrapper">
 
-        <div class="border-end bg-white" id="sidebar-wrapper">
-            <div class="xsidebar-heading border-bottom bg-light d-flex">
-                <span class="w-100" style="border-right:1px solid #dee2e6;width:20px;">
+        <div class="border-end" id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom d-flex">
+                <span class="sidebar-title w-100">
                     <div class="text-center py-3">ผู้ดูแลระบบ (Admin)</div>
                 </span>
                 <span class="align-self-center" [class.rotate-180]="openSidenav" (click)="toggleSideNav()"> <i
                         class="bi bi-chevron-right"></i></span>
             </div>
             <div *ngFor="let sidebarnavItem of sidebarnavItems" class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action p-3 pe-2" routerLink="{{sidebarnavItem.path}}"
+                <a class="list-group-item list-group-item-action" routerLink="{{sidebarnavItem.path}}"
                     routerLinkActive="active">
                     <i class="me-2" [ngClass]="[sidebarnavItem.icon]" [class.iconRight]="!openSidenav"></i>
                     <label *ngIf="openSidenav">{{sidebarnavItem.title}}</label></a>

@@ -17,7 +17,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AdminModule } from './admin/admin.module';
+import { StudentModule } from './student/student.module';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
+
 
 
 @NgModule({
@@ -38,6 +40,7 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     ToastrModule.forRoot(),
     NgbModule,
     AdminModule,
+    StudentModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

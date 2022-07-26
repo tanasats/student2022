@@ -206,17 +206,16 @@ export class ActivityCreateComponent implements OnInit {
   changeMasterFaculty(){
     this.optionFaculty.forEach(item =>{ item.isSelected=this.masterOptionFaculty;});
   }
-  changeFaculty(){
-    console.log(this.optionFaculty.some(item=>{return item.isSelected==false}))
-    if(this.optionFaculty.some(item=>{return item.isSelected==false})){
-      this.masterOptionFaculty=false;
-    }else{
-      this.masterOptionFaculty=true;
-    }
-    // let test = this.optionFaculty.filter(item=>{return item.isSelected==true}).map(item=>{return item.value})
-    // console.log('test=',test);
-    // console.log(JSON.stringify(test));
+  changeFaculty(e:any){
+    console.log(e.target.checked);
+    console.log(this.optionFaculty);
+    const all_isSelected_true = this.optionFaculty.every((item)=>{
+      // item.isSelect has 3 status undefined,false,true
+      return item.isSelected==true
+    });
+    this.masterOptionFaculty=all_isSelected_true;
   }
+
   padZeros(num: number, totalLength: number): string {
     return String(num).padStart(totalLength, '0');
   }

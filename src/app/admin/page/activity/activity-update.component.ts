@@ -108,27 +108,39 @@ export class ActivityUpdateComponent implements OnInit {
       cdate: [null, []],
       mdate: [null, []],
     }) as IActivityFormGroup;    
-   }
-   get f(): { [key: string]: AbstractControl } {
+   } //constructor
+
+  get f(): { [key: string]: AbstractControl } {
     return this.formActivity.controls;
   }
 
-   ngOnInit(): void {
+  ngOnInit(): void {
     this.initForm();
     this.formActivity.patchValue(this.item);
     this.formActivity.patchValue({'activity_dateform': this.datetimeISO8601_ngbDatetimepickerThai(this.item.activity_dateform) });
     this.formActivity.patchValue({'activity_dateto': this.datetimeISO8601_ngbDatetimepickerThai(this.item.activity_dateto) });
 
+    //console.log(this.optionFaculty);
+    //this.optionFaculty.every((element)=>{element.isSelected=true;})
+    
+  }//ngOnInit()
 
-
-    let objFaculty = JSON.parse(this.formActivity.value['activity_faculty']);
-    console.log(objFaculty);
-  }
 
   initForm(){
     this.facultyService.getOption().subscribe({
       next: (res) => {
         this.optionFaculty = res;
+        console.log('init',this.optionFaculty);
+        console.log('data',this.item.activity_faculty);//<-- string
+        const arrFaculty=JSON.parse(this.item.activity_faculty);
+        console.log(arrFaculty);
+        console.log('test-access:',arrFaculty.includes(30));
+        
+        this.optionFaculty.forEach((element)=>{ 
+           if(arrFaculty.includes(element.value)){
+             element.isSelected=true;
+           }
+        })
       },
       error: (err) => {
         console.log('err getOptionFaclulty=', err);
@@ -169,6 +181,9 @@ export class ActivityUpdateComponent implements OnInit {
         let d = this.padZeros(datas.activity_dateto.day,2);
         datas.activity_dateto= y+"-"+m+"-"+d;
       } 
+      let arrfaculty = JSON.stringify(this.optionFaculty.filter(item=>{return item.isSelected==true}).map(item=>{return item.value}));
+      datas.activity_faculty=arrfaculty;
+      console.log('submit: ',datas);      
       this.activityService.update(datas).subscribe({
         next: (v) =>{
           this.formActivity.controls

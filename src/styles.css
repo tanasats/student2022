@@ -1,19 +1,171 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Sarabun:wght@300&display=swap');
-html body{
-    font-family: 'Sarabun',sans-serif;
-}
+
 /* My Color Theme */
 :root {
-    --msu-yellow: rgb(250, 223, 74);
-    --msu-yellow1: rgb(251, 182, 0);
-    --msu-gray: rgb(147, 151, 154);
-    --msu-appbar: rgb(52, 74, 97);
-    
-  }
+  --msu-yellow: rgb(250, 223, 74);
+  --msu-yellow1: rgb(251, 182, 0);
+  --msu-gray: rgb(147, 151, 154);
+  --msu-appbar: rgb(52, 74, 97);
+  
+  --color-theme1:rgb(20,20,20);
+  --color-theme2:rgb(86,86,86);
+  --color-theme3:rgb(158,158,158);
+  --color-theme4:rgb(251, 169, 44);
+  --color-theme4d:rgb(220, 132, 0);
+  --color-theme5:rgb(255, 255, 255);
 
+/* primary secondary success danger warning info light dark */
+  --theme-bg:rgba(238,242,245);
+  --theme-gray: rgb(147, 151, 154);
+  --theme-navbar: rgb(52, 74, 97);
+  --theme-dark:rgb(52, 74, 97);
+  --theme-dark-1:rgb(161, 183, 207);
+  --theme-light:rgb(248, 249, 250);
+  --theme-light-1:rgb(239, 247, 255);
+  --theme-primary-light:rgb(115, 206, 197);
+  --theme-primary:rgb(51,196,179);
+  --theme-primary-dark:rgb(4, 148, 131);
+  --theme-info:rgb(40,198,218);
+  --theme-danger:rgb(246,142,79);
+  --theme-font-dark:rgb(44,44,44);
+  --theme-font-light:rgb(255,255,255);
+  
+  --theme-line:rgb(222,226,230)
+
+
+}
+html body{
+    font-family: 'Sarabun',sans-serif;
+    font-size:16px;
+    color:var(--theme-font-dark);
+    /*color:red;*/
+}
+.bg-theme-light-1{
+  background-color: var(--theme-light-1);
+}
+.bg-theme-light{
+  background-color: var(--theme-light);
+}
+
+/*  textarea:focus, 
+  textarea.form-control:focus, 
+  input.form-control:focus, 
+  input[type=text]:focus, 
+  input[type=password]:focus, 
+  input[type=email]:focus, 
+  input[type=number]:focus,
+  button:focus, 
+  select:focus,
+  [type=text].form-control:focus, 
+  [type=password].form-control:focus, 
+  [type=email].form-control:focus, 
+  [type=tel].form-control:focus, 
+  [contenteditable].form-control:focus {
+    box-shadow: inset 0 -1px 0 #ddd;
+    box-shadow:none;
+  }*/
+
+.btn-primary,
+.btn-primary:visited{
+  background-color: var(--theme-primary);
+  border:none;
+  box-shadow: none;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active
+{
+  background-color: var(--theme-primary-dark);
+  box-shadow: none;
+}
+.btn-primary.disabled, .btn-primary:disabled {
+  background-color: var(--theme-gray) !important;
+}
+
+.btn-info,
+.btn-info:visited{
+  color:white;
+  background-color: var(--theme-primary);
+  border:none;
+  box-shadow: none;
+}
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active
+{
+  color:white;
+  background-color: var(--theme-primary-dark);
+  box-shadow: none;
+}
+
+.btn-info.disabled, .btn-info:disabled {
+  background-color: var(--theme-gray) !important;
+}
+
+.bg-navbar{
+    background-color: var(--theme-navbar);
+}
 .bg-msu-yellow1{
     background-color: var(--msu-yellow1);
+}
+
+.pagination-wrapper{
+  border-top:1px solid var(--theme-light);
+  padding-top:6px;
+}
+ul.pagination{
+  margin-bottom: 0;
+}
+.list-group-item{
+  color: var(--theme-font-dark);
+  line-height: 2rem;
+}
+.list-group-item.active{
+  background-color: var(--theme-primary);
+}
+a.list-group-item{
+  padding-right: 8px;
+}
+
+.dropdown-item.active{
+  background-color: var(--theme-primary);
+}
+.dropdown-item:hover{
+  background-color: var(--theme-light);
+  color:var(--theme-font-dark);
+}
+.dropdown-item:focus{
+  background-color: var(--theme-primary);
+  color:white;
+}
+
+
+
+
+.page-item a{
+  color:var(--theme-font-dark);
+}
+.page-item a:hover{
+  background-color: var(--theme-light);
+}
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: var(--theme-primary);
+  border-color: var(--theme-primary);
+}
+.page-item.active a:hover{
+  cursor:default;
+}
+
+
+
+.text-primary{
+  color:var(--theme-primary) !important;
+}
+.text-error{
+  color:red;
 }
 
 .form-control{
@@ -46,25 +198,47 @@ td.fit, th.fit {
 .toast-warning { background-color: rgba(255, 187, 51,0.7) !important; }
 .toast-error { background-color: rgba(255, 68, 68,0.7) !important; }
 
+.card-shadow{
+  border-color: #ffffff;
+  -webkit-box-shadow: 0px 0px 2px rgb(0 0 0 / 5%), 0px 0px 6px rgb(0 0 0 / 10%);
+  box-shadow: 0px 0px 2px rgb(0 0 0 / 5%), 0px 0px 6px rgb(0 0 0 / 10%);
+}
+.card-body{
+  padding:8px;
+}
+.card-topic{
+  line-height:2rem;
+  padding:0.5rem 0.8rem;
+  font-size: 1.1rem;
+  font-weight:400;
+  color:var(--theme-primary);
+  background-color: var(--theme-light-1);
+}
+.sidebar-title{
+  background-color: var(--theme-light-1);
+}
+
 .item-table{
     font-family: "Sarabun",sans-serif;
-    font-size: 1.125em;
     background-color: #fff;
     border-radius: 5px;
     overflow: hidden;
     width: 100%;
-    -webkit-box-shadow: 0px 0px 2px rgb(0 0 0 / 5%), 0px 0px 10px rgb(0 0 0 / 10%);
-    box-shadow: 0px 0px 2px rgb(0 0 0 / 5%), 0px 0px 10px rgb(0 0 0 / 10%);
+   /* -webkit-box-shadow: 0px 0px 2px rgb(0 0 0 / 5%), 0px 0px 10px rgb(0 0 0 / 10%);
+    box-shadow: 0px 0px 2px rgb(0 0 0 / 5%), 0px 0px 10px rgb(0 0 0 / 10%); */
     margin: 0;
     min-width: 320px;
 }
+/* .item-table tbody{
+  border-bottom: 1px solid var(--theme-line);
+} */
 .item-table tr:hover{
-    background-color: rgb(255, 250, 228);
+    background-color: var(--theme-light);
 }
 .item-table th{
-    padding: 6px 14px;
-    background-color: #fbb600;
-    color: #000;
+    padding: 6px 12px;
+    background-color:var(--theme-light-1);
+    color: var(--theme-font-dark);
     white-space: nowrap;
     font-weight: normal;
 }
