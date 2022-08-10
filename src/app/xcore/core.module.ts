@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router'
-import { NavbarComponent } from './navbar.component';
-import { FooterComponent } from './footer.component';
+//import { NavbarComponent } from './navbar.component';
+//import { FooterComponent } from './footer.component';
 
 
 
@@ -12,12 +12,12 @@ import { FooterComponent } from './footer.component';
     RouterModule
   ],
   declarations: [
-    NavbarComponent,
-    FooterComponent
+    //NavbarComponent,
+    //FooterComponent
   ],
   exports:[
-    NavbarComponent,
-    FooterComponent
+    //NavbarComponent,
+    //FooterComponent
   ],
   providers:[]
 

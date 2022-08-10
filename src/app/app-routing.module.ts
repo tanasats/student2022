@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-  { path:'', redirectTo:'home', pathMatch:'full'},
+  //{ path:'', redirectTo:'home', pathMatch:'full'},
+  { path:'', redirectTo:'guest', pathMatch:'full'},
+  { path: 'guest',loadChildren:()=> import('./guest/guest-routing.module').then(m=>m.GuestRoutingModule)},
   { path: 'admin',loadChildren:()=> import('./admin/admin-routing.module').then(m=>m.AdminRoutingModule)},
   { path: 'student',loadChildren:()=> import('./student/student-routing.module').then(m=>m.StudentRoutingModule)},
   { path: 'home', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) }, 

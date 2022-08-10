@@ -1,0 +1,101 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/home" (click)="toggleNavbar()">Act@MSU</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" (click)="toggleNavbar()" data-bs-target="#navbarSupportedContentx" aria-controls="navbarSupportedContentx" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{'show':showNavBar}">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li> -->
+
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Student
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/student" routerLinkActive="active">Dashboard</a></li>
+              <li><a class="dropdown-item" routerLink="/student/xx">Register Activity</a></li>
+              <li><a class="dropdown-item" routerLink="/student/xx">Report Activity</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="student" (click)="toggleNavbar()">หน้าหลัก(นิสิต)</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="officer" (click)="toggleNavbar()">หน้าหลัก(เจ้าหน้าที่)</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              เช็คชื่อเข้าร่วม
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/admin" routerLinkActive="active">ด้วยบัตรกิจกรรม</a></li>
+              <li><a class="dropdown-item" routerLink="/admin" routerLinkActive="active">ด้วย GPS+ภาพถ่าย</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>          
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Admin
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/admin" routerLinkActive="active">Dashboard</a></li>
+              <li><a class="dropdown-item" routerLink="/admin/activity">Activity</a></li>
+              <li><a class="dropdown-item" routerLink="/admin/user">user</a></li>
+              <li><a class="dropdown-item" routerLink="/admin/acttype">Activity Type</a></li>
+              <li><a class="dropdown-item" routerLink="/admin/actagency">Activity Agency</a></li>
+              <li><a class="dropdown-item" routerLink="/admin/faculty">faculty</a></li>
+              <li><hr class="dropdown-divider"></li> 
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>           -->
+          <!-- <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="admin" (click)="toggleNavbar()">หน้าหลัก(ผู้ดูแลระบบ)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="toggleNavbar()">เอกสาร</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#" (click)="toggleNavbar()">คู่มือการใช้งาน</a>
+          </li>  -->
+
+
+
+
+        </ul>
+        <!-- <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> -->
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+            <li *ngIf="!islogin" class="nav-item">
+                <a  class="nav-link" routerLink="/sign-in" routerLinkActive="active" (click)="toggleNavbar()">เข้าสู่ระบบ</a>
+            </li>
+            <li *ngIf="islogin" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{displayname}}
+              </a>
+              <ul class="dropdown-menu" style="left:-20px;" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" routerLink="/admin" routerLinkActive="active" (click)="toggleNavbar()">profile</a></li>
+                <li><hr class="dropdown-divider"></li> 
+                <li><a class="dropdown-item" href="javascript:void(0)" (click)="logout()">ออกจากระบบ</a></li>
+              </ul>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

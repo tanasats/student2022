@@ -1,9 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-navbar">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/home" (click)="toggleNavbar()">Act@MSU</a>
+      <a class="navbar-brand" routerLink="" (click)="collapseNavbar()">Act@MSU</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" (click)="toggleNavbar()" data-bs-target="#navbarSupportedContentx" aria-controls="navbarSupportedContentx" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
+      
       <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{'show':showNavBar}">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <!-- <li class="nav-item">
@@ -13,7 +15,7 @@
             <a class="nav-link" href="#">Link</a>
           </li> -->
 
-          <li class="nav-item dropdown">
+          <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Student
             </a>
@@ -24,19 +26,27 @@
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" routerLink="student" (click)="collapseNavbar()">หน้าหลัก(นิสิต)</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="officer" (click)="collapseNavbar()">หน้าหลัก(เจ้าหน้าที่)</a>
           </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Officer
+              เช็คชื่อเข้าร่วม
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" routerLink="/admin" routerLinkActive="active">Dashboard</a></li>
+              <li><a class="dropdown-item" routerLink="/admin" routerLinkActive="active">ด้วยบัตรกิจกรรม</a></li>
+              <li><a class="dropdown-item" routerLink="/admin" routerLinkActive="active">ด้วย GPS+ภาพถ่าย</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </li>          
-          <li class="nav-item dropdown">
+          <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Admin
             </a>
@@ -50,19 +60,19 @@
               <li><hr class="dropdown-divider"></li> 
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
-          </li>          
+          </li>           -->
           <!-- <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link" routerLink="admin" (click)="toggleNavbar()">หน้าหลัก(ผู้ดูแลระบบ)</a>
+            <a class="nav-link" routerLink="admin" (click)="collapseNavbar()">หน้าหลัก(ผู้ดูแลระบบ)</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" (click)="toggleNavbar()">เอกสาร</a>
+            <a class="nav-link" href="#" (click)="collapseNavbar()">เอกสาร</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" (click)="toggleNavbar()">คู่มือการใช้งาน</a>
-          </li> 
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#" (click)="collapseNavbar()">คู่มือการใช้งาน</a>
+          </li>  -->
 
 
 
@@ -75,14 +85,14 @@
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
             <li *ngIf="!islogin" class="nav-item">
-                <a  class="nav-link" routerLink="/sign-in" routerLinkActive="active" (click)="toggleNavbar()">เข้าสู่ระบบ</a>
+                <a  class="nav-link" routerLink="/sign-in" routerLinkActive="active" (click)="collapseNavbar()">เข้าสู่ระบบ</a>
             </li>
             <li *ngIf="islogin" class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 {{displayname}}
               </a>
               <ul class="dropdown-menu" style="left:-20px;" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" routerLink="/admin" routerLinkActive="active" (click)="toggleNavbar()">profile</a></li>
+                <li><a class="dropdown-item" routerLink="/admin" routerLinkActive="active" (click)="collapseNavbar()">profile</a></li>
                 <li><hr class="dropdown-divider"></li> 
                 <li><a class="dropdown-item" href="javascript:void(0)" (click)="logout()">ออกจากระบบ</a></li>
               </ul>
