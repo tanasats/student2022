@@ -1,0 +1,17 @@
+<div class="sidenav-wrapper" [ngClass]="{'sidenav-expaned': is_expaned}">
+    <div class="d-flex justify-content-end">
+        <span class="align-self-center" [class.rotate-180]="!is_expaned" (click)="_toggleSideNav()"> <i class="bi bi-arrow-right-square m-2"></i></span>
+    </div>
+ 
+    <div id="sidebar-wrapper">
+
+        <div *ngFor="let _menuItem of _menuItems" class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action" routerLink="{{_menuItem.path}}"
+                routerLinkActive="active">
+                <i class="me-2" [ngClass]="[_menuItem.icon]" [class.iconRight]="is_expaned"></i>
+                <label *ngIf="!is_expaned">{{_menuItem.title}}</label></a>
+        </div>
+
+    </div>    
+
+</div>

@@ -37,7 +37,7 @@
 
 }
 html{
-    font-size:14px;
+    font-size:16px;
     color:var(--theme-font-dark);
 }
 body{
@@ -274,7 +274,7 @@ td.fit, th.fit {
     background-color: var(--theme-light);
 }
 .item-table th{
-    padding: 8px 6px;
+    padding: 6px 6px;
     background-color:var(--theme-light-1);
     color: var(--theme-font-dark);
     white-space: nowrap;
@@ -310,3 +310,8 @@ td.fit, th.fit {
     line-height: 1.33;
     border-radius: 35px;
   }
+
+
+app-side-nav{
+    border-right: 1px solid var(--theme-light);
+}

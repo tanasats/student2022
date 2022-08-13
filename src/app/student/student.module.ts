@@ -1,3 +1,4 @@
+import { SharedcomponentModule } from './../sharedcomponent/sharedcomponent.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -18,7 +19,8 @@ import { ActivityItemComponent } from './component/activity-item/activity-item.c
   ],
   imports: [
     CommonModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    SharedcomponentModule
   ]
 })
 export class StudentModule { }

@@ -1,4 +1,3 @@
-import { GuestModule } from './guest/guest.module';
 import { authInterceptorProviders } from './interceptor/auth.interceptor';
 //import { AuthInterceptor } from 'src/app/interceptor/auth.interceptor';
 import { ErrorInterceptor } from 'src/app/interceptor/error.interceptor';
@@ -18,6 +17,7 @@ import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { GuestModule } from './guest/guest.module';
 import { AdminModule } from './admin/admin.module';
 import { StudentModule } from './student/student.module';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
@@ -30,7 +30,6 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     AppComponent,
     ConfirmDialogComponent,
     //NavbarComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -42,7 +41,7 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     ReactiveFormsModule,
 //  FontAwesomeModule,
     ToastrModule.forRoot(),
-    NgbModule,
+    NgbModule, 
     GuestModule,
     AdminModule,
     StudentModule,

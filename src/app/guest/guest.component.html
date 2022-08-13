@@ -1,2 +1,8 @@
-<p>guest works!</p>
-<router-outlet></router-outlet>
+<!-- module defalut template -->
+<div class="d-flex">
+    <app-side-nav [_menuItems]="guest_menu_items"></app-side-nav>
+    <div class="flex-grow-1">
+       <router-outlet></router-outlet>  
+    </div>
+    
+</div>

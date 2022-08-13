@@ -51,7 +51,7 @@ export class AuthService {
           errorMsg = error.error;
         }
       } else {
-        errorMsg = error;
+        errorMsg = error+"xx";
       }
     }
     return throwError(() => {
@@ -65,10 +65,11 @@ export class AuthService {
     private userService: UserService //private jwt:JwtHelperService
   ) {
     console.log('#auth.service.constructor()');
-    let accesstoken = localStorage.getItem('access-token') || '';
-    if (accesstoken) {
+    let _access_token = localStorage.getItem('access-token') || '';
+    console.log(_access_token);
+    if (_access_token) {
       this.me().subscribe({
-        next: ([[res]]) => {
+        next: ([res]) => {
           console.log('auth.service call me() res=', res);
           const _user: any = res;
           this.userService.userroles(res.user_id).subscribe({
@@ -88,11 +89,10 @@ export class AuthService {
               if (_role_code) {
                 this.currUserService.role = _role_code[0];
               }
-
               this.currUserService.islogin = true; //<--this activate to emitt(data) to navbar
             },
             error: (err) => {
-              console.log(err);
+              console.log('userroles error:',err);
               //this.notifyService.show('error','User roles '+err,'');
             },
           });
@@ -103,12 +103,12 @@ export class AuthService {
         },
       });
     } else {
-      console.log('localstorage not have accesstoken');
+      console.log('localstorage not have _access_token');
     }
   }
 
   signin(data: any): Observable<any> {
-    console.log('sign data: ', data);
+    console.log('app_sign data: ', data);
     return this.http
       .post(this.endpoint + '/signin', data, this.httpOptions)
       .pipe(catchError(this.handleError));
@@ -121,9 +121,18 @@ export class AuthService {
   }
 
   me(): Observable<any> {
-    // you can pass here whatever you want
     return this.http
       .get(this.endpoint + '/me', this.httpOptions)
       .pipe(catchError(this.handleError));
   }
+
+  register(data: any): Observable<any> {
+    console.log('register data: ', data);
+    return this.http
+      .post(this.endpoint + '/register', data, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+
+
 } //class

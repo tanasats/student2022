@@ -1,4 +1,4 @@
-<div [class.sb-sidenav-toggled]="openSidenav">
+<!-- <div [class.sb-sidenav-toggled]="openSidenav">
     <div class="d-flex" id="wrapper">
 
         <div class="border-end" id="sidebar-wrapper">
@@ -18,12 +18,19 @@
         </div>
 
         <div id="page-content-wrapper">
-            <!-- <div>
+            <! -- <div>
                 <i class="rotate bi bi-caret-right-square-fill m-1 text-primary" [class.rotate-180]="openSidenav"
                     (click)="toggleSideNav()"></i>
-            </div> -->
+            </div> -- >
             <router-outlet></router-outlet>
 
         </div>
+    </div>
+</div> -->
+
+<div class="d-flex">
+    <app-side-nav [_menuItems]="student_menu_items"></app-side-nav>
+    <div class="flex-grow-1">
+        <router-outlet></router-outlet> 
     </div>
 </div>

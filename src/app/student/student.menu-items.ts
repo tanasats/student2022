@@ -1,13 +1,6 @@
-export interface IMenuItems {
-    path: string;
-    title: string;
-    icon: string;
-    class: string;
-    extralink: boolean;
-    submenu: IMenuItems[];
-  }
+import { IMenuItem } from "../interface/menuitem";
 
-export const MenuItems: IMenuItems[] = [
+export const student_menu_items: IMenuItem[] = [
   {
     path: 'dashboard',
     title: 'หน้าหลัก',
@@ -18,7 +11,7 @@ export const MenuItems: IMenuItems[] = [
   },
   {
     path: 'activity',
-    title: 'รายการกิจกรรม',
+    title: 'ลงทะเบียนกิจกรรม',
     icon: 'bi bi-bell',
     class: '',
     extralink: false,
@@ -26,42 +19,10 @@ export const MenuItems: IMenuItems[] = [
   },
   {
     path: 'user',
-    title: 'ผู้ใช้งาน',
+    title: 'ตรวจสอบชั่วโมง',
     icon: 'bi bi-patch-check',
     class: '',
     extralink: false,
     submenu: []
   },
-  {
-    path: 'acttype',
-    title: 'ประเภทกิจกรรม',
-    icon: 'bi bi-patch-check',
-    class: '',
-    extralink: false,
-    submenu: []
-  },  
-  {
-    path: 'actorganization',
-    title: 'องค์กรที่จัดกิจกรรม',
-    icon: 'bi bi-patch-check',
-    class: '',
-    extralink: false,
-    submenu: []
-  }, 
-  {
-    path: 'faculty',
-    title: 'คณะหน่วยงาน',
-    icon: 'bi bi-patch-check',
-    class: '',
-    extralink: false,
-    submenu: []
-  },  
-  {
-    path: 'test',
-    title: 'ทดสอบ',
-    icon: 'bi bi-patch-check',
-    class: '',
-    extralink: false,
-    submenu: []
-  },  
 ];

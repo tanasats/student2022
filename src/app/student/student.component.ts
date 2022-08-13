@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IMenuItems,MenuItems } from './student.menu-items';
+import { IMenuItem } from '../interface/menuitem';
+import { student_menu_items } from './student.menu-items';
 
 @Component({
   selector: 'app-student',
@@ -7,17 +8,11 @@ import { IMenuItems,MenuItems } from './student.menu-items';
   styleUrls: ['./student.component.css']
 })
 export class StudentComponent implements OnInit {
-  public sidebarnavItems:IMenuItems[]=[];
-  public openSidenav=true;
+  public student_menu_items:IMenuItem[]=student_menu_items
+
   constructor() { }
 
-
   ngOnInit(): void {
-    this.sidebarnavItems = MenuItems.filter(sidebarnavItem => sidebarnavItem);
-    console.log(this.sidebarnavItems);
   }
 
-  toggleSideNav(){
-    this.openSidenav=!this.openSidenav;
-  }
 }

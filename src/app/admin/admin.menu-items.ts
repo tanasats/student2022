@@ -1,13 +1,14 @@
-export interface IMenuItems {
-    path: string;
-    title: string;
-    icon: string;
-    class: string;
-    extralink: boolean;
-    submenu: IMenuItems[];
-  }
+// export interface IMenuItems {
+//     path: string;
+//     title: string;
+//     icon: string;
+//     class: string;
+//     extralink: boolean;
+//     submenu: IMenuItems[];
+//   }
 
-export const MenuItems: IMenuItems[] = [
+import { IMenuItem } from "../interface/menuitem";
+export const admin_menu_items: IMenuItem[] = [
   {
     path: 'dashboard',
     title: 'แผงควบคุม',

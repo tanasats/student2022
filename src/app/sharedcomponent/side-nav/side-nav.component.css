@@ -1,0 +1,16 @@
+.sidenav-wrapper{
+    width:250px;
+    min-height:calc(100vh);
+    transition: margin 0.25s ease-out;
+}
+.sidenav-wrapper.sidenav-expaned{
+    margin-left:-200px;
+}
+.rotate-180{
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+}
+.iconRight{
+    float:right;
+}

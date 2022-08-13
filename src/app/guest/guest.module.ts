@@ -1,3 +1,4 @@
+import { SharedcomponentModule } from './../sharedcomponent/sharedcomponent.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,7 +14,8 @@ import { HomeComponent } from './page/home/home.component';
   ],
   imports: [
     CommonModule,
-    GuestRoutingModule
+    GuestRoutingModule,
+    SharedcomponentModule,
   ]
 })
 export class GuestModule { }
