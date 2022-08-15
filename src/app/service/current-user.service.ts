@@ -19,9 +19,10 @@ export class CurrentUserService {
     this._currentuser = this.initCurrentUser;
   }
 
-  get initCurrentUser(): ICurrentuser {
+  private get initCurrentUser(): ICurrentuser {
     return {
       islogin: false,
+      user_id:0,
       username: '',
       displayname: '',
       email: '',
@@ -33,8 +34,14 @@ export class CurrentUserService {
   get username() {
     return this._currentuser.username;
   }
-  set username(username) {
+  set username(username) { 
     this._currentuser.username = username;
+  }
+  get user_id() {
+    return this._currentuser.user_id;
+  }
+  set user_id(user_id) { 
+    this._currentuser.user_id = user_id;
   }
   get displayname() {
     return this._currentuser.displayname;
@@ -66,6 +73,9 @@ export class CurrentUserService {
   set islogin(bool: boolean) {
     this._currentuser.islogin = bool;
     this.fireIsLoggedIn.emit(this._currentuser);
+  }
+  get info(){
+    return this._currentuser;
   }
 
   logout() {

@@ -15,6 +15,8 @@ export class NavbarComponent implements OnInit {
   public displayname="";
   public showNavBar = false;
 
+
+
   constructor( 
     public authService:AuthService,
     public currUserService:CurrentUserService,
@@ -24,17 +26,17 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     // subscribe currentuserservice emit
     this.currUserService.getEmitter().subscribe((currUserObject:ICurrentuser) => { 
-      console.log("Navebar.component getEmitter(currUserObject) form currUserService =",JSON.stringify(currUserObject)); 
+      console.log("Navbar.component getEmitter(currUserObject) form currUserService =",JSON.stringify(currUserObject)); 
         this.islogin=currUserObject.islogin;
         this.displayname=currUserObject.displayname;
         this.role=currUserObject.role;
     }); 
   }
- 
+  
   logout(){
     console.log("logout()");
     this.currUserService.logout();
-    this.router.navigate(['home']);
+    this.router.navigate(['guest']);
     this.showNavBar=!this.showNavBar;
   }
 

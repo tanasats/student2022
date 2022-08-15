@@ -1,0 +1,72 @@
+<section class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 mb-2">
+            <div class="rounded-2">
+                <div class="mb-3">
+                    <h2>{{item.activity_name}}</h2>
+                    <small>{{item.cdate}}</small>                    
+                </div>
+
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#msg">รายละเอียด</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#pro">รายชื่อผู้สม้คร</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#set">FAQ</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content" style="border:1px solid rgb(222, 226, 230);border-top:none;border-bottom-left-radius: 4px;border-bottom-right-radius: 4px;">
+                    <div class="tab-pane container active" id="msg">
+                        This is a message tab.
+                {{item_id}}
+                {{item|json}}
+
+                    </div>
+                    <div class="tab-pane container fade" id="pro">This is a profile tab.</div>
+                    <div class="tab-pane container fade" id="set">This is a setting tab.</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+
+            <div class="bg-light rounded-2 p-3 mb-3">
+                <div class="row">
+                    <h5 class=""><i class="bi bi-person-video me-2"></i>จำนวนผู้สมัครเข้าร่วม</h5>
+                    <div class="col-6">
+                        <div class="bg-white rounded-2 text-center pb-1">
+                            <span class="small">สมัคร</span>
+                            <div class="h2"><strong>{{item.activity_receive}}</strong></div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="bg-white rounded-2 text-center pb-1">
+                            <span class="small">จำนวนรับ</span>
+                            <div class="h2"><strong>{{item.activity_receive}}</strong></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-success w-100 mt-3">สม้ครเข้าร่วม</button>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="card card-no-border bg-light">
+                        <div class="card-body">
+                            content
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>

@@ -25,4 +25,12 @@ export const student_menu_items: IMenuItem[] = [
     extralink: false,
     submenu: []
   },
+  {
+    path: 'profile',
+    title: 'ข้อมูลส่วนตัว',
+    icon: 'bi bi-patch-check',
+    class: '',
+    extralink: false,
+    submenu: []
+  },
 ];

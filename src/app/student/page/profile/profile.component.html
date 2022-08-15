@@ -1,0 +1,68 @@
+<app-page-title _title="ข้อมูลส่วนตัว" _icon="bi bi-person-bounding-box"></app-page-title>
+<section class="my-0" style="background-color: var(--theme-light-1);">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-md-9 col-lg-9 col-xl-7">
+                <div class="card" style="border-radius: 15px;">
+                    <div class="card-body p-4">
+                        <div class="d-flex text-black">
+                            <div class="flex-shrink-0">
+                                <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                                    alt="Generic placeholder image" class="img-fluid"
+                                    style="width: 180px; border-radius: 10px;"> -->
+                                    <img src="http://202.28.32.211/picture/student/{{me.studentcode|slice:0:2}}/{{me.studentcode}}.jpg"
+                                    alt="Generic placeholder image" class="img-fluid"
+                                    style="width: 180px; border-radius: 10px;">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5 class="mb-1">{{me.prefixname}}{{me.fname}} {{me.sname}}</h5>
+                                <h6 class="mb-1">{{me.fname_en}} {{me.sname_en}}</h6>
+                                <p class="pb-1">{{me.studentcode}}<br>{{me.faculty_name}}</p>
+                                <div class="d-flex text-center rounded-3 p-2 pt-3 mb-2"
+                                    style="background-color: #efefef;">
+                                    <div class="col col-xs-4 emphasis ">
+                                        <h3><strong> 10 </strong></h3>
+                                        <p class="text-muted mb-0"><small>กิจกรรม</small></p>
+                                    </div>
+                                    <div class="col col-xs-4 emphasis">
+                                        <h3><strong>20</strong></h3>
+                                        <p class="text-muted mb-0"><small>ชั่วโมง</small></p>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="d-flex justify-content-between rounded-3 p-2 mb-2 text-center"
+                                    style="background-color: #efefef;">
+                                    <div>
+                                        <p class="small text-muted mb-1">ชั่วโมง</p>
+                                        <p class="mb-0">41</p>
+                                    </div>
+                                    <div class="px-3">
+                                        <p class="small text-muted mb-1">Followers</p>
+                                        <p class="mb-0">976</p>
+                                    </div>
+                                    <div>
+                                        <p class="small text-muted mb-1">Rating</p>
+                                        <p class="mb-0">8.5</p>
+                                    </div>
+                                </div> -->
+
+                                <div class="d-flex pt-1">
+                                    <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
+                                    <button type="button" class="btn btn-primary flex-grow-1">Follow</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container-fluid">
+    {{current_user|json}}
+    <hr>
+    {{me|json}}
+    <hr>
+    {{me.username}}
+</div>

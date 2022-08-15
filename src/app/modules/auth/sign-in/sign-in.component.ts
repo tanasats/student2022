@@ -132,7 +132,8 @@ export class SignInComponent implements OnInit {
               return item.role_code;
             });
             console.log('useroles=', _role_code);
-
+            
+            this.currUserService.user_id = _user.user_id;
             this.currUserService.username = _user.username;
             this.currUserService.displayname = _user.displayname;
             this.currUserService.email = _user.email;

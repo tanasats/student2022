@@ -1,15 +1,13 @@
+<app-page-title _title="ข้อมูลกิจกรรม" _icon="bi bi-journals"></app-page-title>
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-            <div class="text-primary h5 mt-3">
-                ข้อมูลกิจกรรม
-            </div>
-            <div class="d-flex py-2">
+            <div class="d-flex py-2"> 
                 <div class="me-auto">
                     <div class="input-group">
                         <input [(ngModel)]="keyword" (keydown)="searchkeydown($event)" type="text" class="form-control"
                             placeholder="ค้นหา" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-info text-white" type="button" id="button-addon2" (click)="getItems()">
+                        <button class="btn btn-success text-white" type="button" id="button-addon2" (click)="getItems()">
                             <i class="bi bi-search"></i>
                         </button>
                         <div *ngIf="loading" class="ms-3">
@@ -18,10 +16,10 @@
                     </div>
                 </div>
 
-                <div class="align-self-center"><button class="btn btn-info text-white" (click)="getItems()">
+                <div class="align-self-center"><button class="btn btn-success text-white" (click)="getItems()">
                         <i class="bi bi-arrow-repeat"></i>
                     </button></div>
-                <div class="align-self-center ms-2"><button class="btn btn-info text-white" [routerLink]="['create']">
+                <div class="align-self-center ms-2"><button class="btn btn-success text-white" [routerLink]="['create']">
                         <i class="bi bi-plus"></i>เพิ่มรายการ
                     </button></div>
             </div>
@@ -41,7 +39,7 @@
                         <tbody>
                             <tr *ngFor="let item of items">
                                 <td class="fit">
-                                    <button class="btn btn-sm btn-info text-white"
+                                    <button class="btn btn-sm btn-success text-white"
                                         [routerLink]="['update',item.activity_id]" [state]="{data:item}">
                                         <i class="bi bi-pencil"></i>
                                     </button>

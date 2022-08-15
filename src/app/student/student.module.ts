@@ -7,6 +7,8 @@ import { StudentRoutingModule } from './student-routing.module';
 import { StudentComponent } from './student.component';
 import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { ActivityItemComponent } from './component/activity-item/activity-item.component';
+import { ProfileComponent } from './page/profile/profile.component';
+import { ActivityComponent } from './page/activity/activity.component';
 //import { ActivityItemsComponent } from './component/activity-items/activity-items.component';
 
 
@@ -15,6 +17,8 @@ import { ActivityItemComponent } from './component/activity-item/activity-item.c
     StudentComponent,
     DashboardComponent,
     ActivityItemComponent,
+    ProfileComponent,
+    ActivityComponent,
     //ActivityItemsComponent
   ],
   imports: [

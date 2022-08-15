@@ -73,12 +73,12 @@ exports.me = (req, res) => {
   var token = req.headers["x-access-token"];
   try {
     const _decode = jwt.verify(token, config.secret);
-    console.log('access_token_decode:',_decode);
+    //console.log('access_token_decode:',_decode);
     authModel
       .findUsername(_decode.username)
       .then(([row]) => {
         //console.log("numrow:", row.length);
-        console.log("app_user_info:",row);
+        //console.log("app_user_info:",row);
         if (!row.length){
           return res
             .status(401)
@@ -104,6 +104,12 @@ exports.register = async (req, res) => {
     studentcode: req.body.studentcode,
     displayname: req.body.fullname,
     faculty_name: req.body.faculty,
+    prefixname:req.body.prefixname,
+    fname:req.body.name,
+    sname:req.body.surname,
+    fname_en:req.body.nameeng,
+    sname_en:req.body.surnameeng,
+    email:req.body.email,
   };
   if (datas.password) {
     const saltRound = 10;

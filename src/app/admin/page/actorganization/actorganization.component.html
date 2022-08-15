@@ -1,18 +1,16 @@
+<app-page-title _title="องค์กรจัดกิจกรรม" _icon="bi bi-building"></app-page-title>
 <div class="container-fluid">
     <div class="row">
         <router-outlet></router-outlet>
     </div>
     <div class="row">
         <div class="col">
-            <div class="text-primary h5 mt-3">
-                องค์กรที่จัดกิจกรรม
-            </div>
             <div class="d-flex py-2">
                 <div class="me-auto">
                     <div class="input-group">
                         <input [(ngModel)]="keyword" (keydown)="searchkeydown($event)" type="text" class="form-control"
                             placeholder="ค้นหา" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn btn-info text-white" type="button" id="button-addon2" (click)="getItems()">
+                        <button class="btn btn-success text-white" type="button" id="button-addon2" (click)="getItems()">
                             <i class="bi bi-search"></i>
                         </button>
                         <div *ngIf="loading" class="ms-3">
@@ -21,10 +19,10 @@
                     </div>
                 </div>
 
-                <div class="align-self-center"><button class="btn btn-info text-white" (click)="getItems()">
+                <div class="align-self-center"><button class="btn btn-success text-white" (click)="getItems()">
                         <i class="bi bi-arrow-repeat"></i>
                     </button></div>
-                <div class="align-self-center ms-2"><button class="btn btn-info text-white" data-bs-toggle="modal"
+                <div class="align-self-center ms-2"><button class="btn btn-success text-white" data-bs-toggle="modal"
                         data-bs-target="#addnewModal" (click)="addnewItem();">
                         <i class="bi bi-plus"></i>เพิ่มรายการ
                     </button></div>
@@ -48,7 +46,7 @@
                         <tbody>
                             <tr *ngFor="let item of items">
                                 <td class="fit">
-                                    <button class="btn btn-sm btn-info text-white" data-bs-toggle="modal"
+                                    <button class="btn btn-sm btn-success text-white" data-bs-toggle="modal"
                                         data-bs-target="#updateModal" (click)="updateItem(item);">
                                         <i class="bi bi-pencil"></i>
                                     </button>
@@ -106,7 +104,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-theme-light-1">
-                <h5 class="modal-title text-primary" id="addnewModalLabel"><i
+                <h5 class="modal-title text-success" id="addnewModalLabel"><i
                         class="bi bi-plus-circle me-2"></i>ลบข้อมูล</h5>
                 <button type="button" class="btn-close" tabindex="-1" data-bs-dismiss="modal"
                     aria-label="Close"></button>
@@ -132,7 +130,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-theme-light-1">
-                <h5 class="modal-title text-primary" id="addnewModalLabel"><i
+                <h5 class="modal-title text-success" id="addnewModalLabel"><i
                         class="bi bi-plus-circle me-2"></i>เพิ่มข้อมูล</h5>
                 <button type="button" class="btn-close" tabindex="-1" data-bs-dismiss="modal"
                     aria-label="Close"></button>
@@ -183,7 +181,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-theme-light-1">
-                <h5 class="modal-title text-primary" id="addnewModalLabel"><i
+                <h5 class="modal-title text-success" id="addnewModalLabel"><i
                         class="bi bi-plus-circle me-2"></i>แก้ไขข้อมูล</h5>
                 <button type="button" class="btn-close" tabindex="-1" data-bs-dismiss="modal"
                     aria-label="Close"></button>
@@ -220,7 +218,7 @@
                 <!-- {{this.formActorganization.value|json}} -->
             </div>
             <div class="modal-footer">
-                <button [disabled]="!formActorganization.valid" type="button" class="btn btn-info"
+                <button [disabled]="!formActorganization.valid" type="button" class="btn btn-success"
                     (click)="submitUpdate()">บันทึก</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
             </div>

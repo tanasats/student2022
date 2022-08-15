@@ -1,5 +1,5 @@
+import { CurrentUserService } from 'src/app/service/current-user.service';
 import { UserService } from 'src/app/service/user.service';
-import { CurrentUserService } from './current-user.service';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import {
   HttpClient,
@@ -80,7 +80,8 @@ export class AuthService {
                 return item.role_code;
               });
               console.log("useroles=",_role_code);
-
+              
+              this.currUserService.user_id = _user.user_id;
               this.currUserService.username = _user.username;
               this.currUserService.displayname = _user.displayname;
               this.currUserService.email = _user.email;
@@ -89,7 +90,7 @@ export class AuthService {
               if (_role_code) {
                 this.currUserService.role = _role_code[0];
               }
-              this.currUserService.islogin = true; //<--this activate to emitt(data) to navbar
+              this.currUserService.islogin = true; //<--this activate to emitt(data) to navbar or appbar
             },
             error: (err) => {
               console.log('userroles error:',err);
@@ -133,6 +134,9 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   }
 
-
+  getStudentPicture(studentcode: string): Observable<Blob> {
+    const url = "http://202.28.32.211/picture/student/"+studentcode.slice(0,2)+"/"+studentcode+".jpg";
+    return this.http.get(url, { responseType: 'blob' });
+  }
 
 } //class

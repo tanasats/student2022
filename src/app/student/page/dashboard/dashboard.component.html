@@ -1,60 +1,4 @@
-<section class="my-0" style="background-color: #9de2ff;">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col col-md-9 col-lg-9 col-xl-7">
-                <div class="card" style="border-radius: 15px;">
-                    <div class="card-body p-4">
-                        <div class="d-flex text-black">
-                            <div class="flex-shrink-0">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                                    alt="Generic placeholder image" class="img-fluid"
-                                    style="width: 180px; border-radius: 10px;">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <h5 class="mb-1">นายปิยพัทธ์ สุดจริง</h5>
-                                <p class="pb-1">65010999001<br>คณะวิศวกรรมศาสตร์</p>
-                                <div class="d-flex text-center rounded-3 p-2 pt-3 mb-2"
-                                    style="background-color: #efefef;">
-                                    <div class="col col-xs-4 emphasis ">
-                                        <h3><strong> 10 </strong></h3>
-                                        <p class="text-muted mb-0"><small>กิจกรรม</small></p>
-                                    </div>
-                                    <div class="col col-xs-4 emphasis">
-                                        <h3><strong>20</strong></h3>
-                                        <p class="text-muted mb-0"><small>ชั่วโมง</small></p>
-                                    </div>
-                                </div>
-
-                                <!-- <div class="d-flex justify-content-between rounded-3 p-2 mb-2 text-center"
-                                    style="background-color: #efefef;">
-                                    <div>
-                                        <p class="small text-muted mb-1">ชั่วโมง</p>
-                                        <p class="mb-0">41</p>
-                                    </div>
-                                    <div class="px-3">
-                                        <p class="small text-muted mb-1">Followers</p>
-                                        <p class="mb-0">976</p>
-                                    </div>
-                                    <div>
-                                        <p class="small text-muted mb-1">Rating</p>
-                                        <p class="mb-0">8.5</p>
-                                    </div>
-                                </div> -->
-
-                                <div class="d-flex pt-1">
-                                    <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
-                                    <button type="button" class="btn btn-primary flex-grow-1">Follow</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div class="container ">
+<div class="container-fluid mt-2">
 
     <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -91,17 +35,24 @@
 
 
 
-        <div class="row row-fluid">
-            <div *ngFor="let item of activitys" class="col col-md-6 col-lg-4">
-                <app-activity-item clss="card" [item]="item" (onRegister)="onRegister($event)"
-                    (onDelete)="onDelete($event)">
-                </app-activity-item>
-            </div>
+    <div class="row row-fluid">
+        <div *ngFor="let item of activitys" class="col col-md-6 col-lg-4">
+            <app-activity-item clss="card" [item]="item" (onRegister)="onRegister($event)"
+                (onDelete)="onDelete($event)">
+            </app-activity-item>
         </div>
+    </div>
 
 
 
-
+    <div class="position-relative m-4">
+        <div class="progress" style="height: 1px;">
+          <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">1</button>
+        <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">2</button>
+        <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">3</button>
+      </div>
 
 
 </div>
