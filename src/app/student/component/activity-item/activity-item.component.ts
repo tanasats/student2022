@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { IActivity } from 'src/app/interface/activity';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
@@ -11,8 +12,12 @@ export class ActivityItemComponent implements OnInit {
   @Output() onRegister = new EventEmitter<IActivity>();
   @Output() onDelete = new EventEmitter<IActivity>();
 
+  public imgUrl:string = environment.imgURL;
+
   constructor() {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   regItemEvent(data:any) {
     this.onRegister.emit(data);

@@ -1,3 +1,4 @@
+import { MsuuserModule } from './msuuser/msuuser.module';
 import { authInterceptorProviders } from './interceptor/auth.interceptor';
 //import { AuthInterceptor } from 'src/app/interceptor/auth.interceptor';
 import { ErrorInterceptor } from 'src/app/interceptor/error.interceptor';
@@ -21,7 +22,9 @@ import { GuestModule } from './guest/guest.module';
 import { AdminModule } from './admin/admin.module';
 import { StudentModule } from './student/student.module';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
+import { WordcountPipe } from './pipe/wordcount.pipe';
 //import { NavbarComponent } from './theme/layout/navbar/navbar.component';
+
 
 
 
@@ -29,6 +32,7 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
   declarations: [
     AppComponent,
     ConfirmDialogComponent,
+    WordcountPipe,
     //NavbarComponent,
   ],
   imports: [
@@ -45,10 +49,15 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     GuestModule,
     AdminModule,
     StudentModule,
+    MsuuserModule,
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     authInterceptorProviders,
+  ],
+  exports: [
+    WordcountPipe,
   ],
   bootstrap: [AppComponent]
 })

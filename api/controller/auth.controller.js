@@ -41,9 +41,14 @@ exports.signin = async (req, res) => {
       console.log(row);
       if (row.length === 0) {
         //return res.status(404).send({message: "Not found User!" });
-        return res.status(404).send({message: "0"});
+        return res.status(401).send({message: "0"});
       }
-      let [user] = row;  
+      let [user] = row;
+        
+      if(user.password == null){
+        return res.status(401).send({message:'2'});
+      }
+
       let passwordIsValid =  bcrypt.compareSync(password || "", user.password);
       //console.log('password is valid:',passwordIsValid);
       if (!passwordIsValid) {
@@ -97,7 +102,7 @@ exports.me = (req, res) => {
 // ทำการลงทะเบียน โดยรับข้อมูล user จาก AD พร้อมทั้งกำหนด role
 exports.register = async (req, res) => {
   //console.log(req.body);
-  var datas = {
+  var datas = { 
     username: req.body.username,
     password: req.body.password,
     usertype: req.body.usertype,
@@ -117,7 +122,11 @@ exports.register = async (req, res) => {
     datas.password = await bcrypt.hash(datas.password, salt);
   }
   await authModel.get_faculty_id(req.body.faculty).then(([[row]])=>{
-    console.log('faculty:',row);
+    console.log('faculty:',row||"no faculty_id in database");
+    if(row==undefined){
+      console.log("Unknow faculty_id");
+      //return res.status(500).json({message:"Unknow faculty_id"});
+    }
     datas.faculty_id = row.faculty_id;
   });
   //console.log('userinfo:',datas);
@@ -150,3 +159,21 @@ exports.register = async (req, res) => {
   //res.status(200).send("test");
 };
 
+exports.setpassword= async (req,res)=>{
+  let datas = req.body;
+  if (datas.password) {
+    const saltRound = 10;
+    const salt = await bcrypt.genSalt(saltRound);
+    datas.password = await bcrypt.hash(datas.password, salt);
+  }
+  console.log(datas);
+  await authModel.setpassword(datas.password,datas.username)
+  .then(([row])=>{
+    console.log(row);
+    res.status(200).json(row);
+  })
+  .catch((err)=>{
+    console.log(err);
+    res.status(500).json({message:err});
+  })
+}

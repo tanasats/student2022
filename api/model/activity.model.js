@@ -34,6 +34,11 @@ class _class {
     const sql = db.format("DELETE FROM activity WHERE activity_id=?", [id]);
     return db.execute(sql);
   }
+  updatePoster({id,filename,caption}){
+    const sql = db.format("UPDATE activity set activity_poster=?,activity_caption=? where activity_id=?",[filename,caption,id]);
+    console.log(sql);
+    return db.execute(sql);
+  }
 
 }//class
 

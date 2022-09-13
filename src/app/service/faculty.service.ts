@@ -106,7 +106,7 @@ export class FacultyService {
 
   update(datas: any): Observable<any> {
     return this.http
-      .put(this.endpoint + '/' + datas.acttypeid, datas, this.httpOptions)
+      .put(this.endpoint + '/' + datas.faculty_id, datas, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 

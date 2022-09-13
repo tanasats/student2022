@@ -89,7 +89,7 @@ exports.create = async (req, res) => {
   const datas = req.body;
   datas.cdate = new Date();
   datas.mdate = new Date();
-  if (req.body.facultyname) {
+  if (req.body.faculty_name) {
     console.log("data:", datas);
     facultyModel
       .create({ datas: datas })

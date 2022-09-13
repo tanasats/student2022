@@ -24,7 +24,7 @@
                     </button></div>
             </div>
 
-            <div class="card card-shadow">
+            <div class="card card-no-border">
                 <div class="card-body">
                     <table class="item-table">
                         <thead>
@@ -52,6 +52,7 @@
                                 <td>{{ item.activity_name }}</td>
                                 <td>
                                     {{ item.activity_statuscode }}
+                                    <img *ngIf="item.activity_poster" src="http://localhost:3000/api/v1/files/{{item.activity_poster}}" style="width:100px">
                                 </td>
 
                             </tr>

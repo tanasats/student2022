@@ -66,7 +66,8 @@ export class AuthService {
   ) {
     console.log('#auth.service.constructor()');
     let _access_token = localStorage.getItem('access-token') || '';
-    console.log(_access_token);
+    console.log("token=",_access_token);
+    
     if (_access_token) {
       this.me().subscribe({
         next: ([res]) => {
@@ -109,7 +110,7 @@ export class AuthService {
   }
 
   signin(data: any): Observable<any> {
-    console.log('app_sign data: ', data);
+    console.log('app_sign service: ', data);
     return this.http
       .post(this.endpoint + '/signin', data, this.httpOptions)
       .pipe(catchError(this.handleError));

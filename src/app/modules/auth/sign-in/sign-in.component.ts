@@ -7,6 +7,7 @@ import { MsuAuthService } from 'src/app/service/msu-auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-sign-in',
@@ -15,8 +16,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SignInComponent implements OnInit {
   public frmLogin: FormGroup = this.fb.group({
-    username: ['62012210012', [Validators.required, Validators.minLength(3)]],
-    password: ['1341101407056', Validators.required],
+    //username: ['', [Validators.required, Validators.minLength(3)]],
+    //password: ['', Validators.required],
+    //username: ['tanasat', [Validators.required, Validators.minLength(3)]],
+    //password: ['tanasat71521150', Validators.required],
+    username: ['janpen', [Validators.required, Validators.minLength(3)]],
+    password: ['5461200005331', Validators.required],
+   // username: ['62012210012', [Validators.required, Validators.minLength(3)]],
+   // password: ['1341101407056', Validators.required],
     //email: ['', [Validators.required, Validators.email]],
     //message: ['', [Validators.required, Validators.minLength(15)]],
   });
@@ -32,12 +39,31 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public onSubmit(form: FormGroup) {
+
+  private async applogin(username:string,password:string){
+    console.log("applogin()");
+    await firstValueFrom(this.authService.signin({username:username,password:password}) )
+    .then((res)=>{
+      console.log("applogin()->res=",res);
+    })
+    .catch((err)=>{ //err='1' is invalid password //err=0 is not found username
+      console.log("applogin()->err=",err);
+    })
+  }
+
+
+
+
+  public async onSubmit(form: FormGroup) {
     var ad_access_token = '';
     var ad_userinfo: any = '';
     var is_user_registered = false;
+//    await this.applogin("tanasatx","tanasat71521150");
+//    console.log("xxxxx");
+
     if (this.frmLogin.valid) {
       console.log('form submit Login', form.value);
+
 
       this.authService.signin(form.value).subscribe({
         next: (res) => {
@@ -51,13 +77,16 @@ export class SignInComponent implements OnInit {
           }
         },
         error: (err) => {
-          console.log('app signin(e):', err);
+          console.log('app signin(error code):', err);
+
           if (err == '1') {
             // username has registered but this password is invalid
             //console.log("invalid password");
             this.notifyService.show('error', 'รหัสผ่านไม่ถูกต้อง !!', ''); // invalid app_signin and ad_signin
-          } else {
-            console.log('user no register then try ad_signin()');
+          //}else if (err == '2'){
+          //   console.log("app has user but no password, Try to update password from AD");
+          }else {
+            console.log('user no register, Try to ad_signin()');
             this.msuAuthService.signin(form.value).subscribe({
               next: (res) => {
                 console.log('ad_signin:', res);
@@ -68,6 +97,8 @@ export class SignInComponent implements OnInit {
                       console.log('ad_userinfo:', res);
                       ad_userinfo = res;
                       ad_userinfo.password = form.value.password;
+
+
 
                       //เอาข้อมูล ad_userinfo ไปลงทะเบียน App (user+role)
                       this.authService.register(ad_userinfo).subscribe({
@@ -105,7 +136,8 @@ export class SignInComponent implements OnInit {
               },
               error: (err) => {
                 console.log('ad_signin(e):', err);
-                this.notifyService.show('error', err, 'MSU Authentication'); // invalid app_signin and ad_signin
+                //this.notifyService.show('error', err, 'MSU Authentication'); // invalid app_signin and ad_signin
+                this.notifyService.show('error', 'username/password ไม่ถูกต้อง', 'MSU Authentication'); // invalid app_signin and ad_signin
               },
             });
           }

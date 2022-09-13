@@ -14,6 +14,6 @@ router.post("/auth/signin",authController.signin);
 router.post("/auth/tokensignin",authController.tokenSignin);
 router.get("/auth/me",authController.me);
 router.post("/auth/register",authController.register);
-
+router.post("/auth/setpassword",authController.setpassword);
 
 module.exports = router;

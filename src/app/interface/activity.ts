@@ -19,6 +19,8 @@ export interface IActivity {
     activity_budget_source	:number,
     activity_budget_init	:number,
     activity_budget_used	:number,
+    activity_poster:string,
+    activity_caption:string,
 
     activity_statuscode:string,
     cdate: string,

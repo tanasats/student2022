@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  title: 'Local Environment Heading',
+  apiMSUAuth: 'https://data.msu.ac.th/api/v1/auth',
+  apiURL: 'http://localhost:3000',
+  imgURL: 'http://localhost:3000/api/v1/files/',
 };
 
 /*

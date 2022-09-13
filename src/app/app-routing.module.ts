@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'guest',loadChildren:()=> import('./guest/guest-routing.module').then(m=>m.GuestRoutingModule)},
   { path: 'admin',loadChildren:()=> import('./admin/admin-routing.module').then(m=>m.AdminRoutingModule)},
   { path: 'student',loadChildren:()=> import('./student/student-routing.module').then(m=>m.StudentRoutingModule)},
+  { path: 'msuuser',loadChildren:()=> import('./msuuser/msuuser-routing.module').then(m=>m.MsuuserRoutingModule)},
   { path: 'home', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) }, 
   { path: 'sign-in', loadChildren: () => import('./modules/auth/sign-in/sign-in.module').then(m => m.SignInModule) },
   { path: '**', redirectTo:'home',pathMatch:'full'}

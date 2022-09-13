@@ -1,0 +1,22 @@
+
+<p>profile works!</p>
+{{current_user|json}}
+
+<ul *ngIf="current_user.islogin">
+    <li>
+        <label>ชื่อ:</label>
+        <div class="d-inline">{{me.displayname}}</div>
+    </li>
+    <li>
+        <label>สิทธิ์ผู้ใช้งาน:</label>
+        <div class="d-inline">{{me.roles|json}}</div>
+        <label *ngFor="let role of me.roles;let i = index">
+           {{role.role_name}}
+        </label>
+
+    </li>
+</ul>
+
+
+
+{{me|json}}

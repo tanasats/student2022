@@ -1,6 +1,8 @@
 const uploadFile = require("../middleware/upload");
 const fs = require("fs"); 
+
 const upload = async (req, res) => {
+  console.log(req);
   try {
     await uploadFile(req, res);
     if (req.file == undefined) {
@@ -15,6 +17,7 @@ const upload = async (req, res) => {
     });
   }
 };
+
 const getListFiles = (req, res) => {
   const directoryPath = __basedir + "/uploads/";
   fs.readdir(directoryPath, function (err, files) {
@@ -34,6 +37,7 @@ const getListFiles = (req, res) => {
     res.status(200).send(fileInfos);
   });
 };
+
 const download = (req, res) => {
   const fileName = req.params.name;
   const directoryPath = __basedir + "/uploads/";

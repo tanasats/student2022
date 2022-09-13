@@ -1,3 +1,4 @@
+import { UploadService } from './../../../service/upload.service';
 
 import { AppdataService } from 'src/app/service/appdata.service';
 import { ActorganizationService } from 'src/app/service/actorganization.service';
@@ -17,6 +18,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import localeThai from '@angular/common/locales/th';
 import { getLocaleDayNames, FormStyle, TranslationWidth, getLocaleMonthNames, formatDate, registerLocaleData } from '@angular/common';
+import { ImageCroppedEvent, LoadedImage ,base64ToFile } from 'ngx-image-cropper';
 
 @Injectable()
 export class NgbDatepickerI18nBuddhist extends NgbDatepickerI18n {
@@ -73,11 +75,14 @@ export class NgbDatepickerI18nBuddhist extends NgbDatepickerI18n {
 export class ActivityCreateComponent implements OnInit {
   public model?: NgbDateStruct;
   public formActivity: FormGroup;
+  public formUpload: FormGroup;
   public optionFaculty: IOption[] = [];
   public optionActtype: IOption[] = [];
   public optionActorganization: IOption[] = [];
   public masterOptionFaculty: boolean = false;
   
+  imageSrc: string = '';
+ 
 
   // public movies: Movie = {
   //   name: 'Dynamic Movie List',
@@ -110,7 +115,7 @@ export class ActivityCreateComponent implements OnInit {
     private facultyService: FacultyService,
     private formBuilder: FormBuilder,
     private notifyService: NotificationService,
-    private location: Location
+    private location: Location,
   ) {
     this.initForm();
     this.formActivity = this.formBuilder.group({
@@ -132,8 +137,15 @@ export class ActivityCreateComponent implements OnInit {
       activity_budget_init:[null,[Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
       activity_budget_used:[null,[Validators.required, Validators.pattern(/^[0-9]+(\.[0-9]{1,2})?$/)]],
       activity_statuscode:[0,[]],
+      activity_poster:[null,[]],
+      activity_caption:[null,[]],
       cdate: [null, []],
       mdate: [null, []],
+    });
+    this.formUpload =this.formBuilder.group({
+      id:[1,[]],
+      file:[null,[]],
+      caption:[null,[]],
     });
   } //constructor
   get f(): { [key: string]: AbstractControl } {
@@ -219,5 +231,126 @@ export class ActivityCreateComponent implements OnInit {
   padZeros(num: number, totalLength: number): string {
     return String(num).padStart(totalLength, '0');
   }
+
+  onFileChange(event:any) {
+    const reader = new FileReader();
+    
+    if(event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+    
+      reader.onload = () => {
+   
+        this.imageSrc = reader.result as string;
+     
+        //this.myForm.patchValue({
+        //  fileSource: reader.result
+        //});
+   
+      };
+   
+    }
+  }
+
+
+
+
+  public imageChangedEvent: any = '';
+  public croppedImage: any = ''; // cropped image in base64 format
+  public fileToUpload: File = {} as File;
+
+  fileChangeEvent(event: any): void {
+      this.imageChangedEvent = event;
+  }
+  imageCropped(event: ImageCroppedEvent) {
+      console.log("cropped action!!");
+      //this.croppedImage = event.base64;
+      //let File = base64ToFile(this.croppedImage); //File is type Blob
+      //console.log('File:',File);
+      //console.log(this.croppedImage);
+
+      this.croppedImage = event.base64;
+      //console.log(this.croppedImage);
+      this.fileToUpload = this.base64ToFile(
+        event.base64,
+        this.imageChangedEvent.target.files[0].name,
+      )
+      return this.fileToUpload
+
+
+  }
+  imageLoaded(image: LoadedImage) {
+  //imageLoaded() {
+      // show cropper
+      //console.log("imageLoaded()",image);
+    
+  }
+  cropperReady() {
+      // cropper ready
+  }
+  loadImageFailed() {
+      // show message
+  }
+
+onSubmitUpload(){
+  
+  console.log("submitUpload()");
+  //const file = this.formUpload.get('file')?.value;
+  //const formdata = this.myForm.getRawValue();
+  //console.log("formdata:",formdata);
+
+  let datas = this.formUpload.getRawValue(); 
+  let File = base64ToFile(this.croppedImage); //File is type Blob
+  console.log("File:",File);
+  //console.log("file:",file);
+  //datas.file = File;
+  console.log(datas);
+
+
+ 
+  let file: File = this.fileToUpload;
+   let formData:FormData = new FormData();
+   formData.append('id','1');
+   formData.append('caption','test caption ok');
+   formData.append('file', file, Date.now()+".png");
+   //console.log(JSON.stringify(formData))
+
+  //formData.forEach((value,key) => {
+  //   console.log(key+" "+value)
+  // })
+
+  //datas.file = this.fileToUpload;
+  this.activityService.upload(formData).subscribe({
+    next: (v) => {
+      console.log("v=",v);
+    },
+    error: (e) => {
+      console.log('error:',e);
+      this.notifyService.show('error', e.message, '');
+    }
+  })
+
+
+}
+
+base64ToFile(data:any, filename:string) {
+  const arr = data.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  let u8arr = new Uint8Array(n);
+  while(n--){
+      u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, { type: mime });
+}
+
+
+
+
+
+
+
+
 
 }//class

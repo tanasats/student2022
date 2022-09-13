@@ -1,3 +1,4 @@
+<app-page-title _title="แก้ไขข้อมูลกิจกรรม" _icon="bi bi-journals"></app-page-title>
 <div class="container-fluid">
     <div class="row">
         <div class="col">
@@ -14,185 +15,262 @@
                 </div>
             </div>
 
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link tabs-form active" id="tab1-tab" type="button" data-bs-toggle="tab"
+                        data-bs-target="#tab1"  aria-controls="tab1" role="tab" 
+                        aria-selected="true">กิจกรรม</button>
+                    <button class="nav-link tabs-form" id="tab2-tab" type="button" data-bs-toggle="tab"
+                        data-bs-target="#tab2" aria-controls="tab2" role="tab" 
+                        aria-selected="false">ประชาสัมพันธ์</button>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div id="tab1" class="tab-pane fade show active"  role="tabpanel" >
 
-            <div class="card card-shadow">
-                <div class="card-body">
-                    <div class="card-topic">
-                        แก้ไขข้อมูล
+                    <div class="card card-no-border">
+                        <div class="card-body">
+                            <div class="card-topic">
+                                แก้ไขข้อมูล
+                            </div>
+        
+                            <form [formGroup]="formActivity" #ngForm="ngForm" autocomplete="off">
+                                <div class="row">
+                                    <!-- <div class="col" style="flex: 0 1 100px;">
+                                        <label class="form-label">รหัส</label>
+                                        <input formControlName="activity_id" class="form-control" readonly
+                                            placeholder="อัตโนมัติ">
+                                    </div> -->
+                                    <div class="col-sm-4 col-lg-2">
+                                        <label class="form-label">รหัสกิจกรรม</label>
+                                        <input formControlName="activity_code" class="form-control">
+                                    </div>
+                                    <div class="col-sm-8 col-lg-6">
+                                        <label class="form-label">ชื่อกิจกรรม *</label>
+                                        <input formControlName="activity_name" class="form-control">
+                                        <div *ngIf="f['activity_name'].touched&&f['activity_name'].errors">
+                                            <div *ngIf="f['activity_name'].errors['required']" class="form-error">Required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-lg-2">
+                                        <label class="form-label">ปีการศึกษา</label>
+                                        <input formControlName="activity_year" type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-sm-4 col-lg-2">
+                                        <label class="form-label">ภาคเรียน</label>
+                                        <select formControlName="activity_term" class="form-select">
+                                            <option value="null" selected>-เลือก-</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+        
+                                    <div class="w-100"></div><!-- Force next columns to break to new line -->
+                                    <div class="col-sm-6 col-lg-4">
+                                        <label class="form-label">องค์กรผู้จัด</label>
+                                        <select formControlName="actorganization_id" class="form-select">
+                                            <option value="null">-เลือก-</option>
+                                            <option *ngFor="let item of optionActorganization" value="{{item.value}}">
+                                                {{item.value}}: {{item.name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-4">
+                                        <label class="form-label">ผู้เปิดกิจกรรม</label>
+                                        <select formControlName="actowner_id" class="form-select">
+                                            <option value="null">-เลือก-</option>
+        
+                                            <option value="0">0:....</option>
+        
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-4">
+                                        <label class="form-label">ประเภทกิจกรรม</label>
+                                        <select formControlName="acttype_id" class="form-select">
+                                            <option value="null">-เลือก-</option>
+                                            <option *ngFor="let item of optionActtype" value="{{item.value}}">{{item.value}}:
+                                                {{item.name}}</option>
+                                        </select>
+                                    </div>
+        
+                                    <div class="w-100"></div><!-- Force next columns to break to new line -->
+                                    <div class="col-sm-6">
+                                        <label class="form-label">สถานที่จัดกิจกรรม</label>
+                                        <input formControlName="activity_place" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="form-label">รายละเอียด</label>
+                                        <textarea formControlName="activity_description" type="text" class="form-control"
+                                            placeholder=""></textarea>
+                                    </div>
+        
+                                    <div class="w-100"></div><!-- Force next columns to break to new line -->
+                                    <div class="col-sm-6 col-lg-4 col-xl-3 col-xxl-2">
+                                        <div class="form-group">
+                                            <label class="form-label">วันที่เปิดกิจกรรม</label>
+                                            <div class="input-group">
+                                                <input formControlName="activity_dateform" class="form-control"
+                                                    placeholder="yyyy-mm-dd" ngbDatepicker #d1="ngbDatepicker">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" (click)="d1.toggle()"
+                                                        type="button"><i class="bi bi-calendar2-fill"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-4 col-xl-3 col-xxl-2">
+                                        <div class="form-group">
+                                            <label class="form-label">วันที่ปิดกิจกรรม</label>
+                                            <div class="input-group">
+                                                <input formControlName="activity_dateto" class="form-control"
+                                                    placeholder="yyyy-mm-dd" ngbDatepicker #d2="ngbDatepicker">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" (click)="d2.toggle()"
+                                                        type="button"><i class="bi bi-calendar2-fill"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+        
+        
+                                    <div class="w-100"></div><!-- Force next columns to break to new line -->
+                                    <div class="col-sm-6 col-lg-4 col-xl-3 col-xxl-2">
+                                        <label class="form-label">จำนวนที่รับ</label>
+                                        <input formControlName="activity_receive" type="text" class="form-control"
+                                            id="inputCity">
+                                        <div *ngIf="f['activity_receive'].touched&&f['activity_receive'].errors">
+                                            <div *ngIf="f['activity_receive'].errors['required']" class="form-error">
+                                                กรุณากรอกข้อมูล</div>
+                                            <div *ngIf="f['activity_receive'].errors['pattern']" class="form-error">
+                                                ตัวเลขจำนวนเต็ม เท่านั้น</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-4 col-xl-3 col-xxl-2">
+                                        <label class="form-label">แหล่งงบประมาณ
+                                        </label>
+                                        <input formControlName="activity_budget_source" class="form-control" id="inputCity">
+                                    </div>
+                                    <div class="col-sm-6 col-lg-4 col-xl-3 col-xxl-2">
+                                        <label class="form-label">งบประมาณขออนุมัติ</label>
+                                        <input formControlName="activity_budget_init" class="form-control">
+                                        <div *ngIf="f['activity_budget_init'].touched&&f['activity_budget_init'].errors">
+                                            <div *ngIf="f['activity_budget_init'].errors['required']" class="form-error">
+                                                กรุณากรอกข้อมูล</div>
+                                            <div *ngIf="f['activity_budget_init'].errors['pattern']" class="form-error">
+                                                จำนวนเงิน ทศนิยม 2 ตำแหน่ง เท่านั้น</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-4 col-xl-3 col-xxl-2">
+                                        <label class="form-label">งบประมาณใช้จริง</label>
+                                        <input formControlName="activity_budget_used" class="form-control">
+                                        <div *ngIf="f['activity_budget_used'].touched&&f['activity_budget_used'].errors">
+                                            <div *ngIf="f['activity_budget_used'].errors['required']" class="form-error">
+                                                กรุณากรอกข้อมูล</div>
+                                            <div *ngIf="f['activity_budget_used'].errors['pattern']" class="form-error">
+                                                จำนวนเงิน ทศนิยม 2 ตำแหน่ง เท่านั้น</div>
+                                        </div>
+                                    </div>
+        
+                                    <div class="w-100"></div><!-- Force next columns to break to new line -->
+                                    <div class="col-12 mt-2">
+                                        <label class="form-label">คณะที่เปิดให้ลงทะเบียน</label>
+                                        <div class="w-100"></div>
+                                        <label class="mt-2 fw-bold">
+                                            <input type="checkbox" (change)="changeMasterFaculty()"
+                                                [(ngModel)]="masterOptionFaculty" [ngModelOptions]="{standalone: true}" />
+                                            เลือกทั้งหมด
+                                        </label>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div *ngFor="let item of optionFaculty; let i=index" class="col-md-6 col-xl-4 col-xxl-3">
+                                        <label>
+                                            <input type="checkbox" [value]="item.value" [(ngModel)]="item.isSelected"
+                                                [ngModelOptions]="{standalone: true}" (change)="changeFaculty()" />
+                                            {{item.name}}
+                                        </label>
+                                    </div>
+        
+        
+                                    <div class="w-100"></div><!-- Force next columns to break to new line -->
+                                    <div class="row mt-3">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-success me-2" [disabled]="!formActivity.valid"
+                                                (click)="onSubmit()">บันทึก</button>
+                                            <button type="button" [routerLink]="['../../']"
+                                                class="btn btn-secondary">ยกเลิก</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+        
+        
+                        </div>
+                    </div>
+        
+
+                </div>
+                <div id="tab2" class="tab-pane fade show" role="tabpanel">
+
+                    <div class="card card-no-border">
+                        <div class="card-body">
+                            <div class="card-topic">
+                                ข้อมูลประชาสัมพันธ์โครงการ
+                            </div>
+                            <form [formGroup]="formUpload" (ngSubmit)="onSubmitUpload()">
+                                <div class="row">
+                                    <div class="col">
+                                        <input formControlName="file" type="file" class="form-control my-1"
+                                            (change)="fileChangeEvent($event)" />
+                                        <image-cropper [imageChangedEvent]="imageChangedEvent"
+                                            [maintainAspectRatio]="true" 
+                                            [aspectRatio]="4 / 3" 
+                                            format="png"
+                                            (imageCropped)="imageCropped($event)" 
+                                            (imageLoaded)="imageLoaded($event)"
+                                            (cropperReady)="cropperReady()" 
+                                            (loadImageFailed)="loadImageFailed()">
+                                        </image-cropper>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-lg-4">
+                                        <img [src]="croppedImage" style="width:300px" />
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <label class="form-label">คำยรรยาย</label>
+                                        <textarea formControlName="caption" class="form-control"></textarea>
+                                    </div>
+
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-success me-2">บันทึก</button>
+                                        <button type="button" [routerLink]="['../']"
+                                            class="btn btn-secondary">ยกเลิก</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
 
-                    <form [formGroup]="formActivity" #ngForm="ngForm" autocomplete="off">
-                        <div class="row">
-                            <!-- <div class="col" style="flex: 0 1 100px;">
-                                <label class="form-label">รหัส</label>
-                                <input formControlName="activity_id" class="form-control" readonly
-                                    placeholder="อัตโนมัติ">
-                            </div> -->
-                            <div class="col-sm-4 col-lg-2">
-                                <label class="form-label">รหัสกิจกรรม</label>
-                                <input formControlName="activity_code" class="form-control">
-                            </div>
-                            <div class="col-sm-8 col-lg-6">
-                                <label class="form-label">ชื่อกิจกรรม *</label>
-                                <input formControlName="activity_name" class="form-control">
-                                <div *ngIf="f['activity_name'].touched&&f['activity_name'].errors">
-                                    <div *ngIf="f['activity_name'].errors['required']" class="form-error">Required</div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 col-lg-2">
-                                <label class="form-label">ปีการศึกษา</label>
-                                <input formControlName="activity_year" type="text" class="form-control" placeholder="">
-                            </div>
-                            <div class="col-sm-4 col-lg-2">
-                                <label class="form-label">ภาคเรียน</label>
-                                <select formControlName="activity_term" class="form-select">
-                                    <option value="null" selected>-เลือก-</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select>
-                            </div>
-
-                            <div class="w-100"></div><!-- Force next columns to break to new line -->
-                            <div class="col-sm-6 col-lg-4">
-                                <label class="form-label">องค์กรผู้จัด</label>
-                                <select formControlName="actorganization_id" class="form-select">
-                                    <option value="null">-เลือก-</option>
-                                    <option *ngFor="let item of optionActorganization" value="{{item.value}}">
-                                        {{item.value}}: {{item.name}}</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-6 col-lg-4">
-                                <label class="form-label">ผู้เปิดกิจกรรม</label>
-                                <select formControlName="actowner_id" class="form-select">
-                                    <option value="null">-เลือก-</option>
-
-                                    <option value="0">0:....</option>
-
-                                </select>
-                            </div>
-                            <div class="col-sm-6 col-lg-4">
-                                <label class="form-label">ประเภทกิจกรรม</label>
-                                <select formControlName="acttype_id" class="form-select">
-                                    <option value="null">-เลือก-</option>
-                                    <option *ngFor="let item of optionActtype" value="{{item.value}}">{{item.value}}:
-                                        {{item.name}}</option>
-                                </select>
-                            </div>
-
-                            <div class="w-100"></div><!-- Force next columns to break to new line -->
-                            <div class="col-sm-6">
-                                <label class="form-label">สถานที่จัดกิจกรรม</label>
-                                <input formControlName="activity_place" type="text" class="form-control">
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="form-label">รายละเอียด</label>
-                                <textarea formControlName="activity_description" type="text" class="form-control"
-                                    placeholder=""></textarea>
-                            </div>
-
-                            <div class="w-100"></div><!-- Force next columns to break to new line -->
-                            <div class="col-sm-6 col-lg-4 col-xl-3 col-xxl-2">
-                                <div class="form-group">
-                                    <label class="form-label">วันที่เปิดกิจกรรม</label>
-                                    <div class="input-group">
-                                        <input formControlName="activity_dateform" class="form-control"
-                                            placeholder="yyyy-mm-dd" ngbDatepicker #d1="ngbDatepicker">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" (click)="d1.toggle()"
-                                                type="button"><i class="bi bi-calendar2-fill"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4 col-xl-3 col-xxl-2">
-                                <div class="form-group">
-                                    <label class="form-label">วันที่ปิดกิจกรรม</label>
-                                    <div class="input-group">
-                                        <input formControlName="activity_dateto" class="form-control"
-                                            placeholder="yyyy-mm-dd" ngbDatepicker #d2="ngbDatepicker">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" (click)="d2.toggle()"
-                                                type="button"><i class="bi bi-calendar2-fill"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
 
-                            <div class="w-100"></div><!-- Force next columns to break to new line -->
-                            <div class="col-sm-6 col-lg-4 col-xl-3 col-xxl-2">
-                                <label class="form-label">จำนวนที่รับ</label>
-                                <input formControlName="activity_receive" type="text" class="form-control"
-                                    id="inputCity">
-                                    <div *ngIf="f['activity_receive'].touched&&f['activity_receive'].errors">
-                                        <div *ngIf="f['activity_receive'].errors['required']" class="form-error">กรุณากรอกข้อมูล</div>
-                                        <div *ngIf="f['activity_receive'].errors['pattern']" class="form-error">ตัวเลขจำนวนเต็ม เท่านั้น</div>
-                                    </div>                                    
-                            </div>
-                            <div class="col-sm-6 col-lg-4 col-xl-3 col-xxl-2">
-                                <label class="form-label">แหล่งงบประมาณ
-                                </label>
-                                <input formControlName="activity_budget_source" class="form-control" id="inputCity"> 
-                            </div>
-                            <div class="col-sm-6 col-lg-4 col-xl-3 col-xxl-2">
-                                <label class="form-label">งบประมาณขออนุมัติ</label>
-                                <input formControlName="activity_budget_init" class="form-control">
-                                <div *ngIf="f['activity_budget_init'].touched&&f['activity_budget_init'].errors">
-                                    <div *ngIf="f['activity_budget_init'].errors['required']" class="form-error">กรุณากรอกข้อมูล</div>
-                                    <div *ngIf="f['activity_budget_init'].errors['pattern']" class="form-error">จำนวนเงิน ทศนิยม 2 ตำแหน่ง เท่านั้น</div>
-                                </div>                                  
-                            </div>
-                            <div class="col-sm-6 col-lg-4 col-xl-3 col-xxl-2">
-                                <label class="form-label">งบประมาณใช้จริง</label>
-                                <input formControlName="activity_budget_used" class="form-control">
-                                <div *ngIf="f['activity_budget_used'].touched&&f['activity_budget_used'].errors">
-                                    <div *ngIf="f['activity_budget_used'].errors['required']" class="form-error">กรุณากรอกข้อมูล</div>
-                                    <div *ngIf="f['activity_budget_used'].errors['pattern']" class="form-error">จำนวนเงิน ทศนิยม 2 ตำแหน่ง เท่านั้น</div>
-                                </div>                                  
-                            </div>
-
-                            <div class="w-100"></div><!-- Force next columns to break to new line -->
-                            <div class="col-12 mt-2">
-                                <label class="form-label">คณะที่เปิดให้ลงทะเบียน</label>
-                                <div class="w-100"></div>
-                                <label class="mt-2 fw-bold">
-                                    <input type="checkbox" (change)="changeMasterFaculty()"  [(ngModel)]="masterOptionFaculty"
-                                    [ngModelOptions]="{standalone: true}" />
-                                    เลือกทั้งหมด
-                                </label>
-                            </div>
-                            <div class="clear"></div>
-                            <div *ngFor="let item of optionFaculty; let i=index" class="col-md-6 col-xl-4 col-xxl-3">
-                                <label>
-                                    <input type="checkbox" [value]="item.value" [(ngModel)]="item.isSelected"
-                                        [ngModelOptions]="{standalone: true}" (change)="changeFaculty()" />
-                                    {{item.name}}
-                                </label>
-                            </div>
 
 
-                            <div class="w-100"></div><!-- Force next columns to break to new line -->
-                            <div class="row mt-3">
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-success me-2" [disabled]="!formActivity.valid"
-                                        (click)="onSubmit()">บันทึก</button>
-                                    <button type="button" [routerLink]="['../../']"
-                                        class="btn btn-secondary">ยกเลิก</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
 
 
                 </div>
+                
             </div>
+
+
+
+
+
 
 
             {{formActivity.value|json}}
 
-
-{{formActivity.value|json}}
 
         </div>
     </div>

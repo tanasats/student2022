@@ -19,6 +19,11 @@ class _Class {
 	  console.log(sql);
     return db.query(sql);
   }
+  setpassword(password,username){
+    const sql = db.format("UPDATE user SET password=? WHERE username=?", [password, username]);
+	  console.log(sql);
+    return db.query(sql);
+  }
   addRole(user_id,role_id){
     const datas={
       user_id:user_id,

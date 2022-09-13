@@ -74,7 +74,7 @@ export class ActivityComponent implements OnInit {
         this.notifyService.show('error', 'ผิดพลาด:' + e, '');
       },
       complete: () => {},
-    });
+    }); 
   }
 
   deleteItem(item: IActivity) {

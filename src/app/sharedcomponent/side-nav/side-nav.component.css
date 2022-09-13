@@ -2,6 +2,7 @@
     width:250px;
     min-height:calc(100vh);
     transition: margin 0.25s ease-out;
+    background-color:white;
 }
 .sidenav-wrapper.sidenav-expaned{
     margin-left:-200px;

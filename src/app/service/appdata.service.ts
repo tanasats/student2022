@@ -8,7 +8,7 @@ export class AppdataService {
   constructor() { }
 
   get acadyear(){
-    return 2560
+    return 2565
   }
 
 }

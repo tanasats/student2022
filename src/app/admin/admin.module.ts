@@ -19,7 +19,7 @@ import { ActivityUpdateComponent } from './page/activity/activity-update.compone
 import { FacultyComponent } from './page/faculty/faculty.component';
 import { ActorganizationComponent } from './page/actorganization/actorganization.component';
 import { TestComponent } from './page/test/test.component';
-
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -37,6 +37,7 @@ import { TestComponent } from './page/test/test.component';
     FacultyComponent,
     ActorganizationComponent,
     TestComponent,
+
     
   ],
   imports: [
@@ -46,6 +47,7 @@ import { TestComponent } from './page/test/test.component';
     FormsModule,
     NgbModule,
     SharedcomponentModule,
+    ImageCropperModule,
 
   ]
 })
