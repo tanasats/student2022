@@ -7,12 +7,13 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private endpoint = 'http://localhost:3000/api/v1/user';
+  private endpoint = environment.apiURL+'/api/v1/user';
   constructor(private http: HttpClient) {}
 
   get httpOptions() {

@@ -7,12 +7,12 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root', 
 })
 export class ActtypeService {
-  private endpoint = 'http://localhost:3000/api/v1/acttype';
+  private endpoint = environment.apiURL+'/api/v1/acttype';
   constructor(private http: HttpClient) {}
 
 

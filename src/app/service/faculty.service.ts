@@ -8,13 +8,13 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class FacultyService {
   private facultys: IFaculty[] = [];
-  private endpoint = 'http://localhost:3000/api/v1/faculty';
+  private endpoint = environment.apiURL+'/api/v1/faculty';
   constructor(private http: HttpClient) {
     console.log("faculty.service constructor ###");
   }

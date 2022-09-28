@@ -20,6 +20,7 @@ import { FacultyComponent } from './page/faculty/faculty.component';
 import { ActorganizationComponent } from './page/actorganization/actorganization.component';
 import { TestComponent } from './page/test/test.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { SharedModule } from '../shared/SharedModule';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     NgbModule,
     SharedcomponentModule,
     ImageCropperModule,
+    SharedModule,
 
   ]
 })

@@ -4,8 +4,7 @@
             <div class="rounded-2">
                 <div class="mb-3">
                     <h1>{{item.activity_name}}</h1>
-                    <small>{{item.cdate}}</small>
-                    
+                    <small class="text-hint">{{item.cdate|thaidate}}</small>
                 </div>
 
 
@@ -25,21 +24,40 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane container active" id="msg">
-                        <div class="row-fluid">                            
-                            <div class="col-sm"><img src="{{imgUrl}}{{item.activity_poster}}" class="img-fluid"></div>
-                            <div class="col-sm">{{item.activity_description}}</div>
-                            <div class="col-sm">{{item.activity_faculty|json}}</div>
-                        </div>
-             
                         <div class="row-fluid">
-                            <div class="col-4">label</div>
-                            <div class="col-8">content</div>
+                            <div class="col pt-4"><img class="w-100" src="{{imgUrl}}{{item.activity_poster}}"></div>
                         </div>
 
-                        <div class="label-data">
-                            <label class="">Flex item</label>
-                            <span class="">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur error unde cupiditate itaque consequuntur officia consectetur fuga ipsa exercitationem inventore! Dolorem quos nesciunt inventore eligendi sequi architecto nemo saepe? Aut?</span>
+                        <div class="panel-data">
+                            <label>ชื่อโครงการ/กิจกรรม</label>
+                            <div>
+                                {{item.activity_name}}&nbsp;
+                            </div>
+                            <label>ภาคเรียน</label>
+                            <div>
+                                {{item.activity_term}}/{{item.activity_year}}&nbsp;
+                            </div>
+                            <label>ผู้จัดกิจกรรม</label>
+                            <div>
+                                {{item.actorganization_id}}&nbsp;
+                            </div>
+                            <label>รายละเอียด</label>
+                            <div>
+                                {{item.activity_description}}&nbsp;
+                            </div>
+                            <label>จำนวนรับ</label>
+                            <div>
+                                {{item.activity_receive}}&nbsp;คน
+                            </div>
+                            <label>สถานะ</label>
+                            <div>
+                                {{item.activity_statusvalue}}&nbsp;
+                            </div>
                         </div>
+
+
+
+
 
 
                     </div>
@@ -55,17 +73,20 @@
         </div>
         <div class="col-md-4">
 
-            <div class="bg-light rounded-2 p-3 mb-3">
+            <div class="bg-white rounded-2 p-3 mb-3">
                 <div class="row">
-                    <h2 class=""><i class="bi bi-clipboard-data me-2"></i>จำนวนผู้ร่วมกิจกรรม</h2>
+                    <div class="my-2">
+                        <h2><i class="bi bi-clipboard-data me-2"></i>จำนวนผู้ร่วมกิจกรรม</h2>
+                    </div>
+
                     <div class="col-6">
-                        <div class="bg-white rounded-2 text-center pb-1">
+                        <div class="bg-light rounded-2 text-center pb-1">
                             <span class="small">สมัคร</span>
                             <div class="h2"><strong>{{item.activity_receive}}</strong></div>
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="bg-white rounded-2 text-center pb-1">
+                        <div class="bg-light rounded-2 text-center pb-1">
                             <span class="small">จำนวนรับ</span>
                             <div class="h2"><strong>{{item.activity_receive}}</strong></div>
                         </div>
@@ -76,7 +97,7 @@
 
             <div class="row">
                 <div class="col">
-                    <div class="card card-no-border bg-light">
+                    <div class="card card-no-border bg-white">
                         <div class="card-body">
                             <div class="label-data">
                                 <label>aaa</label>

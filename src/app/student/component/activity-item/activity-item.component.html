@@ -1,31 +1,37 @@
 <div class="card card-activity mb-3">
-    <img class="card-img-top" 
-        alt="{{item?.activity_name}}" 
-        style="max-width:300; display: block;"
-        src="{{imgUrl}}{{item?.activity_poster}}"
-        data-holder-rendered="true">
-        <div class="bg-light p-2">
-            <h2 >{{item?.activity_name}}</h2>
-        </div>
+    <img class="card-img-top" alt="{{item?.activity_name}}" style="max-width:300; display: block;"
+        src="{{imgUrl}}{{item?.activity_poster}}" data-holder-rendered="true">
+    <div class="bg-light p-2">
+        <h4>{{item?.activity_name}}</h4>
+    </div>
     <div class="card-body">
-        <p class="card-text">
+        <div style="width:50px;float:right;">
+            <div class="mini-calendar">
+                <label>{{item?.activity_dateform|thaidate:'date'}}</label>
+                <span>{{item?.activity_dateform|thaidate:'month'}}</span>
+            </div>
+        </div>
+        <p class="card-text" style="padding-right:60px;">
             {{item?.activity_description}}
         </p>
 
+
+
         <div class="d-block">
-            <i class="bi bi-calendar-event me-1 text-success"></i> {{item?.activity_dateform}}
+            <i class="bi bi-calendar-event-fill me-1 text-info"></i> {{item?.activity_dateform|thaidate}}
         </div>
         <div class="d-block">
-            <i class="bi bi-person-rolodex me-1 text-success"></i> {{item?.activity_receive}}
+            <i class="bi bi-person-badge-fill me-1 text-info"></i> {{item?.activity_receive}}
         </div>
         <div class="d-block">
-            <i class="bi bi-pin-map me-1 text-success"></i> {{item?.activity_place}}
+            <i class="bi bi-signpost-split-fill text-info"></i> {{item?.activity_place}}
         </div>
-        
+
         <div class="d-flex justify-content-between align-items-center mt-3">
             <div class="btn-group">
                 <!-- <a type="button" class="btn btn-sm btn-success" routerLink="../activity/{{item?.activity_id}}"> ลงทะเบียน</a> -->
-                <a type="button" class="btn btn-sm btn-success"  [routerLink]="['../activity',item?.activity_id]" [state]="{data:item}" > ลงทะเบียน</a>
+                <a type="button" class="btn btn-sm btn-success" [routerLink]="['../activity',item?.activity_id]"
+                    [state]="{data:item}"> ลงทะเบียน</a>
                 <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
             </div>
             <small class="text-muted">Last updated 3 mins ago</small>

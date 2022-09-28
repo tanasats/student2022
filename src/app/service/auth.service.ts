@@ -10,12 +10,13 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 //import { JwtHelperService } from "@auth0/angular-jwt";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private endpoint = 'http://localhost:3000/api/v1/auth';
+  private endpoint = environment.apiURL+'/api/v1/auth';
 
   get httpOptions() {
     let token = localStorage.getItem('access-token') || '';

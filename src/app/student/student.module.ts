@@ -9,6 +9,7 @@ import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { ActivityItemComponent } from './component/activity-item/activity-item.component';
 import { ProfileComponent } from './page/profile/profile.component';
 import { ActivityComponent } from './page/activity/activity.component';
+import { SharedModule } from '../shared/SharedModule';
 //import { ActivityItemsComponent } from './component/activity-items/activity-items.component';
 
 
@@ -24,7 +25,8 @@ import { ActivityComponent } from './page/activity/activity.component';
   imports: [
     CommonModule,
     StudentRoutingModule,
-    SharedcomponentModule
+    SharedcomponentModule,
+    SharedModule,
   ]
 })
 export class StudentModule { }

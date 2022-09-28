@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400&family=Sarabun:wght@400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Chonburi&display=swap');
+*/
 
 /* My Color Theme */
 :root {
@@ -20,6 +24,7 @@
   --theme-bg:rgba(238,242,245);
   --theme-gray: rgb(147, 151, 154);
   --theme-gray-light: rgb(228, 231, 234);
+  --theme-violet:rgb(215,25,97);
   --theme-navbar: rgb(52, 74, 97);
   --theme-dark:rgb(52, 74, 97);
   --theme-dark-1:rgb(161, 183, 207);
@@ -28,12 +33,19 @@
   --theme-primary-light:rgb(115, 206, 197);
   --theme-primary:rgb(77, 96, 241);
   --theme-primary-dark:rgb(52, 71, 212);
+  --theme-success2: rgb(16,193,122);
+   
   --theme-success:rgb(51,196,179);
+  --theme-success1:rgb(28,198,146);
   --theme-success-dark:rgb(4, 148, 131);  
-  --theme-info:rgb(103, 180, 244);
-  --theme-info-dark:rgb(70, 139, 195);
-  --theme-danger:rgb(220, 53, 69);
-  --theme-danger-dark:rgb(192, 18, 35);
+  --theme-info:rgb(0,116,191);
+  --theme-info-dark:rgb(1,87,160);
+  --theme-danger1:rgb(220, 53, 69);
+  --theme-danger:rgb(221,28,13);
+  --theme-danger-dark1:rgb(192, 18, 35);
+  --theme-danger-dark:rgb(184, 20, 8);
+  --theme-warning:rgb(255,193,7);
+  --theme-warning-dark:rgb(255,193,7);
   --theme-font-dark:rgb(44,44,44);
   --theme-font-normal1:rgb(40,50,60);
   --theme-font-normal:#495057;
@@ -102,55 +114,128 @@ body{
   .h4,
   .h5,
   .h6 {
-    font-family: "Noto Sans Thai", sans-serif;
+    font-family: "Kanit", sans-serif;
     margin: 0;
   }
+
+
   h1,
   .h1 {
-    font-size: 1.375em;
+    font-size: 1.6em;
   }
   h2,
   .h2 {
-    font-size: 1.188em;
+    font-size: 1.4em;
   }
   h3,
   .h3 {
-    font-size: 1.063em;
+    font-size: 1.2em;
   }
   h4,
   .h4 {
-    font-size: 0.938em;
+    font-size: 1.1em;
   }
   h5,
   .h5 {
-    font-size: 0.813em;
+    font-size: 0.9em;
   }
   h6,
   .h6 {
-    font-size: 0.75em;
+    font-size: 0.8em;
   }
 
 
 
+.panel-data {
+  background-color: var(--theme-light);
+}
+.panel-data label{
+  color:var(--theme-info);
+  width:200px;
+  height:100%;
+  float: left;
+  padding:0.25em;
+  text-align:right;
+}
+.panel-data div{
+  margin-left: 200px;
+  padding:0.25em;
+  background-color: white;
+}
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 767px) { 
+  .panel-data label{
+    text-align:left;
+    width:100%;
+    padding:1em 0 0 0;
+    font-weight:bold;
+  }
+  .panel-data div{
+    margin-left: 0px;
+    padding:0;
+  }
+}
 
 
 
-.label-data{
+.page-topic{
+  padding:2em 0 1em 0;
+}
+
+.data-label{
   padding:1em;
 }
-.label-data label{
+.data-label label{
   color:var(--theme-success);
   width:250px;
+  display:block;
 }
+
 .label span{
   padding-left:1em;
 }
 /* Medium devices (tablets, 768px and up) */
 @media (max-width: 767px) { 
-    .label-data label{
+    .data-label label{
       display:block;
     }
  }
+
+
+.text-hint{
+  font-size:0.6em;
+  font-style: italic;
+  color:rgba(0,0,0,0.4);
+}
+
+
+.mini-calendar{
+  background-color: var(--theme-gray-light);
+  text-align: center;
+  border-radius: 4px;
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+}
+.mini-calendar label{
+  display:block;
+}
+.mini-calendar span{
+  display:block;
+  background-color:var(--theme-info);
+  color:white;
+  border-bottom-left-radius:4px;
+  border-bottom-right-radius:4px;
+  -moz-border-bottom-left-radius:4px;
+  -moz-border-bottom-right-radius:4px;
+  -webkit-border-bottom-left-radius:4px;
+  -webkit-border-bottom-right-radius:4px;
+}
+
+
+
+
+
+
 
 
 /* btn-primary */
@@ -302,16 +387,29 @@ a.list-group-item{
 }
 
 
-
+.text-info{
+  color:var(--theme-info) !important;
+}
 .text-primary{
   color:var(--theme-primary) !important;
 }
 .text-success{
   color:var(--theme-success) !important;
 }
-.text-error{
-  color:red;
+.text-danger{
+  color:var(--theme-danger) !important;
 }
+.text-warning{
+  color:var(--theme-warning) !important;
+}
+.text-error{
+  color:var(--theme-danger) !important;
+}
+
+
+
+
+
 
 .form-control{
     background-color: white;

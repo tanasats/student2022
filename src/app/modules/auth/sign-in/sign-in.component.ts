@@ -16,12 +16,12 @@ import { firstValueFrom, lastValueFrom } from 'rxjs';
 })
 export class SignInComponent implements OnInit {
   public frmLogin: FormGroup = this.fb.group({
-    //username: ['', [Validators.required, Validators.minLength(3)]],
-    //password: ['', Validators.required],
+    username: ['', [Validators.required, Validators.minLength(3)]],
+    password: ['', Validators.required],
     //username: ['tanasat', [Validators.required, Validators.minLength(3)]],
     //password: ['tanasat71521150', Validators.required],
-    username: ['janpen', [Validators.required, Validators.minLength(3)]],
-    password: ['5461200005331', Validators.required],
+    //username: ['janpen', [Validators.required, Validators.minLength(3)]],
+    //password: ['5461200005331', Validators.required],
    // username: ['62012210012', [Validators.required, Validators.minLength(3)]],
    // password: ['1341101407056', Validators.required],
     //email: ['', [Validators.required, Validators.email]],

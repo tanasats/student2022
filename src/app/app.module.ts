@@ -22,18 +22,21 @@ import { GuestModule } from './guest/guest.module';
 import { AdminModule } from './admin/admin.module';
 import { StudentModule } from './student/student.module';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
-import { WordcountPipe } from './pipe/wordcount.pipe';
+import { SharedModule } from './shared/SharedModule';
+//import { TestComponent } from './shared/components/test/test.component';
+//import { Test123Component } from './shared/components/test123/test123.component';
+//import { WordcountPipe } from './shared/pipes/wordcount.pipe';
 //import { NavbarComponent } from './theme/layout/navbar/navbar.component';
-
-
-
 
 @NgModule({
   declarations: [
     AppComponent,
     ConfirmDialogComponent,
-    WordcountPipe,
+
+    //WordcountPipe,
     //NavbarComponent,
+    //TestComponent,
+    //Test123Component
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import { WordcountPipe } from './pipe/wordcount.pipe';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule, // share coponent+pipe
 //  FontAwesomeModule,
     ToastrModule.forRoot(),
     NgbModule, 
@@ -50,14 +54,13 @@ import { WordcountPipe } from './pipe/wordcount.pipe';
     AdminModule,
     StudentModule,
     MsuuserModule,
-
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     authInterceptorProviders,
   ],
   exports: [
-    WordcountPipe,
+   // WordcountPipe,
   ],
   bootstrap: [AppComponent]
 })
