@@ -25,8 +25,8 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     // subscribe currentuserservice emit
-    this.currUserService.getEmitter().subscribe((currUserObject:ICurrentuser) => { 
-      console.log("Navbar.component getEmitter(currUserObject) form currUserService =",JSON.stringify(currUserObject)); 
+    this.currUserService.userInfoEmitter().subscribe((currUserObject:ICurrentuser) => { 
+      console.log("Navbar.component userInfoEmitter(currUserObject) form currUserService =",JSON.stringify(currUserObject)); 
         this.islogin=currUserObject.islogin;
         this.displayname=currUserObject.displayname;
         this.role=currUserObject.role;

@@ -6,14 +6,18 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
   providedIn: 'root',
 })
 export class CurrentUserService {
-  public _currentuser: ICurrentuser;
+  private _currentuser: ICurrentuser;
   //public username:String='';
   //public _authorized:Boolean=false;
-
-  @Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
-  getEmitter() {
-    return this.fireIsLoggedIn;
+  //@Output() _changeRole: EventEmitter<any> = new EventEmitter<any>();
+  @Output() _userInfo: EventEmitter<any> = new EventEmitter<any>();
+  userInfoEmitter() {
+    return this._userInfo;
   }
+  // changeRoleEmitter(){
+  //   return this._changeRole;
+  // }
+ 
 
   constructor() {
     this._currentuser = this.initCurrentUser;
@@ -60,6 +64,7 @@ export class CurrentUserService {
   }
   set role(rolecode){
     this._currentuser.role=rolecode;
+    //this._changeRole.emit(this._currentuser);
   }
   get roles(){
     return this._currentuser.roles;
@@ -72,7 +77,8 @@ export class CurrentUserService {
   }
   set islogin(bool: boolean) {
     this._currentuser.islogin = bool;
-    this.fireIsLoggedIn.emit(this._currentuser);
+    this._userInfo.emit(this._currentuser);
+   // this._changeRole.emit(this._currentuser);
   }
   get info(){
     return this._currentuser;
@@ -81,6 +87,6 @@ export class CurrentUserService {
   logout() {
     this._currentuser = this.initCurrentUser;
     localStorage.removeItem('access-token'); //localStorage.clear();
-    this.fireIsLoggedIn.emit(this._currentuser);
+    this._userInfo.emit(this._currentuser);
   }
 } //class

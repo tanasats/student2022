@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'msuuser',loadChildren:()=> import('./msuuser/msuuser-routing.module').then(m=>m.MsuuserRoutingModule)},
   { path: 'home', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) }, 
   { path: 'sign-in', loadChildren: () => import('./modules/auth/sign-in/sign-in.module').then(m => m.SignInModule) },
-  { path: '**', redirectTo:'home',pathMatch:'full'}
+  { path: '**', redirectTo:'guest',pathMatch:'full'}
 ];
  
 @NgModule({

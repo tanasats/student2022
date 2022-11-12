@@ -51,10 +51,11 @@
                                 <td>{{ item.activity_code }}</td>
                                 <td>{{ item.activity_name }}</td>
                                 <td>
-                                    {{ item.activity_statuscode }}
-                                    <img *ngIf="item.activity_poster" src="http://localhost:3000/api/v1/files/{{item.activity_poster}}" style="width:100px">
+                                    <!-- <img *ngIf="item.activity_poster" src="http://localhost:3000/api/v1/files/{{item.activity_poster}}" style="width:100px"> -->
+                                    <div class="d-inline" [ngClass]="{'text-inactive':!item.activity_poster}"><i class="bi bi-image"></i></div>
+                                    <div class="d-inline ms-1" [ngClass]="{'text-inactive':!item.activity_poster}" *ngIf="item.activity_statuscode=='0'"><i class="bi bi-eye-slash"></i></div>
+                                    <div class="d-inline ms-1" *ngIf="item.activity_statuscode=='1'"><i class="bi bi-eye"></i></div>
                                 </td>
-
                             </tr>
 
                             <tr *ngIf="!loading && !itemsfound">

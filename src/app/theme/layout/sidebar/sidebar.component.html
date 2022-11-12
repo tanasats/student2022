@@ -1,0 +1,89 @@
+<nav id="sidebar" class="sidebar js-sidebar" [ngClass]="{'collapsed': sideBarService.hideSideBar }">
+    <div class="sidebar-content js-simplebar">
+        <a class="sidebar-brand" href="index.html">
+            <span class="align-middle">Student Activity</span>
+        </a>
+
+        <ul class="sidebar-nav">
+            <div *ngIf="userinfo" class="text-light ps-3 my-2 bg-dark-night">
+                <span class="d-block">{{userinfo.displayname}}</span>
+                <span class="d-block">{{userinfo.role}}</span>
+            </div>
+            <li *ngFor="let item of _menuItems" class="sidebar-item" routerLink="{{item.path}}"
+                routerLinkActive="active">
+                <a class="sidebar-link">
+                    <i class="{{item.icon}}"></i> <span class="align-middle">{{item.title}}</span>
+                </a>
+            </li>
+
+            <li class="sidebar-header">
+                ลงบันทึกกิจกรรม
+            </li>
+
+            <li class="sidebar-item" routerLink="/checkpoint" routerLinkActive="active">
+                <a class="sidebar-link">
+                    <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">บัตรกิจกรรม</span>
+                </a>
+            </li>
+
+
+            <li class="sidebar-header">
+                ข้อมูลทั่วไป
+            </li>
+
+            <li class="sidebar-item" routerLink="/xxx" routerLinkActive="active">
+                <a class="sidebar-link">
+                    <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">ระเบียบ-คู่มือ</span>
+                </a>
+            </li>
+            <li class="sidebar-item" routerLink="/xxx" routerLinkActive="active">
+                <a class="sidebar-link">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">ติดต่อเจ้าหน้าที่</span>
+                </a>
+            </li>
+
+
+
+            
+            <!-- <li class="sidebar-item">
+                <a class="sidebar-link dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2">
+                    <i class="align-middle" data-feather="user"></i> <span class="align-middle">aaaa</span>
+                </a>
+                <div class="collapse multi-collapse" id="multiCollapseExample2">
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-item" routerLink="/xxx" routerLinkActive="active">
+                            <a class="sidebar-link">
+                                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">xxxx</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" routerLink="/xxx" routerLinkActive="active">
+                            <a class="sidebar-link">
+                                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">yyyy</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item" routerLink="/xxx" routerLinkActive="active">
+                            <a class="sidebar-link">
+                                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">zzzz</span>
+                            </a>
+                        </li>                        
+                    </ul>                    
+                </div>
+
+            </li> -->
+
+
+        </ul>
+
+        <div class="sidebar-cta">
+            <div class="sidebar-cta-content">
+                <strong class="d-inline-block mb-2">การใช้งาน</strong>
+                <div class="mb-3 text-sm">
+                    นิสิตสามารถเข้าใช้งานด้วย username/password ระบบ Authentication
+                </div>
+                <div class="d-grid">
+                    <a class="btn btn-primary" routerLink="/sign-in">เข้าใช้งาน</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
