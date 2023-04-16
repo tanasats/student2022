@@ -37,4 +37,9 @@ export class SidebarComponent implements OnInit {
       }
     );
   }
+
+  menuGroupClick(event:any):void{
+    console.log(event)
+  }
+
 }

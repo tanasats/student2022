@@ -49,6 +49,7 @@ class _Class {
   }
 
 
+
   test(){
     const sql = db.format("SELECT user.*,role.role_id,role.rolecode,role.rolename from user left join userrole on user.user_id=userrole.user_id left join role on userrole.role_id=role.role_id");
     return db.execute(sql);

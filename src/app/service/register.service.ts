@@ -11,8 +11,9 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class ActivityService {
-  private endpoint = environment.apiURL+'/api/v1/activity';
+
+export class RegisterService {
+  private endpoint = environment.apiURL+'/api/v1/register';
   constructor(private http: HttpClient) {}
 
   get httpOptions() {
@@ -47,7 +48,6 @@ export class ActivityService {
       });
   }
 
-
   private handleError(error: any) {
     var errorMsg: string = 'Unknow error!';
     console.log(error);
@@ -75,69 +75,22 @@ export class ActivityService {
     });
   }
 
-  getAll(): Observable<any> {
-    return this.http
-      .get(this.endpoint + 's', this.httpOptions)
-      .pipe(catchError(this.handleError));
-  }
 
-  filter(parameters: any): Observable<any> {
-    let params = new HttpParams()
-      .set('page', parameters.page)
-      .set('pagesize', parameters.pagesize)
-      .set('keyword', parameters.keyword);
-    return this.http
-      .get(this.endpoint + 's', { headers: this.httpHeaders, params: params })
-      .pipe(catchError(this.handleError));
-  }
 
-  current(parameters: any): Observable<any> {
-    let params = new HttpParams()
-      .set('page', parameters.page)
-      .set('pagesize', parameters.pagesize);
-    return this.http
-      .get(this.endpoint + 's/current', { headers: this.httpHeaders, params: params })
-      .pipe(catchError(this.handleError));
-  }
 
-  getById(id: number): Observable<any> {
-    return this.http
-      .get(this.endpoint + '/' + id, this.httpOptions)
-      .pipe(catchError(this.handleError));
-  }
 
-  getRegisterUser(activity_id:number):Observable<any>{
-    return this.http
-      .get(this.endpoint+'/'+ activity_id+'/registerusers',this.httpOptions)
-  }
-
-  getUserActivity(user_id:number):Observable<any>{
-    return this.http
-      .get(this.endpoint+'/user/'+user_id,this.httpOptions)
-      .pipe(catchError(this.handleError));
-  }
-
-  delete(id: any): Observable<any> {
-    return this.http
-      .delete(this.endpoint + '/' + id, this.httpOptions)
-      .pipe(catchError(this.handleError));
-  }
-
-  create(datas: any): Observable<any> {
+  register(datas: any): Observable<any> {
     return this.http
       .post(this.endpoint, datas, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
-  update(datas: any): Observable<any> {
-    return this.http
-      .put(this.endpoint + '/' + datas.activity_id, datas, this.httpOptions)
-      .pipe(catchError(this.handleError));
-  }
 
-  upload(datas: any): Observable<any> {
-    return this.http
-      .post(this.endpoint + '/upload', datas) //, this.httpOptions_multipath)
-      .pipe(catchError(this.handleError));
-  }
-} //class
+
+
+
+
+
+
+
+}

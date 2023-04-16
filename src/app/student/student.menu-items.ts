@@ -10,9 +10,9 @@ export const student_menu_items: IMenuItem[] = [
     submenu: []
   },
   {
-    path: 'activity',
-    title: 'ลงทะเบียนกิจกรรม',
-    icon: 'bi bi-bell',
+    path: 'calendar',
+    title: 'ปฎิทินกิจกรรม',
+    icon: 'bi bi-calendar',
     class: '',
     extralink: false,
     submenu: []

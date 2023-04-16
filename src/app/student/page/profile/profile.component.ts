@@ -29,11 +29,11 @@ export class ProfileComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.authService.getStudentPicture('62012210012').subscribe({
-      next: (res)=>{
-        console.log(res);
-      }
-    })
+    // this.authService.getStudentPicture('62012210012').subscribe({
+    //   next: (res)=>{
+    //     console.log(res);
+    //   }
+    // })
   }
 
 

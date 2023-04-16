@@ -1,24 +1,60 @@
 <div class="container-fluid">
-    <!-- <div class="page-topic">
-        <h1>กิจกรรมของฉัน</h1>
+    <div class="page-topic">
+        <span class="h2">ข่าวประชาสัมพันธ์</span><small class="text-mute ms-2"></small>
+    </div>
+    <div class="row">
+
     </div>
 
-    <div class="row">
-        <div class="col-md-6">aa</div>
-        <div class="col-md-5">bb</div>
-    </div> -->
 
-    <div class="page-topic">
-        <h1>กิจกรรมใหม่</h1>
+
+    <div class="page-topic mt-5">
+        <span class="h2">กิจกรรมของฉัน</span><small class="text-mute ms-2">ปีการศึกษา 2565</small>
+    </div>
+    <div class="row row-fluid">
+        <div class="col">
+            <table class="app-table">
+                <thead>
+                    <tr>
+                        <td>ที่</td>
+                        <td>กิจกรรม</td>
+                        <td>วันที่</td>
+                        <td>สถานะ</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of myactivity;index as i">
+                        <td>{{i+1}}</td>
+                        <td><a [routerLink]="['../activity',item?.activity_id]"
+                                [state]="{data:item}">{{item.activity_name}}</a></td>
+                        <td>
+                            <div class="">{{item.activity_dateform |thaidate}}</div>
+                            <span class="text-sm" [innerHTML]="item.activity_dateform|daysLeft"></span>
+                        </td>
+                        <td>
+                            <!-- {{item.register_status|registerStatus}} error:SafeValue must use [property]=binding -->
+                            <span [innerHTML]="item.register_status|registerStatus"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+    <div class="page-topic mt-5">
+        <span class="h2">กิจกรรมใหม่</span><small class="ms-2">ปีการศึกษา 2565</small>
     </div>
     <div class="row row-fluid">
         <!--class="row row-fluid" -->
-        <div *ngFor="let item of activitys" class="col-sm-12 col-md-6 col-lg-4 col-xxl-3">
+        <div *ngFor="let item of newactivity" class="col-sm-12 col-md-6 col-lg-6 col-xxl-4">
             <app-activity-item clss="card" [item]="item" (onRegister)="onRegister($event)"
                 (onDelete)="onDelete($event)">
             </app-activity-item>
         </div>
     </div>
+
 
 
 

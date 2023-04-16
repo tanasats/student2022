@@ -38,7 +38,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of items">
-                                <td class="fit">
+                                <td class="align-top fit">
                                     <button class="btn btn-sm btn-success text-white"
                                         [routerLink]="['update',item.activity_id]" [state]="{data:item}">
                                         <i class="bi bi-pencil"></i>
@@ -47,14 +47,16 @@
                                         <i class="bi bi-trash"></i>
                                     </button>
                                 </td>
-                                <td>{{ item.activity_id }}</td>
-                                <td>{{ item.activity_code }}</td>
-                                <td>{{ item.activity_name }}</td>
-                                <td>
+                                <td class="align-top">{{ item.activity_id }}</td>
+                                <td class="align-top">{{ item.activity_code }}</td>
+                                <td class="align-top">{{ item.activity_name }}</td>
+                                <td class="align-top">
                                     <!-- <img *ngIf="item.activity_poster" src="http://localhost:3000/api/v1/files/{{item.activity_poster}}" style="width:100px"> -->
                                     <div class="d-inline" [ngClass]="{'text-inactive':!item.activity_poster}"><i class="bi bi-image"></i></div>
-                                    <div class="d-inline ms-1" [ngClass]="{'text-inactive':!item.activity_poster}" *ngIf="item.activity_statuscode=='0'"><i class="bi bi-eye-slash"></i></div>
-                                    <div class="d-inline ms-1" *ngIf="item.activity_statuscode=='1'"><i class="bi bi-eye"></i></div>
+                                    <a href="javascript:void()" class="d-inline ms-1" *ngIf="item.activity_statuscode=='0'">
+                                        <i class="bi bi-toggle-off"></i></a>
+                                    <a href="javascript:void()" class="text-success d-inline ms-1" *ngIf="item.activity_statuscode=='1'">
+                                        <i *ngIf="item.activity_statuscode=='1'" class="bi bi-toggle-on"></i></a>
                                 </td>
                             </tr>
 

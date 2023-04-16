@@ -23,6 +23,7 @@ import { AdminModule } from './admin/admin.module';
 import { StudentModule } from './student/student.module';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 import { SharedModule } from './shared/SharedModule';
+
 //import { TestComponent } from './shared/components/test/test.component';
 //import { Test123Component } from './shared/components/test123/test123.component';
 //import { WordcountPipe } from './shared/pipes/wordcount.pipe';
@@ -32,7 +33,6 @@ import { SharedModule } from './shared/SharedModule';
   declarations: [
     AppComponent,
     ConfirmDialogComponent,
-
     //WordcountPipe,
     //NavbarComponent,
     //TestComponent,

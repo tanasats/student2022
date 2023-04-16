@@ -59,10 +59,42 @@
     </div>
 </section>
 
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+            <ul class="panel-label-content">
+                <li *ngFor="let item of me|keyvalue">
+                    <label>{{item.key}} :</label>
+                   {{item.value}}
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+<!-- 
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+            <ul class="panel-label-content">
+                <li *ngFor="let item of current_user|keyvalue">
+                    <label>{{item.key}}</label>
+                    {{item.value}}
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+
 <div class="container-fluid">
     {{current_user|json}}
     <hr>
     {{me|json}}
     <hr>
     {{me.username}}
-</div>
+</div> -->

@@ -1,23 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const activityController = require("../controller/activity.controller");
+const registerController = require("../controller/register.controller");
 const { authJwt } = require("../middleware/auth");
 
 // Read
-router.get("/activitys",/*authJwt.verifyToken,*/activityController.filter);
-router.get("/activitys/current",/*authJwt.verifyToken,*/activityController.current);
-router.get("/activity/:id/registerusers",activityController.getRegisterUsers);
-router.get("/activity/:id",/*authJwt.verifyToken,*/ activityController.getById);
-router.get("/activity/user/:id", activityController.getUserActivity);
-
+router.get("/registers",/*authJwt.verifyToken,*/registerController.filter);
+router.get("/registers/current",/*authJwt.verifyToken,*/registerController.current);
+router.get("/register/approve/:register_id",/*authJwt.verifyToken,*/ registerController.approve);
 // Create
-router.post("/activity", /*authJwt.verifyToken,*/ activityController.create);
+router.post("/register", /*authJwt.verifyToken,*/ registerController.create);
+router.post("/register/approves", /*authJwt.verifyToken,*/ registerController.approves);
 // Update
-router.put("/activity/:id", /*authJwt.verifyToken,*/ activityController.update);
+router.put("/register/:id", /*authJwt.verifyToken,*/ registerController.update);
 // Delete
-router.delete("/activity/:id", /*authJwt.verifyToken,*/ activityController.delete);
+router.delete("/register/:id", /*authJwt.verifyToken,*/ registerController.delete);
 // Upload
-router.post("/activity/upload",/*authJwt.verifyToken,*/activityController.upload);
+router.post("/register/upload",/*authJwt.verifyToken,*/registerController.upload);
 
 
 
@@ -51,7 +49,7 @@ var upload = multer({
     }
   }
 });
-router.post("/activity/upload", upload.single('file'), (req, res, next) => {
+router.post("/register/upload", upload.single('file'), (req, res, next) => {
     res.status(200).json({file:req.file.filename,detail:req.body.detail});
 })
 */

@@ -1,0 +1,73 @@
+<div class="h2">ปฎิทินกิจกรรม</div>
+<div class="row">
+            <div class="col-*"><label>ประจำเดือน :</label></div>
+            <div class="col">
+                <select class="col form-select" aria-label="Default select example">
+                    <option>เลือก</option>
+                    <option value="1">มกราคม</option>
+                    <option value="2">กุมภาพันธ์</option>
+                    <option value="3">มีนาคม</option>
+                    <option value="4">เมษายน</option>
+                    <option value="5">พฤษภาคม</option>
+                    <option value="6">มิถุนายน</option>
+                    <option value="7">กรกฎาคม</option>
+                    <option value="8">สิงหาคม</option>
+                    <option value="9">กันยายน</option>
+                    <option value="10">ตุลาคม</option>
+                    <option value="11" selected>พฤศจิกายน</option>
+                    <option value="12">ธันวาคม</option>
+                </select>
+            </div>
+            
+            <div class="col">
+                <select class="col form-select" aria-label="Default select example">
+                    <option>เลือก</option>
+                    <option value="2565" selected>2565</option>
+                    <option value="2566">2566</option>
+                    <option value="2567">2567</option>
+                </select>
+            </div>    
+            <div class="col"><button class="btn btn-info">ค้นหา</button></div>
+</div>
+
+
+<div class="row">
+    <div class="col">  
+
+        <div class="mt-3">
+            <table class="app-table">
+                <thead>
+                    <tr>
+                        <td>กิจกรรม</td>
+                        <td>วันที่จัดกิจกรรม</td>
+                        <td>ประเภทกิจกรรม</td>
+                        <td>เข้าร่วม/เปิดรับ</td>
+                        <td>สถานะ</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of activitys">
+                        <td><a [routerLink]="['../activity',item?.activity_id]"
+                            [state]="{data:item}">{{item.activity_name}}</a></td>
+                        <td>{{item.activity_dateform|thaidate}}
+                            <span class="text-sm" [innerHTML]="item.activity_dateform|daysLeft"></span>
+                        </td>
+                        <td>{{item.acttype_id}}</td>
+                        <td>0/{{item.activity_receive}}</td>
+                        <td>{{item.activity_statuscode}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <ul class="list-unstyled">
+            <li>
+
+            </li>
+        </ul>
+
+
+
+    </div>
+</div>

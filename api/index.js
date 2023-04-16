@@ -50,6 +50,12 @@ app.use('/api/v1', facultyRouteV1);
 
 const uploadRouteV1 = require('./route/upload.route');
 app.use('/api/v1', uploadRouteV1);
+const registerRouterV1 = require('./route/register.route');
+app.use('/api/v1', registerRouterV1);
+
+
+
+
 // app.post('/api/v1/upload',(req,res)=>{
 // 	console.log(req.body);
 // 	res.status(200).send({"status":"ok"});

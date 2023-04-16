@@ -1,3 +1,4 @@
+import { CalendarComponent } from './page/calendar/calendar.component';
 import { ProfileComponent } from './page/profile/profile.component';
 import { StudentComponent } from './student.component';
 import { NgModule } from '@angular/core';
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent},
+      { path: 'calendar', component: CalendarComponent},
       { path: 'activity/:id',component: ActivityComponent}
       // {path:'activity',component:ActivityComponent},
       // {path:'activity/create',component:ActivityCreateComponent},

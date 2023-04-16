@@ -14,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 export class ActivityComponent implements OnInit {
   public items: IActivity[] = [];
   public closeResult: string = '';
-
+ 
   public page: number = 1;
   public pagesize: number = 10;
   public keyword: string = '';

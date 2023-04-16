@@ -10,6 +10,7 @@ import { ActivityItemComponent } from './component/activity-item/activity-item.c
 import { ProfileComponent } from './page/profile/profile.component';
 import { ActivityComponent } from './page/activity/activity.component';
 import { SharedModule } from '../shared/SharedModule';
+import { CalendarComponent } from './page/calendar/calendar.component';
 //import { ActivityItemsComponent } from './component/activity-items/activity-items.component';
 
 
@@ -20,6 +21,7 @@ import { SharedModule } from '../shared/SharedModule';
     ActivityItemComponent,
     ProfileComponent,
     ActivityComponent,
+    CalendarComponent,
     //ActivityItemsComponent
   ],
   imports: [
